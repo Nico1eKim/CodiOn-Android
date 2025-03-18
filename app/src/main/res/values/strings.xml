@@ -3,8 +3,11 @@
 
     <!--    chip component    -->
     <string name="chip_date">❤️ 데이트</string>
-    <string name="chip_casual">🍀 캐주얼</string>
+    <string name="chip_casual">🏠 캐주얼</string>
     <string name="chip_workout">💪 운동</string>
     <string name="chip_business">📁 비즈니스</string>
     <string name="chip_travel">🧳 여행</string>
+
+    <!--    clothes card component    -->
+    <string name="number_of_wear">%d회 작용</string>
 </resources>
