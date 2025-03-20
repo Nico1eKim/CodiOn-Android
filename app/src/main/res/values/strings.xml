@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">CodiOn</string>
+
+    <!--    chip component    -->
+    <string name="chip_date">❤️ 데이트</string>
+    <string name="chip_casual">🏠 캐주얼</string>
+    <string name="chip_workout">💪 운동</string>
+    <string name="chip_business">📁 비즈니스</string>
+    <string name="chip_travel">🧳 여행</string>
+
+    <!--    clothes card component    -->
+    <string name="number_of_wear">%d회 작용</string>
+
+    <!--    button component    -->
+    <string name="login">로그인</string>
+    <string name="reanalyze">다시 분석하기</string>
+    <string name="send_authentication_number">인증번호 발송</string>
+    <string name="kakao_login">카카오톡 계정으로 로그인</string>
+    <string name="camera_personal_color">카메라를 통한 퍼스널컬러 분석</string>
+    <string name="wearable">입을 수 있어요</string>
+    <string name="enter_personal_color">퍼스널컬러 입력 완료</string>
+    <string name="enter_yourself">본인이 직접 입력</string>
 </resources>
