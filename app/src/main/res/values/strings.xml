@@ -30,6 +30,8 @@
     <string name="pwd_ph_hint">비밀번호 (8자 이상, 영문, 숫자, 특수문자)</string>
     <string name="code">이메일 인증번호</string>
     <string name="code_ph">인증번호를 입력하세요</string>
+    <string name="code_btn_send">인증번호 발송</string>
+    <string name="code_btn_done">확인</string>
     <string name="nickname">별명</string>
     <string name="nickname_ph">별명 (15자 이내)</string>
 </resources>
