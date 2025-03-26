@@ -20,4 +20,16 @@
     <string name="wearable">입을 수 있어요</string>
     <string name="enter_personal_color">퍼스널컬러 입력 완료</string>
     <string name="enter_yourself">본인이 직접 입력</string>
+
+    <!--    inputfield component   -->
+    <string name="email">이메일</string>
+    <string name="email_ph">이메일을 입력하세요</string>
+    <string name="pwd">비밀번호</string>
+    <string name="pwd_ph">비밀번호를 입력하세요</string>
+    <string name="pwd_ph_check">비밀번호 확인</string>
+    <string name="pwd_ph_hint">비밀번호 (8자 이상, 영문, 숫자, 특수문자)</string>
+    <string name="code">이메일 인증번호</string>
+    <string name="code_ph">인증번호를 입력하세요</string>
+    <string name="nickname">별명</string>
+    <string name="nickname_ph">별명 (15자 이내)</string>
 </resources>
