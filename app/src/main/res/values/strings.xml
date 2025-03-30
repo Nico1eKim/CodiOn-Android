@@ -20,4 +20,15 @@
     <string name="wearable">입을 수 있어요</string>
     <string name="enter_personal_color">퍼스널컬러 입력 완료</string>
     <string name="enter_yourself">본인이 직접 입력</string>
+
+    <!--    home    -->
+    <string name="home_nickname">%s님의</string>
+    <string name="sensory_temp_is">에서의 체감온도는</string>
+    <string name="temprature_unit">%d°C</string>
+    <string name="today_weather">오늘의 기상 정보</string>
+    <string name="temperature">기온 %d°C</string>
+    <string name="wind_speend">풍속 %dm/s</string>
+    <string name="rainfall">강수량 %dmm</string>
+    <string name="today_clothes">오늘의 옷을 추천해드려요!</string>
+    <string name="unusual_clothes">평소에 많이 입지 않았던 옷을 추천해드려요!</string>
 </resources>
