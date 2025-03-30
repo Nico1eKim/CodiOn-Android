@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
-import com.konkuk.codion.ui.home.component.RecommendationList
+import com.konkuk.codion.ui.home.component.ClothesCardList
 import com.konkuk.codion.ui.home.component.WeatherInformation
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray300
@@ -107,14 +107,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(24.dp))
 
-        RecommendationList(
+        ClothesCardList(
             title = R.string.today_clothes,
             clothesDataList = ClothesCardDummyData.dummyData
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        RecommendationList(
+        ClothesCardList(
             title = R.string.unusual_clothes,
             clothesDataList = ClothesCardDummyData.dummyData
         )

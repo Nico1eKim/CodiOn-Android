@@ -18,7 +18,7 @@ import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun RecommendationList(
+fun ClothesCardList(
     title: Int,
     clothesDataList: List<ClothesCardDummyData>
 ) {

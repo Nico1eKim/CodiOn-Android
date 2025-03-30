@@ -64,7 +64,7 @@ fun CodiRecordCalendar(
     Column(
         modifier = Modifier
             .border(1.dp, Gray300, RoundedCornerShape(12.dp))
-            .padding(16.dp)
+            .padding(20.dp)
     ) {
         // 월 이동 바
         Row(
