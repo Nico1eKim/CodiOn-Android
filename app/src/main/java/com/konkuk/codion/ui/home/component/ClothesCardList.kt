@@ -3,6 +3,7 @@ package com.konkuk.codion.ui.home.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -11,26 +12,47 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.ClothesCardComponent
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.theme.CodiOnTypography
+import com.konkuk.codion.ui.theme.Gray400
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
 fun ClothesCardList(
     title: Int,
-    clothesDataList: List<ClothesCardDummyData>
+    clothesDataList: List<ClothesCardDummyData>,
+    isEditable: Boolean = false,
 ) {
     val state = rememberLazyListState()
 
     Column {
-        Text(
-            text = stringResource(title),
-            style = CodiOnTypography.pretendard_700_16,
-            color = Gray700,
-            modifier = Modifier.padding(horizontal = 20.dp)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = stringResource(title),
+                style = CodiOnTypography.pretendard_700_16,
+                color = Gray700,
+            )
+            if (isEditable) {
+                Text(
+                    text = stringResource(R.string.edit),
+                    style = CodiOnTypography.pretendard_600_12.copy(
+                        textDecoration = TextDecoration.Underline
+                    ),
+                    color = Gray400,
+                )
+            }
+
+        }
+
 
         LazyRow(
             modifier = Modifier
