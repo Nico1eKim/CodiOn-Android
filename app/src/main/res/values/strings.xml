@@ -34,4 +34,19 @@
     <string name="code_btn_done">확인</string>
     <string name="nickname">별명</string>
     <string name="nickname_ph">별명 (15자 이내)</string>
+
+    <!--    topappbar component -->
+    <string name="find_pw">비밀번호 찾기</string>
+    <string name="reset_pw">비밀번호 재설정하기</string>
+    <string name="register">회원가입</string>
+    <string name="register_email">이메일로 회원가입</string>
+    <string name="home">Home</string>
+    <string name="codi_record">코디 기록</string>
+    <string name="add_comment">코멘트 등록</string>
+    <string name="edit_codi">코디 수정</string>
+    <string name="my_closet">MY 옷장</string>
+    <string name="add_clothes">옷 추가하기</string>
+    <string name="mypage">마이페이지</string>
+    <string name="edit_profile">프로필 수정</string>
+    <string name="change_pw">비밀번호 변경</string>
 </resources>
