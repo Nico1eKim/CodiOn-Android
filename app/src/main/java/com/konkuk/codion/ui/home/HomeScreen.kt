@@ -108,14 +108,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
 
         ClothesCardList(
-            title = R.string.today_clothes,
+            title = stringResource(R.string.today_clothes),
             clothesDataList = ClothesCardDummyData.dummyData
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         ClothesCardList(
-            title = R.string.unusual_clothes,
+            title = stringResource(R.string.unusual_clothes),
             clothesDataList = ClothesCardDummyData.dummyData
         )
     }

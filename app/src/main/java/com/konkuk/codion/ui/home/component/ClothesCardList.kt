@@ -23,7 +23,7 @@ import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
 fun ClothesCardList(
-    title: Int,
+    title: String,
     clothesDataList: List<ClothesCardDummyData>,
     isEditable: Boolean = false,
 ) {
@@ -37,7 +37,7 @@ fun ClothesCardList(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = stringResource(title),
+                text = title,
                 style = CodiOnTypography.pretendard_700_16,
                 color = Gray700,
             )
