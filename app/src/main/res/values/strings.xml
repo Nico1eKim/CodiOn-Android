@@ -10,6 +10,7 @@
 
     <!--    clothes card component    -->
     <string name="number_of_wear">%d회 작용</string>
+    <string name="edit">수정하기</string>
 
     <!--    button component    -->
     <string name="login">로그인</string>
