@@ -35,4 +35,5 @@
 
     <!--    codi record    -->
     <string name="year_month">%d년 %d월</string>
+    <string name="wore_clothes">%d월 %d일 착용했던 코디에요</string>
 </resources>
