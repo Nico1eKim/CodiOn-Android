@@ -31,4 +31,7 @@
     <string name="rainfall">강수량 %dmm</string>
     <string name="today_clothes">오늘의 옷을 추천해드려요!</string>
     <string name="unusual_clothes">평소에 많이 입지 않았던 옷을 추천해드려요!</string>
+
+    <!--    codi record    -->
+    <string name="year_month">%d년 %d월</string>
 </resources>
