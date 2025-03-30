@@ -63,6 +63,7 @@ fun CodiRecordCalendar(
 
     Column(
         modifier = Modifier
+            .padding(20.dp)
             .border(1.dp, Gray300, RoundedCornerShape(12.dp))
             .padding(20.dp)
     ) {
