@@ -33,51 +33,51 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     val selectedReview = codiRecordMap[selectedDate]
 
-        Scaffold(
-            topBar = {
-                TopAppBarComponent(
-                    title = stringResource(R.string.codi_record),
-                    leftIcon = null,
-                    onLeftClicked = null,
-                    rightIcon = null,
-                    onRightClicked = null
-                )
-            },
-        ) { innerPadding ->
-
-    LazyColumn(
-        modifier = modifier
-                .padding(innerPadding)
-            .fillMaxSize(),
-    ) {
-        item {
-            CodiRecordCalendar(
-                recordData = codiRecordMap.mapValues { it.value.emotion },
-                onDateSelected = { selectedDate = it }
+    Scaffold(
+        topBar = {
+            TopAppBarComponent(
+                title = stringResource(R.string.codi_record),
+                leftIcon = null,
+                onLeftClicked = null,
+                rightIcon = null,
+                onRightClicked = null
             )
+        },
+    ) { innerPadding ->
+
+        LazyColumn(
+            modifier = modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+        ) {
+            item {
+                CodiRecordCalendar(
+                    recordData = codiRecordMap.mapValues { it.value.emotion },
+                    onDateSelected = { selectedDate = it }
+                )
+            }
+
+            item {
+                selectedReview?.let {
+                    Column {
+                        ClothesCardList(
+                            title = stringResource(
+                                R.string.wore_clothes,
+                                selectedDate.month.value,
+                                selectedDate.dayOfMonth
+                            ),
+                            clothesDataList = ClothesCardDummyData.dummyData,
+                            isEditable = true
+                        )
+
+                        Spacer(Modifier.height(24.dp))
+
+                        MyComment(record = it)
+                    }
+                } ?: CodiRecordEmpty()
+            }
+
         }
-
-        item {
-            selectedReview?.let {
-                Column {
-                    ClothesCardList(
-                        title = stringResource(
-                            R.string.wore_clothes,
-                            selectedDate.month.value,
-                            selectedDate.dayOfMonth
-                        ),
-                        clothesDataList = ClothesCardDummyData.dummyData,
-                        isEditable = true
-                    )
-
-                    Spacer(Modifier.height(24.dp))
-
-                    MyComment(record = it)
-                }
-            } ?: CodiRecordEmpty()
-        }
-
-    }
     }
 }
 
