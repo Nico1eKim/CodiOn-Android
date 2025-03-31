@@ -25,6 +25,7 @@ fun InputFieldWithBtnComponent(
     label: String,
     placeholder: String,
     inputText: String,
+    onTextChanged: (String) -> Unit,
     btnText: String,
     showTimer: Boolean = false,
     timerSeconds: Int? = null,
@@ -37,6 +38,7 @@ fun InputFieldWithBtnComponent(
             isRequired = true,
             placeholder = placeholder,
             inputText = inputText,
+            onTextChanged = onTextChanged,
             width = 212.dp,
             showTimer = showTimer,
             timerSeconds = timerSeconds
@@ -64,6 +66,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_ph),
             inputText = "",
+            onTextChanged = {},
             btnText = stringResource(R.string.code_btn_send)
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -71,6 +74,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "",
+            onTextChanged = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 180
@@ -80,6 +84,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "12345678",
+            onTextChanged = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 140
