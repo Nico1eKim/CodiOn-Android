@@ -49,4 +49,7 @@
     <string name="mypage">마이페이지</string>
     <string name="edit_profile">프로필 수정</string>
     <string name="change_pw">비밀번호 변경</string>
+
+    <!--    login screen    -->
+    <string name="or">또는</string>
 </resources>
