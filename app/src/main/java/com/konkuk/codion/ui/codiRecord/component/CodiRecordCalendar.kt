@@ -2,6 +2,7 @@ package com.konkuk.codion.ui.codiRecord.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,7 +44,8 @@ import java.time.YearMonth
 
 @Composable
 fun CodiRecordCalendar(
-    recordData: Map<LocalDate, EmotionType>
+    recordData: Map<LocalDate, EmotionType>,
+    onDateSelected: (LocalDate) -> Unit
 ) {
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     val today = LocalDate.now()
@@ -125,7 +127,9 @@ fun CodiRecordCalendar(
         // 날짜 격자
         LazyVerticalGrid(
             columns = GridCells.Fixed(7),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(304.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             userScrollEnabled = false
         ) {
@@ -155,7 +159,9 @@ fun CodiRecordCalendar(
                         )
 
                         Box(
-                            modifier = Modifier.size(44.dp),
+                            modifier = Modifier
+                                .size(44.dp)
+                                .clickable { onDateSelected(day.date) }, // 👈 클릭 시 전달
                             contentAlignment = Alignment.Center
                         ) {
                             day.emotion?.let {
@@ -178,5 +184,5 @@ fun CodiRecordCalendar(
 @Composable
 private fun CodiRecordCalendarPreview() {
     val mockData = CalendarDay.dummyData.toMap()
-    CodiRecordCalendar(recordData = mockData)
+    CodiRecordCalendar(recordData = mockData) {}
 }

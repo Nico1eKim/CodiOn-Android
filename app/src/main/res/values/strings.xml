@@ -36,6 +36,8 @@
     <!--    codi record    -->
     <string name="year_month">%d년 %d월</string>
     <string name="wore_clothes">%d월 %d일 착용했던 코디에요</string>
+    <string name="my_comment">나의 코멘트</string>
+    <string name="my_comment_today">오늘의 코디 평가</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>
