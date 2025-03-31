@@ -13,7 +13,7 @@ data class CodiRecordDummyData(
             CodiRecordDummyData(
                 date = LocalDate.now(),
                 emotion = EmotionType.HAPPY,
-                content = "니트를 입고 나갔더니 친구들이 다 이쁘다고 칭찬해줬다. 하지만 살짝 추운 감이 있었다. 니트와 매치한 바지도 색상이 잘 어울려서 좋았다. 상황에도 적합한 옷이었다."
+                content = "니트를 입고 나갔더니 친구들이 다 이쁘다고 칭찬해줬다. 하지만 살짝 추운 감이 있었다. 니트와 매치한 바지도 색상이 잘 어울려서 좋았다."
             ),
             CodiRecordDummyData(
                 date = LocalDate.of(2025, 3, 17),
@@ -24,6 +24,41 @@ data class CodiRecordDummyData(
                 date = LocalDate.of(2025, 3, 25),
                 emotion = EmotionType.NEUTRAL,
                 content = "평범한 코디였지만 무난하게 하루를 보냈다. 눈에 띄진 않았지만 불편함도 없었다."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 5),
+                emotion = EmotionType.HAPPY,
+                content = "날씨가 좋아서 가벼운 셔츠에 청바지를 입었는데 산뜻한 기분이었다."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 6),
+                emotion = EmotionType.NEUTRAL,
+                content = "옷차림은 나쁘지 않았지만 신발이 조금 불편했다. 무난한 하루."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 7),
+                emotion = EmotionType.SAD,
+                content = "비가 와서 우산과 어울리는 코디를 못 해서 다소 어색했다."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 10),
+                emotion = EmotionType.HAPPY,
+                content = "깔끔한 블레이저와 슬랙스로 단정한 인상을 줄 수 있었던 날."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 11),
+                emotion = EmotionType.SAD,
+                content = "패턴이 너무 튀어서 주변 시선을 많이 받았다. 다음엔 더 심플하게."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 13),
+                emotion = EmotionType.NEUTRAL,
+                content = "편하게 입고 나갔지만 거울 속 모습은 조금 아쉬웠다."
+            ),
+            CodiRecordDummyData(
+                date = LocalDate.of(2025, 3, 22),
+                emotion = EmotionType.HAPPY,
+                content = "친구들과의 모임에 어울리는 옷차림으로 기분 좋은 하루!"
             )
         )
     }
