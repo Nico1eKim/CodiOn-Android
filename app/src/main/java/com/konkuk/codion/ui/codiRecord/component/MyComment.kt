@@ -91,14 +91,3 @@ fun MyComment(record: CodiRecordDummyData) {
         )
     }
 }
-
-@Composable
-fun MyCommentEmptyState() {
-    Column(Modifier.padding(16.dp)) {
-        Text(
-            text = "이 날은 코디 기록이 없어요.",
-            style = CodiOnTypography.pretendard_400_14,
-            color = Gray400
-        )
-    }
-}

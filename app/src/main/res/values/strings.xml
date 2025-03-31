@@ -38,6 +38,9 @@
     <string name="wore_clothes">%d월 %d일 착용했던 코디에요</string>
     <string name="my_comment">나의 코멘트</string>
     <string name="my_comment_today">오늘의 코디 평가</string>
+    <string name="wore_clothes_empty_title">착용한 코디</string>
+    <string name="wore_clothes_empty">착용한 코디가 존재하지 않아요</string>
+    <string name="record_codi">코디 등록하기</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>

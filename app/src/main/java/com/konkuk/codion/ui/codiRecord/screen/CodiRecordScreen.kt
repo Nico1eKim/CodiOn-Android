@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.codiRecord.screen
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -15,8 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.codiRecord.component.CodiRecordCalendar
+import com.konkuk.codion.ui.codiRecord.component.CodiRecordEmpty
 import com.konkuk.codion.ui.codiRecord.component.MyComment
-import com.konkuk.codion.ui.codiRecord.component.MyCommentEmptyState
 import com.konkuk.codion.ui.codiRecord.dummy.CodiRecordDummyData
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.home.component.ClothesCardList
@@ -29,7 +30,6 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     val selectedReview = codiRecordMap[selectedDate]
 
-    val today = LocalDate.now()
     //    Scaffold(
     //        topBar = {
     //            // TODO: top app bar 공통 컴포넌트 적용하기
@@ -49,25 +49,23 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
         }
 
         item {
-            ClothesCardList(
-                title = stringResource(
-                    R.string.wore_clothes,
-                    selectedDate.month.value,
-                    selectedDate.dayOfMonth
-                ),
-                clothesDataList = ClothesCardDummyData.dummyData,
-                isEditable = true
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(24.dp))
-        }
-
-        item {
             selectedReview?.let {
-                MyComment(record = it)
-            } ?: MyCommentEmptyState()
+                Column {
+                    ClothesCardList(
+                        title = stringResource(
+                            R.string.wore_clothes,
+                            selectedDate.month.value,
+                            selectedDate.dayOfMonth
+                        ),
+                        clothesDataList = ClothesCardDummyData.dummyData,
+                        isEditable = true
+                    )
+
+                    Spacer(Modifier.height(24.dp))
+
+                    MyComment(record = it)
+                }
+            } ?: CodiRecordEmpty()
         }
 
     }
