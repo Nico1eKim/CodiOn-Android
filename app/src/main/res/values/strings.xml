@@ -36,8 +36,8 @@
     <string name="nickname_ph">별명 (15자 이내)</string>
 
     <!--    topappbar component -->
-    <string name="find_pw">비밀번호 찾기</string>
-    <string name="reset_pw">비밀번호 재설정하기</string>
+    <string name="find_pwd">비밀번호 찾기</string>
+    <string name="reset_pwd">비밀번호 재설정하기</string>
     <string name="register">회원가입</string>
     <string name="register_email">이메일로 회원가입</string>
     <string name="home">Home</string>
@@ -48,7 +48,7 @@
     <string name="add_clothes">옷 추가하기</string>
     <string name="mypage">마이페이지</string>
     <string name="edit_profile">프로필 수정</string>
-    <string name="change_pw">비밀번호 변경</string>
+    <string name="change_pwd">비밀번호 변경</string>
 
     <!--    login screen    -->
     <string name="or">또는</string>

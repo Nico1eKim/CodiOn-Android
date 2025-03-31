@@ -133,7 +133,7 @@ fun LoginScreen() {
                 )
 
                 Text(
-                    text = stringResource(R.string.find_pw),
+                    text = stringResource(R.string.find_pwd),
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .clickable { /* TODO("클릭 처리") */ },
