@@ -37,8 +37,7 @@ import com.konkuk.codion.ui.theme.Gray900
 fun FilterBottomSheetList(
     selectedParentCategory: ClothesCategoryType? = null,
     selectedCategoryOptions: SnapshotStateList<ClothesCategoryType>,
-    selectedPersonalColor: PersonalColorType?,
-    onPersonalColorSelect: (PersonalColorType?) -> Unit,
+    selectedPersonalColorOptions: SnapshotStateList<PersonalColorType>,
     onClick: () -> Unit,
     expandedSheet: FilterType?,
     onDismiss: () -> Unit,
@@ -64,8 +63,7 @@ fun FilterBottomSheetList(
             expandedSheet = expandedSheet,
             selectedParentCategory = selectedParentCategory,
             selectedCategoryOptions = selectedCategoryOptions,
-            selectedPersonalColor = selectedPersonalColor,
-            onPersonalColorSelect = onPersonalColorSelect,
+            selectedPersonalColorOptions = selectedPersonalColorOptions,
             onDismiss = onDismiss,
             onClick = onClick
         )
@@ -78,8 +76,7 @@ fun FilterBottomSheet(
     expandedSheet: FilterType,
     selectedParentCategory: ClothesCategoryType?,
     selectedCategoryOptions: SnapshotStateList<ClothesCategoryType>,
-    selectedPersonalColor: PersonalColorType?,
-    onPersonalColorSelect: (PersonalColorType?) -> Unit,
+    selectedPersonalColorOptions: SnapshotStateList<PersonalColorType>,
     onDismiss: () -> Unit,
     onClick: () -> Unit = { onDismiss() }
 ) {
@@ -125,8 +122,7 @@ fun FilterBottomSheet(
                 )
 
                 FilterType.PERSONAL_COLOR -> PersonalColorFilter(
-                    selected = selectedPersonalColor,
-                    onSelect = onPersonalColorSelect
+                    selectedOptions = selectedPersonalColorOptions
                 )
 
                 else -> Text("아직 구현되지 않은 필터입니다.")
@@ -166,13 +162,11 @@ fun CategoryFilter(
 
 @Composable
 fun PersonalColorFilter(
-    selected: PersonalColorType?,
-    onSelect: (PersonalColorType?) -> Unit
+    selectedOptions: SnapshotStateList<PersonalColorType>
 ) {
-    RadioButtonFilter(
+    CheckBoxFilter(
         options = PersonalColorType.entries,
-        selectedOption = selected,
-        onSelect = onSelect,
+        selectedOptions = selectedOptions,
         labelProvider = { it.label }
     )
 }

@@ -39,10 +39,10 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
 
     // 필터 상태
     val appliedCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
-    var appliedPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
+    val appliedPersonalColorOptions = remember { mutableStateListOf<PersonalColorType>() }
 
     val tempCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
-    var tempPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
+    val tempPersonalColorOptions = remember { mutableStateListOf<PersonalColorType>() }
 
     // 바텀시트 열림 상태
     var expandedSheet by remember { mutableStateOf<FilterType?>(null) }
@@ -50,9 +50,13 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
     val allClothes = ClothesCardDummyData.dummyData
 
     val filteredClothes = allClothes.filter { item ->
-        val matchCategory = appliedCategoryOptions.isEmpty() || appliedCategoryOptions.contains(item.clothesType)
-        val matchPersonalColor = appliedPersonalColor == null || appliedPersonalColor == item.clothesPersonalColor
-        val matchTopTab = selectedTab == ClothesCategoryType.ALL || item.clothesType.parent == selectedTab
+        val matchCategory =
+            appliedCategoryOptions.isEmpty() || appliedCategoryOptions.contains(item.clothesType)
+        val matchPersonalColor =
+            tempPersonalColorOptions.isEmpty() || tempPersonalColorOptions.contains(item.clothesPersonalColor)
+
+        val matchTopTab =
+            selectedTab == ClothesCategoryType.ALL || item.clothesType.parent == selectedTab
 
         matchCategory && matchPersonalColor && matchTopTab
     }
@@ -96,21 +100,22 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
             FilterBottomSheetList(
                 selectedParentCategory = selectedTab,
                 selectedCategoryOptions = tempCategoryOptions,
-                selectedPersonalColor = tempPersonalColor,
-                onPersonalColorSelect = { tempPersonalColor = it },
+                selectedPersonalColorOptions = tempPersonalColorOptions,
                 onClick = {
-                    // 적용 로직
                     appliedCategoryOptions.clear()
                     appliedCategoryOptions.addAll(tempCategoryOptions)
-                    appliedPersonalColor = tempPersonalColor
-                    expandedSheet = null // 바텀시트 닫기
+
+                    appliedPersonalColorOptions.clear()
+                    appliedPersonalColorOptions.addAll(tempPersonalColorOptions)
+
+                    expandedSheet = null
                 },
                 expandedSheet = expandedSheet,
                 onDismiss = { expandedSheet = null },
                 onOpenSheet = { expandedSheet = it }
             )
 
-            // TODO: 필터링된 의류 목록을 LazyVerticalGrid로 표시
+            // TODO: 선택한 목록을 LazyVerticalGrid로 표시
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
