@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,11 @@ import com.konkuk.codion.ui.theme.Gray700
 @Composable
 fun FilterBottomSheetList(selectedParentCategory: ClothesCategoryType? = null) {
     var expandedSheet by remember { mutableStateOf<FilterType?>(null) }
+
+    // ✅ 상태 저장용
+    val selectedCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
+    var selectedPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
+
 
     val filters = FilterType.entries
 
@@ -56,6 +62,9 @@ fun FilterBottomSheetList(selectedParentCategory: ClothesCategoryType? = null) {
         FilterBottomSheet(
             expandedSheet = expandedSheet!!,
             selectedParentCategory = selectedParentCategory,
+            selectedCategoryOptions = selectedCategoryOptions,
+            selectedPersonalColor = selectedPersonalColor,
+            onPersonalColorSelect = { selectedPersonalColor = it },
         ) { expandedSheet = null }
     }
 }
@@ -65,6 +74,9 @@ fun FilterBottomSheetList(selectedParentCategory: ClothesCategoryType? = null) {
 fun FilterBottomSheet(
     expandedSheet: FilterType,
     selectedParentCategory: ClothesCategoryType?,
+    selectedCategoryOptions: SnapshotStateList<ClothesCategoryType>,
+    selectedPersonalColor: PersonalColorType?,
+    onPersonalColorSelect: (PersonalColorType?) -> Unit,
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -103,22 +115,29 @@ fun FilterBottomSheet(
             Spacer(modifier = Modifier.height(8.dp))
 
             when (selectedTab) {
-                FilterType.CATEGORY -> CategoryFilter(parentCategory = selectedParentCategory)
-                FilterType.PERSONAL_COLOR -> PersonalColorFilter()
+                FilterType.CATEGORY -> CategoryFilter(
+                    parentCategory = selectedParentCategory,
+                    selectedOptions = selectedCategoryOptions
+                )
+
+                FilterType.PERSONAL_COLOR -> PersonalColorFilter(
+                    selected = selectedPersonalColor,
+                    onSelect = onPersonalColorSelect
+                )
+
                 else -> Text("아직 구현되지 않은 필터입니다.")
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-
-
         }
     }
 }
 
 @Composable
-fun CategoryFilter(parentCategory: ClothesCategoryType? = null) {
-    val selectedOptions = remember { mutableStateListOf<ClothesCategoryType>() }
-
+fun CategoryFilter(
+    parentCategory: ClothesCategoryType? = null,
+    selectedOptions: SnapshotStateList<ClothesCategoryType>
+) {
     val options = when (parentCategory) {
         null, ClothesCategoryType.ALL -> ClothesCategoryType.entries.filter { it.parent != null }
         else -> ClothesCategoryType.getChildrenOf(parentCategory)
@@ -132,13 +151,14 @@ fun CategoryFilter(parentCategory: ClothesCategoryType? = null) {
 }
 
 @Composable
-fun PersonalColorFilter() {
-    var selected by remember { mutableStateOf<PersonalColorType?>(null) }
-
+fun PersonalColorFilter(
+    selected: PersonalColorType?,
+    onSelect: (PersonalColorType?) -> Unit
+) {
     RadioButtonFilter(
         options = PersonalColorType.entries,
         selectedOption = selected,
-        onSelect = { selected = it },
+        onSelect = onSelect,
         labelProvider = { it.label }
     )
 }
