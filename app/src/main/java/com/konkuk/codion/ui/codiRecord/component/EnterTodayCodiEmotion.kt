@@ -36,8 +36,7 @@ fun EnterTodayCodiEmotion(modifier: Modifier = Modifier) {
 
     Column(
         Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
