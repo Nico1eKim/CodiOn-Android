@@ -93,7 +93,7 @@ fun ClothesCardComponent(clothesData: ClothesCardDummyData) {
         )
 
         Text(
-            text = clothesData.clothesPersonalColor,
+            text = clothesData.clothesPersonalColor.label,
             style = CodiOnTypography.pretendard_600_12,
             color = Gray500,
             modifier = Modifier.padding(top = 4.dp)
