@@ -26,51 +26,81 @@ data class ClothesCardDummyData(
                 )
             ),
             ClothesCardDummyData(
-                clothesImg = R.drawable.img_clothes_example,
-                wearCount = 5,
+                clothesImg = R.drawable.img_clothes_example2,
+                wearCount = 2,
                 isHeartClicked = false,
-                clothesName = "갈색 가디건",
+                clothesName = "코듀로이 팬츠",
                 clothesPersonalColor = "가을 웜",
                 chipList = listOf(
                     R.string.chip_date,
+                    R.string.chip_casual,
+                    R.string.chip_business
+                )
+            ),
+            ClothesCardDummyData(
+                clothesImg = R.drawable.img_clothes_example3,
+                wearCount = 1,
+                isHeartClicked = false,
+                clothesName = "레더 자켓",
+                clothesPersonalColor = "겨울 쿨",
+                chipList = listOf(
                     R.string.chip_casual,
                     R.string.chip_travel
                 )
             ),
             ClothesCardDummyData(
-                clothesImg = R.drawable.img_clothes_example,
-                wearCount = 5,
+                clothesImg = R.drawable.img_clothes_example4,
+                wearCount = 0,
                 isHeartClicked = false,
-                clothesName = "갈색 가디건",
-                clothesPersonalColor = "가을 웜",
+                clothesName = "청바지",
+                clothesPersonalColor = "여름 쿨",
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
-                    R.string.chip_travel
+                    R.string.chip_travel,
+                    R.string.chip_business
                 )
             ),
             ClothesCardDummyData(
-                clothesImg = R.drawable.img_clothes_example,
-                wearCount = 5,
+                clothesImg = R.drawable.img_clothes_example5,
+                wearCount = 3,
                 isHeartClicked = false,
-                clothesName = "갈색 가디건",
-                clothesPersonalColor = "가을 웜",
+                clothesName = "라인이 있는 청바지",
+                clothesPersonalColor = "봄 웜",
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
-                    R.string.chip_travel
                 )
             ),
             ClothesCardDummyData(
-                clothesImg = R.drawable.img_clothes_example,
-                wearCount = 5,
+                clothesImg = R.drawable.img_clothes_example6,
+                wearCount = 2,
                 isHeartClicked = false,
-                clothesName = "갈색 가디건",
+                clothesName = "갈색 미디 원피스",
                 clothesPersonalColor = "가을 웜",
                 chipList = listOf(
                     R.string.chip_date,
+                )
+            ),
+            ClothesCardDummyData(
+                clothesImg = R.drawable.img_clothes_example7,
+                wearCount = 2,
+                isHeartClicked = false,
+                clothesName = "스커트",
+                clothesPersonalColor = "봄 웜",
+                chipList = listOf(
+                    R.string.chip_date,
                     R.string.chip_casual,
-                    R.string.chip_travel
+                )
+            ),
+            ClothesCardDummyData(
+                clothesImg = R.drawable.img_clothes_example8,
+                wearCount = 1,
+                isHeartClicked = false,
+                clothesName = "아우터",
+                clothesPersonalColor = "봄 웜",
+                chipList = listOf(
+                    R.string.chip_casual,
                 )
             )
         )
