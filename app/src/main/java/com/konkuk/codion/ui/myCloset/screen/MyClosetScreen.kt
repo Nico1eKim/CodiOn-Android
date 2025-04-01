@@ -1,11 +1,14 @@
 package com.konkuk.codion.ui.myCloset.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -26,6 +29,7 @@ import com.konkuk.codion.ui.common.ClothesCardComponent
 import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.common.filter.FilterBottomSheetList
+import com.konkuk.codion.ui.common.filter.FilterButton
 import com.konkuk.codion.ui.common.filter.FilterType
 import com.konkuk.codion.ui.common.filter.PersonalColorType
 import com.konkuk.codion.ui.myCloset.ClothesCategoryType
@@ -37,14 +41,13 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
 
-    // 필터 상태
+// 필터 상태
     val appliedCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
     val appliedPersonalColorOptions = remember { mutableStateListOf<PersonalColorType>() }
 
     val tempCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
     val tempPersonalColorOptions = remember { mutableStateListOf<PersonalColorType>() }
 
-    // 바텀시트 열림 상태
     var expandedSheet by remember { mutableStateOf<FilterType?>(null) }
 
     val allClothes = ClothesCardDummyData.dummyData
@@ -53,8 +56,7 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
         val matchCategory =
             appliedCategoryOptions.isEmpty() || appliedCategoryOptions.contains(item.clothesType)
         val matchPersonalColor =
-            tempPersonalColorOptions.isEmpty() || tempPersonalColorOptions.contains(item.clothesPersonalColor)
-
+            appliedPersonalColorOptions.isEmpty() || appliedPersonalColorOptions.contains(item.clothesPersonalColor)
         val matchTopTab =
             selectedTab == ClothesCategoryType.ALL || item.clothesType.parent == selectedTab
 
@@ -115,7 +117,33 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
                 onOpenSheet = { expandedSheet = it }
             )
 
-            // TODO: 선택한 목록을 LazyVerticalGrid로 표시
+            // 적용된 필터 목록
+            if (appliedCategoryOptions.isNotEmpty() || appliedPersonalColorOptions.isNotEmpty()) {
+                LazyRow(
+                    modifier = Modifier
+                        .padding(start = 20.dp, top = 12.dp, bottom = 12.dp),
+                    contentPadding = PaddingValues(end = 8.dp)
+                ) {
+                    items(appliedCategoryOptions) { category ->
+                        FilterButton(
+                            filterLabel = category.label,
+                            onClose = {
+                                appliedCategoryOptions.remove(category)
+                                tempCategoryOptions.remove(category)
+                            }
+                        )
+                    }
+                    items(appliedPersonalColorOptions) { color ->
+                        FilterButton(
+                            filterLabel = color.label,
+                            onClose = {
+                                appliedPersonalColorOptions.remove(color)
+                                tempPersonalColorOptions.remove(color)
+                            }
+                        )
+                    }
+                }
+            }
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
