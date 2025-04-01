@@ -2,6 +2,7 @@ package com.konkuk.codion.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,21 +28,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray200
+import com.konkuk.codion.ui.theme.Gray300
 import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun ClothesCardComponent(clothesData: ClothesCardDummyData) {
+fun ClothesCardComponent(
+    clothesData: ClothesCardDummyData,
+    isClickable: Boolean = false,
+    isSelected: Boolean = false,
+) {
     var isHeartClicked by remember { mutableStateOf(clothesData.isHeartClicked) }
+
+    val outerPadding: Dp = if (isClickable && isSelected) 12.dp else 0.dp
+    val outerBackgroundColor = if (isClickable && isSelected) Gray300 else Color.Transparent
+    val outerBorderColor = if (isClickable && isSelected) Gray700 else Color.Transparent
+
 
     Column(
         modifier = Modifier
             .width(148.dp)
+            .background(outerBackgroundColor, shape = RoundedCornerShape(12.dp))
+            .border(width = 1.dp, color = outerBorderColor, shape = RoundedCornerShape(12.dp))
+            .padding(outerPadding)
     ) {
         Box(
             modifier = Modifier
@@ -101,7 +116,7 @@ fun ClothesCardComponent(clothesData: ClothesCardDummyData) {
 
         LazyRow(
             modifier = Modifier
-                .fillMaxWidth()
+                .width(148.dp)
                 .padding(top = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
