@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
-import com.konkuk.codion.ui.codiRecord.component.TodayCodiEmotion
+import com.konkuk.codion.ui.codiRecord.component.EnterTodayCodiEmotion
 import com.konkuk.codion.ui.common.TopAppBarComponent
 
 @Composable
@@ -30,7 +30,7 @@ fun RegisterCodiCommentScreen(modifier: Modifier = Modifier) {
                     .padding(innerPadding)
                     .padding(top = 24.dp)
             ) {
-                TodayCodiEmotion()
+                EnterTodayCodiEmotion()
             }
         }
     )
