@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,39 +18,41 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.konkuk.codion.R
+import com.konkuk.codion.ui.common.buttons.BigButtonComponent
 import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray700
+import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun FilterBottomSheetList(selectedParentCategory: ClothesCategoryType? = null) {
-    var expandedSheet by remember { mutableStateOf<FilterType?>(null) }
-
-    // ✅ 상태 저장용
-    val selectedCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
-    var selectedPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
-
-
+fun FilterBottomSheetList(
+    selectedParentCategory: ClothesCategoryType? = null,
+    selectedCategoryOptions: SnapshotStateList<ClothesCategoryType>,
+    selectedPersonalColor: PersonalColorType?,
+    onPersonalColorSelect: (PersonalColorType?) -> Unit,
+    onClick: () -> Unit,
+    expandedSheet: FilterType?,
+    onDismiss: () -> Unit,
+    onOpenSheet: (FilterType) -> Unit
+) {
     val filters = FilterType.entries
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        LazyRow(
-            contentPadding = PaddingValues(end = 8.dp)
-        ) {
+    Column(modifier = Modifier.padding(start = 20.dp, top = 12.dp)) {
+        LazyRow(contentPadding = PaddingValues(end = 8.dp)) {
             items(filters) { filter ->
                 Box(modifier = Modifier.padding(end = 8.dp)) {
                     FilterBottomSheetButton(
                         placeholder = filter.label,
-                        onClick = { expandedSheet = filter }
+                        onClick = { onOpenSheet(filter) }
                     )
                 }
             }
@@ -60,12 +61,14 @@ fun FilterBottomSheetList(selectedParentCategory: ClothesCategoryType? = null) {
 
     if (expandedSheet != null) {
         FilterBottomSheet(
-            expandedSheet = expandedSheet!!,
+            expandedSheet = expandedSheet,
             selectedParentCategory = selectedParentCategory,
             selectedCategoryOptions = selectedCategoryOptions,
             selectedPersonalColor = selectedPersonalColor,
-            onPersonalColorSelect = { selectedPersonalColor = it },
-        ) { expandedSheet = null }
+            onPersonalColorSelect = onPersonalColorSelect,
+            onDismiss = onDismiss,
+            onClick = onClick
+        )
     }
 }
 
@@ -77,7 +80,8 @@ fun FilterBottomSheet(
     selectedCategoryOptions: SnapshotStateList<ClothesCategoryType>,
     selectedPersonalColor: PersonalColorType?,
     onPersonalColorSelect: (PersonalColorType?) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onClick: () -> Unit = { onDismiss() }
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var selectedTab by remember { mutableStateOf(expandedSheet) }
@@ -128,7 +132,17 @@ fun FilterBottomSheet(
                 else -> Text("아직 구현되지 않은 필터입니다.")
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.weight(1f))
+
+            BigButtonComponent(
+                containerColor = Gray900,
+                contentColor = Gray100,
+                text = stringResource(R.string.finish)
+            ) {
+                onClick()
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -161,17 +175,4 @@ fun PersonalColorFilter(
         onSelect = onSelect,
         labelProvider = { it.label }
     )
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun FilterBottomSheetListPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-
-        FilterBottomSheetList()
-    }
 }

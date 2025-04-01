@@ -3,12 +3,16 @@ package com.konkuk.codion.ui.myCloset.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -18,8 +22,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
+import com.konkuk.codion.ui.common.ClothesCardComponent
 import com.konkuk.codion.ui.common.TopAppBarComponent
+import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.common.filter.FilterBottomSheetList
+import com.konkuk.codion.ui.common.filter.FilterType
+import com.konkuk.codion.ui.common.filter.PersonalColorType
 import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
@@ -28,6 +36,26 @@ import com.konkuk.codion.ui.theme.Gray700
 fun MyClosetScreen(modifier: Modifier = Modifier) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
+
+    // 필터 상태
+    val appliedCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
+    var appliedPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
+
+    val tempCategoryOptions = remember { mutableStateListOf<ClothesCategoryType>() }
+    var tempPersonalColor by remember { mutableStateOf<PersonalColorType?>(null) }
+
+    // 바텀시트 열림 상태
+    var expandedSheet by remember { mutableStateOf<FilterType?>(null) }
+
+    val allClothes = ClothesCardDummyData.dummyData
+
+    val filteredClothes = allClothes.filter { item ->
+        val matchCategory = appliedCategoryOptions.isEmpty() || appliedCategoryOptions.contains(item.clothesType)
+        val matchPersonalColor = appliedPersonalColor == null || appliedPersonalColor == item.clothesPersonalColor
+        val matchTopTab = selectedTab == ClothesCategoryType.ALL || item.clothesType.parent == selectedTab
+
+        matchCategory && matchPersonalColor && matchTopTab
+    }
 
     Scaffold(
         topBar = {
@@ -66,8 +94,32 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
             }
 
             FilterBottomSheetList(
-                selectedParentCategory = selectedTab
+                selectedParentCategory = selectedTab,
+                selectedCategoryOptions = tempCategoryOptions,
+                selectedPersonalColor = tempPersonalColor,
+                onPersonalColorSelect = { tempPersonalColor = it },
+                onClick = {
+                    // 적용 로직
+                    appliedCategoryOptions.clear()
+                    appliedCategoryOptions.addAll(tempCategoryOptions)
+                    appliedPersonalColor = tempPersonalColor
+                    expandedSheet = null // 바텀시트 닫기
+                },
+                expandedSheet = expandedSheet,
+                onDismiss = { expandedSheet = null },
+                onOpenSheet = { expandedSheet = it }
             )
+
+            // TODO: 필터링된 의류 목록을 LazyVerticalGrid로 표시
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.padding(horizontal = 20.dp),
+            ) {
+                items(filteredClothes) { item ->
+                    ClothesCardComponent(clothesData = item, isClickable = true, isSelected = false)
+                }
+            }
         }
     }
 }

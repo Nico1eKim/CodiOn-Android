@@ -21,6 +21,7 @@
     <string name="wearable">입을 수 있어요</string>
     <string name="enter_personal_color">퍼스널컬러 입력 완료</string>
     <string name="enter_yourself">본인이 직접 입력</string>
+    <string name="finish">적용하기</string>
 
     <!--    home    -->
     <string name="home_nickname">%s님의</string>
