@@ -42,6 +42,10 @@
     <string name="wore_clothes_empty_title">착용한 코디</string>
     <string name="wore_clothes_empty">착용한 코디가 존재하지 않아요</string>
     <string name="record_codi">코디 등록하기</string>
+    <string name="today_codi_evaluation">오늘의 코디 평가</string>
+    <string name="good">좋음</string>
+    <string name="normal">보통</string>
+    <string name="bad">나쁨</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>
