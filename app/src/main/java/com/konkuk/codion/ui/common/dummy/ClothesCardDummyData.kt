@@ -2,13 +2,14 @@ package com.konkuk.codion.ui.common.dummy
 
 import androidx.annotation.DrawableRes
 import com.konkuk.codion.R
+import com.konkuk.codion.ui.common.filter.PersonalColorType
 
 data class ClothesCardDummyData(
     @DrawableRes val clothesImg: Int,
     val wearCount: Int,
     val isHeartClicked: Boolean,
     val clothesName: String,
-    val clothesPersonalColor: String,
+    val clothesPersonalColor: PersonalColorType,
     val chipList: List<Int> = listOf()
 ) {
     companion object {
@@ -18,7 +19,7 @@ data class ClothesCardDummyData(
                 wearCount = 5,
                 isHeartClicked = false,
                 clothesName = "갈색 가디건",
-                clothesPersonalColor = "가을 웜",
+                clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -30,7 +31,7 @@ data class ClothesCardDummyData(
                 wearCount = 2,
                 isHeartClicked = false,
                 clothesName = "코듀로이 팬츠",
-                clothesPersonalColor = "가을 웜",
+                clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -42,7 +43,7 @@ data class ClothesCardDummyData(
                 wearCount = 1,
                 isHeartClicked = false,
                 clothesName = "레더 자켓",
-                clothesPersonalColor = "겨울 쿨",
+                clothesPersonalColor = PersonalColorType.WINTER_COOL,
                 chipList = listOf(
                     R.string.chip_casual,
                     R.string.chip_travel
@@ -53,7 +54,7 @@ data class ClothesCardDummyData(
                 wearCount = 0,
                 isHeartClicked = false,
                 clothesName = "청바지",
-                clothesPersonalColor = "여름 쿨",
+                clothesPersonalColor = PersonalColorType.SUMMER_COOL,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -66,7 +67,7 @@ data class ClothesCardDummyData(
                 wearCount = 3,
                 isHeartClicked = false,
                 clothesName = "라인이 있는 청바지",
-                clothesPersonalColor = "봄 웜",
+                clothesPersonalColor = PersonalColorType.SPRING_WARM,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -77,7 +78,7 @@ data class ClothesCardDummyData(
                 wearCount = 2,
                 isHeartClicked = false,
                 clothesName = "갈색 미디 원피스",
-                clothesPersonalColor = "가을 웜",
+                clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
                 chipList = listOf(
                     R.string.chip_date,
                 )
@@ -87,7 +88,7 @@ data class ClothesCardDummyData(
                 wearCount = 2,
                 isHeartClicked = false,
                 clothesName = "스커트",
-                clothesPersonalColor = "봄 웜",
+                clothesPersonalColor = PersonalColorType.SPRING_WARM,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -98,12 +99,11 @@ data class ClothesCardDummyData(
                 wearCount = 1,
                 isHeartClicked = false,
                 clothesName = "아우터",
-                clothesPersonalColor = "봄 웜",
+                clothesPersonalColor = PersonalColorType.SPRING_WARM,
                 chipList = listOf(
                     R.string.chip_casual,
                 )
             )
         )
-
     }
 }
