@@ -3,7 +3,7 @@ package com.konkuk.codion.ui.common.dummy
 import androidx.annotation.DrawableRes
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.filter.PersonalColorType
-import com.konkuk.codion.ui.myCloset.ClothesType
+import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 
 data class ClothesCardDummyData(
     @DrawableRes val clothesImg: Int,
@@ -11,7 +11,7 @@ data class ClothesCardDummyData(
     val isHeartClicked: Boolean,
     val clothesName: String,
     val clothesPersonalColor: PersonalColorType,
-    val clothesType: ClothesType,
+    val clothesType: ClothesCategoryType,
     val chipList: List<Int> = listOf()
 ) {
     companion object {
@@ -22,7 +22,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "갈색 가디건",
                 clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
-                clothesType = ClothesType.TOP,
+                clothesType = ClothesCategoryType.CARDIGAN,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -35,7 +35,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "코듀로이 팬츠",
                 clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
-                clothesType = ClothesType.BOTTOM,
+                clothesType = ClothesCategoryType.LONG_PANTS,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -48,7 +48,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "레더 자켓",
                 clothesPersonalColor = PersonalColorType.WINTER_COOL,
-                clothesType = ClothesType.OUTER,
+                clothesType = ClothesCategoryType.JACKET,
                 chipList = listOf(
                     R.string.chip_casual,
                     R.string.chip_travel
@@ -60,7 +60,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "청바지",
                 clothesPersonalColor = PersonalColorType.SUMMER_COOL,
-                clothesType = ClothesType.BOTTOM,
+                clothesType = ClothesCategoryType.LONG_PANTS,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -74,7 +74,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "라인이 있는 청바지",
                 clothesPersonalColor = PersonalColorType.SPRING_WARM,
-                clothesType = ClothesType.BOTTOM,
+                clothesType = ClothesCategoryType.LONG_PANTS,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -86,7 +86,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "갈색 미디 원피스",
                 clothesPersonalColor = PersonalColorType.AUTUMN_WARM,
-                clothesType = ClothesType.DRESS,
+                clothesType = ClothesCategoryType.MIDI,
                 chipList = listOf(
                     R.string.chip_date,
                 )
@@ -97,7 +97,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "스커트",
                 clothesPersonalColor = PersonalColorType.SPRING_WARM,
-                clothesType = ClothesType.DRESS,
+                clothesType = ClothesCategoryType.LONG,
                 chipList = listOf(
                     R.string.chip_date,
                     R.string.chip_casual,
@@ -109,7 +109,7 @@ data class ClothesCardDummyData(
                 isHeartClicked = false,
                 clothesName = "아우터",
                 clothesPersonalColor = PersonalColorType.SPRING_WARM,
-                clothesType = ClothesType.OUTER,
+                clothesType = ClothesCategoryType.JACKET,
                 chipList = listOf(
                     R.string.chip_casual,
                 )
