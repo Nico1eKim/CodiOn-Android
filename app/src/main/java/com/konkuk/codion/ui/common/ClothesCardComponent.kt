@@ -46,14 +46,13 @@ fun ClothesCardComponent(
 ) {
     var isHeartClicked by remember { mutableStateOf(clothesData.isHeartClicked) }
 
-    val outerPadding: Dp = if (isClickable && isSelected) 12.dp else 0.dp
+    val outerPadding: Dp = if (isClickable) 12.dp else 0.dp
     val outerBackgroundColor = if (isClickable && isSelected) Gray300 else Color.Transparent
     val outerBorderColor = if (isClickable && isSelected) Gray700 else Color.Transparent
 
 
     Column(
         modifier = Modifier
-            .width(148.dp)
             .background(outerBackgroundColor, shape = RoundedCornerShape(12.dp))
             .border(width = 1.dp, color = outerBorderColor, shape = RoundedCornerShape(12.dp))
             .padding(outerPadding)
