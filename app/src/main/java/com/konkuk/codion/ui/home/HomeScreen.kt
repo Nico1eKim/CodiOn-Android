@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -30,6 +32,8 @@ import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+    val scrollState = rememberScrollState()
+
     Scaffold(
         topBar = {
             TopAppBarComponent(
@@ -44,7 +48,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Column(
             modifier = modifier
                 .padding(innerPadding)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(scrollState),
         ) {
             Row(
                 modifier = Modifier
@@ -126,6 +131,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 title = stringResource(R.string.unusual_clothes),
                 clothesDataList = ClothesCardDummyData.dummyData
             )
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
