@@ -24,6 +24,7 @@
     <string name="finish">적용하기</string>
     <string name="upload">등록하기</string>
     <string name="take_picture">옷 촬영하기</string>
+    <string name="finish_clothes_upload">옷 등록 완료하기</string>
 
     <!--    home    -->
     <string name="home_nickname">%s님의</string>
@@ -82,4 +83,13 @@
 
     <!--    my closet    -->
     <string name="pictrue_guide">화면 안에 옷의 형태가 모두 들어오도록\n촬영 구도를 조절해주세요</string>
+    <string name="category">카테고리</string>
+    <string name="category_placeholder">카테고리 선택</string>
+    <string name="personal_color_color">퍼스널컬러 / 색상</string>
+    <string name="personal_color_placeholder">퍼스널컬러 선택</string>
+    <string name="color_placeholder">색상 선택</string>
+    <string name="can_wear_in_rain">비가 오는 날에도 착용할 수 있나요?</string>
+    <string name="can_wear">입을 수 있어요</string>
+    <string name="cant_wear">입기 불편해요</string>
+    <string name="occasion_keyword">상황 키워드</string>
 </resources>
