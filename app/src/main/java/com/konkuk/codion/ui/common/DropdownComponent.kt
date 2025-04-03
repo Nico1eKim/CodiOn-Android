@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
+import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.theme.Red
@@ -90,6 +91,8 @@ fun <T> GenericDropdownComponent(
             )
         }
         DropdownMenu(
+            modifier = Modifier
+                .background(color = Gray100, shape = RoundedCornerShape(8.dp)),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
