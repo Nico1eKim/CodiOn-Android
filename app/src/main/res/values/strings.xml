@@ -61,4 +61,12 @@
     <string name="register_done">회원가입 완료</string>
     <string name="personal_color">퍼스널컬러</string>
     <string name="terms">약관 동의</string>
+
+    <!--    mypage  -->
+    <string name="month">이번 달</string>
+    <string name="with">과 함께</string>
+    <string name="done_codi">%d개의 코디</string>
+    <string name="complete">를 완성했어요!</string>
+    <string name="logout">로그아웃</string>
+    <string name="withdrawal">회원 탈퇴</string>
 </resources>
