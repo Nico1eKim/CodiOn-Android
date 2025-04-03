@@ -37,7 +37,6 @@ fun InputFieldWithBtnComponent(
             isRequired = true,
             placeholder = placeholder,
             inputText = inputText,
-            width = 212.dp,
             showTimer = showTimer,
             timerSeconds = timerSeconds
         )

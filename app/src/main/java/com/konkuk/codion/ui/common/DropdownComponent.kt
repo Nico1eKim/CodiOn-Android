@@ -111,12 +111,14 @@ fun <T> GenericDropdownComponent(
 // 텍스트 값이 존재하는 드롭다운
 @Composable
 fun DropdownComponent(
+    modifier: Modifier = Modifier,
     placeholder: String,
     options: List<String>,
     selectedOption: String?,
     onOptionSelected: (String) -> Unit
 ) {
     GenericDropdownComponent(
+        modifier = modifier,
         placeholder = placeholder,
         options = options,
         selectedOption = selectedOption,
@@ -134,12 +136,14 @@ fun DropdownComponent(
 // 색상 + 텍스트 값이 존재하는 드롭다운
 @Composable
 fun DropdownComponent(
+    modifier: Modifier = Modifier,
     placeholder: String,
     options: List<ColorWithText>,
     selectedOption: ColorWithText?,
     onOptionSelected: (ColorWithText) -> Unit
 ) {
     GenericDropdownComponent(
+        modifier = modifier,
         placeholder = placeholder,
         options = options,
         selectedOption = selectedOption,
