@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
@@ -42,7 +42,7 @@ data class ColorWithText(val color: Color, val text: String)  // 색상 + 텍스
 // 두 드롭다운에서 공통인 부분 추출한 함수
 @Composable
 fun <T> GenericDropdownComponent(
-    width: Dp,  // 드롭다운 박스 너비
+    modifier: Modifier = Modifier,  // 드롭다운 박스 너비
     placeholder: String,  // 선택되지 않았을 때 표시할 텍스트
     options: List<T>,  // 드롭다운 메뉴에 보이는 항목 리스트
     selectedOption: T?,  // 현재 선택된 항목 값
@@ -55,9 +55,9 @@ fun <T> GenericDropdownComponent(
     val dropdownIcon = painterResource(id = R.drawable.ic_dropdown)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .clickable { expanded = true }  // 클릭 시 드롭다운 열림
-            .width(width)
+            .fillMaxWidth()
             .height(40.dp)
             .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
     ) {
@@ -111,14 +111,12 @@ fun <T> GenericDropdownComponent(
 // 텍스트 값이 존재하는 드롭다운
 @Composable
 fun DropdownComponent(
-    width: Dp,
     placeholder: String,
     options: List<String>,
     selectedOption: String?,
     onOptionSelected: (String) -> Unit
 ) {
     GenericDropdownComponent(
-        width = width,
         placeholder = placeholder,
         options = options,
         selectedOption = selectedOption,
@@ -136,14 +134,12 @@ fun DropdownComponent(
 // 색상 + 텍스트 값이 존재하는 드롭다운
 @Composable
 fun DropdownComponent(
-    width: Dp,
     placeholder: String,
     options: List<ColorWithText>,
     selectedOption: ColorWithText?,
     onOptionSelected: (ColorWithText) -> Unit
 ) {
     GenericDropdownComponent(
-        width = width,
         placeholder = placeholder,
         options = options,
         selectedOption = selectedOption,
@@ -185,7 +181,6 @@ fun DropdownComponentPreview() {
         verticalArrangement = Arrangement.Center
     ) {
         DropdownComponent(
-            width = 320.dp,
             placeholder = "카테고리 선택",
             options = listOf("상의", "아우터", "바지", "원피스/스커트"),
             selectedOption = selectedCategory,
@@ -193,7 +188,6 @@ fun DropdownComponentPreview() {
         )
         Spacer(modifier = Modifier.height(16.dp))
         DropdownComponent(
-            width = 154.dp,
             placeholder = "퍼스널컬러 선택",
             options = listOf("봄 웜", "여름 쿨", "가을 웜", "겨울 쿨"),
             selectedOption = selectedTone,
@@ -201,7 +195,6 @@ fun DropdownComponentPreview() {
         )
         Spacer(modifier = Modifier.height(16.dp))
         DropdownComponent(
-            width = 154.dp,
             placeholder = "색상 선택",
             options = listOf(
                 ColorWithText(Red, "빨강"),
