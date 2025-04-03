@@ -1,6 +1,7 @@
 package com.konkuk.codion.ui.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -15,20 +16,30 @@ import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
+import com.konkuk.codion.ui.theme.Gray300
+import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun ChipComponent(chipText: String) {
+fun ChipComponent(
+    chipText: String,
+    isSelected: Boolean = false,
+    onClick: () -> Unit = {}
+) {
+    val backgroundColor = if (isSelected) Gray900 else Gray300
+    val textColor = if (isSelected) Gray100 else Gray700
+
     Row(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(18.dp))
-            .background(color = Gray900)
+            .background(color = backgroundColor)
+            .clickable { onClick() }
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Text(
             text = chipText,
             style = CodiOnTypography.pretendard_600_12,
-            color = Gray100
+            color = textColor
         )
     }
 }
