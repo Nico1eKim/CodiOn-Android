@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray500
@@ -47,7 +49,13 @@ fun InputFieldComponent(
     Column {
         Text(
             text = labelText,
-            style = CodiOnTypography.pretendard_600_14,
+            style = CodiOnTypography.pretendard_600_14.copy(
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment.Center,
+                    trim = LineHeightStyle.Trim.None
+                ),
+                lineHeight = 21.sp
+            ),
             color = Gray700
         )
         Spacer(modifier = Modifier.height(4.dp))
