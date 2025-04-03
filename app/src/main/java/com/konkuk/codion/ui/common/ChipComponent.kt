@@ -23,7 +23,7 @@ import com.konkuk.codion.ui.theme.Gray900
 @Composable
 fun ChipComponent(
     chipText: String,
-    isSelected: Boolean = false,
+    isSelected: Boolean = true,
     onClick: () -> Unit = {}
 ) {
     val backgroundColor = if (isSelected) Gray900 else Gray300
