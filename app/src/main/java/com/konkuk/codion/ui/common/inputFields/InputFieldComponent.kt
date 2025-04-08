@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
@@ -44,7 +46,7 @@ fun InputFieldComponent(
     placeholder: String,
     inputText: String,
     onTextChanged: (String) -> Unit,
-    width: Dp = 320.dp,
+    modifier: Modifier = Modifier,
     // 비밀번호 필드 관련
     isPwdField: Boolean = false,  // 해당 inputfield가 pwd를 다루는 필드인지 여부
     isPwdVisible: Boolean = true,  // 현재 보이는 상태인지에 대한 여부
@@ -61,7 +63,9 @@ fun InputFieldComponent(
         String.format(Locale.KOREA, "%02d:%02d", seconds / 60, seconds % 60)
     }
 
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         Text(
             text = labelText,
             style = CodiOnTypography.pretendard_600_14,
@@ -72,7 +76,7 @@ fun InputFieldComponent(
             value = inputText,
             onValueChange = onTextChanged,
             modifier = Modifier
-                .size(width, 40.dp)
+                .height(40.dp)
                 .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
                 .padding(start = 10.dp, end = 10.dp),
             textStyle = CodiOnTypography.pretendard_400_14.copy(color = Gray700),
@@ -180,7 +184,6 @@ fun InputFieldComponentPreview() {
             placeholder = stringResource(R.string.code_ph),
             inputText = emailCodeInputTest1,
             onTextChanged = { emailCodeInputTest1 = it },
-            width = 212.dp,
             showTimer = true,
             timerSeconds = 180
         )

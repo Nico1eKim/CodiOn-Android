@@ -1,11 +1,13 @@
 package com.konkuk.codion.ui.common.inputFields
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -31,7 +33,8 @@ fun InputFieldWithBtnComponent(
     timerSeconds: Int? = null,
 ) {
     Row(
-        verticalAlignment = Alignment.Bottom
+        verticalAlignment = Alignment.Bottom,
+        modifier = Modifier.fillMaxWidth()
     ) {
         InputFieldComponent(
             label = label,
@@ -39,9 +42,9 @@ fun InputFieldWithBtnComponent(
             placeholder = placeholder,
             inputText = inputText,
             onTextChanged = onTextChanged,
-            width = 212.dp,
             showTimer = showTimer,
-            timerSeconds = timerSeconds
+            timerSeconds = timerSeconds,
+            modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         SmallButtonComponent(
