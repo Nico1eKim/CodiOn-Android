@@ -22,6 +22,7 @@
     <string name="enter_personal_color">퍼스널컬러 입력 완료</string>
     <string name="enter_yourself">본인이 직접 입력</string>
     <string name="change_pwd_full">비밀번호 변경하기</string>
+    <string name="start_analyze">분석 시작하기</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>
@@ -70,4 +71,12 @@
     <string name="complete">를 완성했어요!</string>
     <string name="logout">로그아웃</string>
     <string name="withdrawal">회원 탈퇴</string>
+
+    <!--    personal color  -->
+    <string name="start_personal_color">카메라를 통한\n퍼스널컬러 분석을 시작합니다</string>
+    <string name="guideline_title">촬영 가이드라인</string>
+    <string name="guideline_1">특정 색상을 띠는 조명을 피하고, 자연스러운 색상의 조명/햇빛이 드는 곳에서 촬영해 주세요.</string>
+    <string name="guideline_2">얼굴에 그림자가 생기지 않도록 촬영해 주세요.</string>
+    <string name="guideline_3">얼굴 가이드라인에 이목구비가 제대로 매칭되도록 촬영 각도를 조정해 주세요.</string>
+    <string name="guideline_4">피부 본연의 색을 분석하기 위해 메이크업을 하지 않은 상태로 촬영해 주세요.</string>
 </resources>
