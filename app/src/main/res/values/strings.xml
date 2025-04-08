@@ -84,7 +84,8 @@
     <!--    my closet    -->
     <string name="pictrue_guide">화면 안에 옷의 형태가 모두 들어오도록\n촬영 구도를 조절해주세요</string>
     <string name="category">카테고리</string>
-    <string name="category_placeholder">카테고리 선택</string>
+    <string name="big_category_placeholder">큰 카테고리 선택</string>
+    <string name="small_category_placeholder">작은 카테고리 선택</string>
     <string name="personal_color_color">퍼스널컬러 / 색상</string>
     <string name="personal_color_placeholder">퍼스널컬러 선택</string>
     <string name="color_placeholder">색상 선택</string>

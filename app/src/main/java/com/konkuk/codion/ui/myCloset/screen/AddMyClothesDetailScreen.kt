@@ -38,7 +38,9 @@ import com.konkuk.codion.ui.common.DropdownComponent
 import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
+import com.konkuk.codion.ui.common.filter.PersonalColorType
 import com.konkuk.codion.ui.common.inputFields.InputFieldComponent
+import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.myCloset.component.OutlineButton
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
@@ -50,8 +52,19 @@ import com.konkuk.codion.ui.theme.Gray900
 fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
     val clothesData = ClothesCardDummyData.dummyData[0]
     val clothesNickname by rememberSaveable { mutableStateOf("") }
-    var selectedCategory by remember { mutableStateOf<String?>(null) }
+
+    var selectedBigCategory by remember { mutableStateOf<String?>(null) }
+    val topCategories = ClothesCategoryType
+        .getTopLevelCategories()
+        .filter { it != ClothesCategoryType.ALL }
+
+    var selectedSmallCategory by remember { mutableStateOf<String?>(null) }
+    val selectedParent = topCategories.find { it.label == selectedBigCategory }
+    val childCategories = selectedParent?.let { ClothesCategoryType.getChildrenOf(it) } ?: emptyList()
+
     var selectedPersonalColor by remember { mutableStateOf<String?>(null) }
+    val personalColorOptions = PersonalColorType.entries
+
     var selectedColor by remember { mutableStateOf<ColorWithText?>(null) }
 
     var canWearState by remember { mutableStateOf<Boolean?>(null) }
@@ -128,12 +141,32 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(top = 20.dp, bottom = 4.dp)
             )
 
-            DropdownComponent(
-                placeholder = stringResource(R.string.category_placeholder),
-                options = listOf("상의", "아우터", "바지", "원피스/스커트"),
-                selectedOption = selectedCategory,
-                onOptionSelected = { selectedCategory = it }
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                DropdownComponent(
+                    modifier = Modifier.weight(1f),
+                    placeholder = stringResource(R.string.big_category_placeholder),
+                    options = topCategories,
+                    selectedOption = topCategories.find { it.label == selectedBigCategory },
+                    onOptionSelected = {
+                        selectedBigCategory = it.label
+                        selectedSmallCategory = null // 대분류 변경 시 소분류 초기화
+                    }
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                DropdownComponent(
+                    modifier = Modifier.weight(1f),
+                    placeholder = stringResource(R.string.small_category_placeholder),
+                    options = childCategories,
+                    selectedOption = childCategories.find { it.label == selectedSmallCategory },
+                    onOptionSelected = { selectedSmallCategory = it.label }
+                )
+            }
+
 
             Text(
                 text = stringResource(R.string.personal_color_color),
@@ -155,9 +188,9 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
                 DropdownComponent(
                     modifier = Modifier.weight(1f),
                     placeholder = stringResource(R.string.personal_color_placeholder),
-                    options = listOf("봄 웜", "여름 쿨", "가을 웜", "겨울 쿨"),
-                    selectedOption = selectedPersonalColor,
-                    onOptionSelected = { selectedPersonalColor = it }
+                    options = personalColorOptions,
+                    selectedOption = personalColorOptions.find { it.label == selectedPersonalColor },
+                    onOptionSelected = { selectedPersonalColor = it.label }
                 )
 
                 Spacer(modifier = Modifier.width(12.dp))
