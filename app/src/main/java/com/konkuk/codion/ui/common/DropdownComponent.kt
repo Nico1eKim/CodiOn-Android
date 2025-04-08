@@ -31,6 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
+import com.konkuk.codion.ui.common.filter.PersonalColorType
+import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray500
@@ -170,6 +172,54 @@ fun DropdownComponent(
                     color = Gray700
                 )
             }
+        }
+    )
+}
+
+@Composable
+fun DropdownComponent(
+    modifier: Modifier = Modifier,
+    placeholder: String,
+    options: List<PersonalColorType>,
+    selectedOption: PersonalColorType?,
+    onOptionSelected: (PersonalColorType) -> Unit
+) {
+    GenericDropdownComponent(
+        modifier = modifier,
+        placeholder = placeholder,
+        options = options,
+        selectedOption = selectedOption,
+        onOptionSelected = onOptionSelected,
+        optionContent = { option ->
+            Text(
+                text = option.label,
+                style = CodiOnTypography.pretendard_400_14,
+                color = Gray700
+            )
+        }
+    )
+}
+
+@Composable
+fun DropdownComponent(
+    modifier: Modifier = Modifier,
+    placeholder: String,
+    options: List<ClothesCategoryType>,
+    selectedOption: ClothesCategoryType?,
+    onOptionSelected: (ClothesCategoryType) -> Unit
+) {
+    GenericDropdownComponent(
+        modifier = modifier,
+        placeholder = placeholder,
+        options = options,
+        selectedOption = selectedOption,
+        onOptionSelected = onOptionSelected,
+        optionContent = { option ->
+            Text(
+                text = option.label,
+                style = CodiOnTypography.pretendard_400_14,
+                color = Gray700
+            )
         }
     )
 }
