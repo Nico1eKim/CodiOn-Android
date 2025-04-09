@@ -23,6 +23,7 @@
     <string name="enter_yourself">본인이 직접 입력</string>
     <string name="change_pwd_full">비밀번호 변경하기</string>
     <string name="start_analyze">분석 시작하기</string>
+    <string name="analyzing">퍼스널컬러를 분석 중입니다</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>
