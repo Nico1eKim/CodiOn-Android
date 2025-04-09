@@ -15,7 +15,7 @@ data class ProfileDummyData(
             email = "honggildong@naver.com",
             pwd = "honggildong1!",
             nickname = "홍길동",
-            personal = "가을 웜톤",
+            personal = "가을 웜",
             monthCodi = 7
         )
     }
