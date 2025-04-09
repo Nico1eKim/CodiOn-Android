@@ -80,4 +80,11 @@
     <string name="guideline_2">얼굴에 그림자가 생기지 않도록 촬영해 주세요.</string>
     <string name="guideline_3">얼굴 가이드라인에 이목구비가 제대로 매칭되도록 촬영 각도를 조정해 주세요.</string>
     <string name="guideline_4">피부 본연의 색을 분석하기 위해 메이크업을 하지 않은 상태로 촬영해 주세요.</string>
+    <string name="feature">특징</string>
+    <string name="palette">팔레트</string>
+    <string name="tone">톤</string>
+    <string name="personal_color_spring">봄 웜</string>
+    <string name="personal_color_summer">여름 쿨</string>
+    <string name="personal_color_autumn">가을 웜</string>
+    <string name="personal_color_winter">겨울 쿨</string>
 </resources>
