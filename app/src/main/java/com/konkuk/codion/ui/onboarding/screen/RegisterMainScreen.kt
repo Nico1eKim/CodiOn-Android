@@ -60,7 +60,7 @@ fun RegisterMainScreen() {
                 icon = painterResource(id = R.drawable.ic_mail)
             )
             Spacer(modifier = Modifier.height(16.dp))
-            // TODO("카카오톡 회원가입 버튼 추가")
+            // TODO: 카카오톡 회원가입 버튼 추가
         }
     }
 }

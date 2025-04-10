@@ -101,7 +101,7 @@ fun LoginScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(12.dp))
-            // TODO("카카오톡 로그인 버튼 추가")
+            // TODO: 카카오톡 로그인 버튼 추가
         }
 
         // 하단 텍스트 (회원가입 | 비밀번호 찾기)
@@ -119,7 +119,7 @@ fun LoginScreen() {
                     text = stringResource(R.string.register),
                     modifier = Modifier
                         .padding(end = 8.dp)
-                        .clickable { /* TODO("클릭 처리") */ },
+                        .clickable { /* TODO: 클릭 처리 */ },
                     style = CodiOnTypography.pretendard_500_14.copy(
                         textDecoration = TextDecoration.Underline
                     ),
@@ -136,7 +136,7 @@ fun LoginScreen() {
                     text = stringResource(R.string.find_pwd),
                     modifier = Modifier
                         .padding(start = 8.dp)
-                        .clickable { /* TODO("클릭 처리") */ },
+                        .clickable { /* TODO: 클릭 처리 */ },
                     style = CodiOnTypography.pretendard_500_14.copy(
                         textDecoration = TextDecoration.Underline
                     ),
