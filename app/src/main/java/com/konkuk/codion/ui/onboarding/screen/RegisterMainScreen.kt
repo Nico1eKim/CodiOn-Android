@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.TopAppBarComponent
@@ -63,4 +64,10 @@ fun RegisterMainScreen() {
             // TODO("카카오톡 회원가입 버튼 추가")
         }
     }
+}
+
+@Preview
+@Composable
+fun RegisterMainScreenPreview() {
+    RegisterMainScreen()
 }
