@@ -61,7 +61,7 @@ fun EditProfileScreen(
                 label = stringResource(R.string.nickname),
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
-                inputText = "홍길동",
+                inputText = profile.nickname,
                 onTextChanged = { }
             )
 
@@ -105,7 +105,7 @@ fun EditProfileScreen(
             BigButtonComponent(
                 containerColor = Gray900,
                 contentColor = Gray100,
-                text = stringResource(R.string.edit_profile) + "하기"
+                text = stringResource(R.string.edit_profile_full)
             )
             Spacer(modifier = Modifier.height(32.dp))
         }

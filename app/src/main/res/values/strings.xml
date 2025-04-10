@@ -24,6 +24,7 @@
     <string name="change_pwd_full">비밀번호 변경하기</string>
     <string name="start_analyze">분석 시작하기</string>
     <string name="analyzing">퍼스널컬러를 분석 중입니다</string>
+    <string name="edit_profile_full">프로필 수정하기</string>
 
     <!--    inputfield component   -->
     <string name="email">이메일</string>
@@ -90,4 +91,9 @@
     <string name="image">이미지</string>
     <string name="eye">눈빛</string>
     <string name="skin">피부톤</string>
+
+    <!--    terms box component -->
+    <string name="required">필수</string>
+    <string name="optional">선택</string>
+    <string name="show">보기</string>
 </resources>
