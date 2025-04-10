@@ -8,7 +8,7 @@ data class ColorDummyData(
     val mainImageResourceId: Int,  // 사진
     val imageList: List<String> = listOf(),  // 이미지 설명
     val eyeList: List<String> = listOf(),  // 눈빛 설명
-    val skin: String = "",  // 피부톤 설명
+    val skinList: List<String> = listOf(),  // 피부톤 설명
     val paletteColors: List<Color> = listOf()  // 컬러 팔레트
 ) {
     companion object {
@@ -25,7 +25,7 @@ data class ColorDummyData(
                 "부드러움",
                 "깊이 있고 탁함"
             ),
-            skin = "비치치 않는 갈색톤",
+            skinList = listOf("비치치 않는 갈색톤"),
             paletteColors = listOf(
                 // line 1
                 Color(0xFFFEE69C),
