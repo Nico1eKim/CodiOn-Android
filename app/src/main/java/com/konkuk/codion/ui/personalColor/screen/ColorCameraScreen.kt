@@ -50,7 +50,7 @@ fun ColorCameraScreen() {
             contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.width(320.dp),
+                modifier = Modifier.padding(horizontal = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.weight(1f))

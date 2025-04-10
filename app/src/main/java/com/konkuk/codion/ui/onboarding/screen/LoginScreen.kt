@@ -43,7 +43,7 @@ fun LoginScreen() {
     ) {
         // 중앙에 보이는 UI
         Column(
-            modifier = Modifier.width(320.dp),
+            modifier = Modifier.padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

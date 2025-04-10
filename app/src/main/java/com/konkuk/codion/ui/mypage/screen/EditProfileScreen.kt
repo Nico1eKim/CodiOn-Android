@@ -7,11 +7,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,7 +54,7 @@ fun EditProfileScreen(
         Spacer(modifier = Modifier.height(30.dp))
 
         Column(
-            modifier = Modifier.width(320.dp)
+            modifier = Modifier.padding(horizontal = 20.dp)
         ) {
             // 별명
             InputFieldComponent(
@@ -77,7 +76,8 @@ fun EditProfileScreen(
             Spacer(modifier = Modifier.height(4.dp))
             Box(
                 modifier = Modifier
-                    .size(320.dp, 40.dp)
+                    .fillMaxWidth()
+                    .height(40.dp)
                     .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
                     .padding(start = 10.dp, end = 10.dp),
                 contentAlignment = Alignment.CenterStart
