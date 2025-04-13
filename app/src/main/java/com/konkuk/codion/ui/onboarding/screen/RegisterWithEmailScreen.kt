@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -25,6 +29,14 @@ import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
 fun RegisterWithEmailScreen() {
+    var email by remember { mutableStateOf("") }
+    var emailCode by remember { mutableStateOf<Int?>(null) }
+    var emailCodeToString by remember { mutableStateOf("") }
+    var pwd by remember { mutableStateOf("") }
+    var isPwdVisible by remember { mutableStateOf(false) }
+    var pwdCheck by remember { mutableStateOf("") }
+    var isPwdCheckVisible by remember { mutableStateOf(false) }
+
     // 상단바
     Column(
         modifier = Modifier
@@ -49,16 +61,19 @@ fun RegisterWithEmailScreen() {
             InputFieldWithBtnComponent(
                 label = stringResource(R.string.email),
                 placeholder = stringResource(R.string.email_ph),
-                inputText = "",
-                onTextChanged = {},
+                inputText = email,
+                onTextChanged = { email = it },
                 btnText = stringResource(R.string.code_btn_send)
             )
             Spacer(modifier = Modifier.height(20.dp))
             InputFieldWithBtnComponent(
                 label = stringResource(R.string.code),
                 placeholder = stringResource(R.string.code_ph),
-                inputText = "",
-                onTextChanged = {},
+                inputText = emailCodeToString,
+                onTextChanged = {
+                    emailCodeToString = it
+                    emailCode = it.toIntOrNull() ?: 0
+                },
                 btnText = stringResource(R.string.code_btn_done),
                 showTimer = true,
                 timerSeconds = 180
@@ -68,22 +83,22 @@ fun RegisterWithEmailScreen() {
                 label = stringResource(R.string.pwd),
                 isRequired = true,
                 placeholder = stringResource(R.string.pwd_ph_hint),
-                inputText = "",
-                onTextChanged = { },
+                inputText = pwd,
+                onTextChanged = { pwd = it },
                 isPwdField = true,
-                isPwdVisible = true,
-                onPwdVisibleToggle = { }
+                isPwdVisible = isPwdVisible,
+                onPwdVisibleToggle = { isPwdVisible = !isPwdVisible }
             )
             Spacer(modifier = Modifier.height(20.dp))
             InputFieldComponent(
                 label = stringResource(R.string.pwd_ph_check),
                 isRequired = true,
                 placeholder = stringResource(R.string.pwd_ph_hint),
-                inputText = "",
-                onTextChanged = { },
+                inputText = pwdCheck,
+                onTextChanged = { pwdCheck = it },
                 isPwdField = true,
-                isPwdVisible = true,
-                onPwdVisibleToggle = { }
+                isPwdVisible = isPwdCheckVisible,
+                onPwdVisibleToggle = { isPwdCheckVisible = !isPwdCheckVisible }
             )
             Spacer(modifier = Modifier.weight(1f))
             BigButtonComponent(
