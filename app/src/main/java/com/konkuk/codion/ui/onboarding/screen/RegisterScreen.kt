@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -29,6 +33,8 @@ import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
 fun RegisterScreen() {
+    var nickname by remember { mutableStateOf("") }
+
     // 상단바
     Column(
         modifier = Modifier
@@ -66,8 +72,8 @@ fun RegisterScreen() {
                 label = stringResource(R.string.nickname),
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
-                inputText = "",
-                onTextChanged = { }
+                inputText = nickname,
+                onTextChanged = { nickname = it }
             )
 
             Spacer(modifier = Modifier.height(20.dp))
