@@ -14,10 +14,16 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
@@ -36,6 +42,15 @@ import com.konkuk.codion.ui.theme.Gray900
 fun EditProfileScreen(
     profile: ProfileDummyData
 ) {
+    var nicknameFieldValue by remember {
+        mutableStateOf(
+            TextFieldValue(
+                text = profile.nickname,
+                selection = TextRange(profile.nickname.length)
+            )
+        )
+    }
+
     // 상단바
     Column(
         modifier = Modifier
@@ -61,8 +76,12 @@ fun EditProfileScreen(
                 label = stringResource(R.string.nickname),
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
-                inputText = profile.nickname,
-                onTextChanged = { }
+                inputText = nicknameFieldValue,
+                onTextChanged = {
+                    nicknameFieldValue = it.copy(
+                        selection = TextRange(it.text.length)
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(20.dp))
