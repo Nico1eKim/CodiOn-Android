@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -123,6 +124,59 @@ fun InputFieldComponent(
                             style = CodiOnTypography.pretendard_400_14,
                             color = Red
                         )
+                    }
+                }
+            }
+        )
+    }
+}
+
+// 커서 정보까지 저장한 InputFieldComponent (InputFieldComponent 오버로딩한 버전)
+@Composable
+fun InputFieldComponent(
+    label: String,
+    isRequired: Boolean,
+    placeholder: String,
+    inputText: TextFieldValue,
+    onTextChanged: (TextFieldValue) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // 필수 입력 여부에 따른 '*' 텍스트 추가 or 미추가 처리
+    val labelText = if (isRequired) "$label *" else label
+
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = labelText,
+            style = CodiOnTypography.pretendard_600_14,
+            color = Gray700
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        BasicTextField(
+            value = inputText,
+            onValueChange = onTextChanged,
+            modifier = Modifier
+                .height(40.dp)
+                .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
+                .padding(start = 10.dp, end = 10.dp),
+            textStyle = CodiOnTypography.pretendard_400_14.copy(color = Gray700),
+            singleLine = true,  // 필드 내에서 엔터 사용 불가능 처리
+            decorationBox = { innerTextField ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        // placeholder 노출 여부
+                        if (inputText.text.isEmpty()) {
+                            Text(
+                                text = placeholder,
+                                style = CodiOnTypography.pretendard_400_14,
+                                color = Gray500
+                            )
+                        }
+                        innerTextField()
                     }
                 }
             }
