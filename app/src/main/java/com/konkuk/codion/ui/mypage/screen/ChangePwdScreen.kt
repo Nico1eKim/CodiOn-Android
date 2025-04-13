@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -29,6 +33,9 @@ import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
 fun ChangePwdScreen() {
+    var newPwd by remember { mutableStateOf("") }
+    var newPwdCheck by remember { mutableStateOf("") }
+
     // 상단바
     Column(
         modifier = Modifier
@@ -66,8 +73,8 @@ fun ChangePwdScreen() {
                 label = stringResource(R.string.pwd),
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph_hint),
-                inputText = "",
-                onTextChanged = { }
+                inputText = newPwd,
+                onTextChanged = { newPwd = it }
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -76,8 +83,8 @@ fun ChangePwdScreen() {
                 label = stringResource(R.string.pwd_ph_check),
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph_check),
-                inputText = "",
-                onTextChanged = { }
+                inputText = newPwdCheck,
+                onTextChanged = { newPwdCheck = it }
             )
 
             Spacer(modifier = Modifier.height(24.dp))
