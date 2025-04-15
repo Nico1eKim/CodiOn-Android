@@ -2,13 +2,13 @@ package com.konkuk.codion.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,22 +27,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray200
+import com.konkuk.codion.ui.theme.Gray300
 import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun ClothesCardComponent() {
-    val dummyData = ClothesCardDummyData.dummyData
-    var isHeartClicked by remember { mutableStateOf(dummyData.isHeartClicked) }
+fun ClothesCardComponent(
+    clothesData: ClothesCardDummyData,
+    isClickable: Boolean = false,
+    isSelected: Boolean = false,
+) {
+    var isHeartClicked by remember { mutableStateOf(clothesData.isHeartClicked) }
+
+    val outerPadding: Dp = if (isClickable) 12.dp else 0.dp
+    val outerBackgroundColor = if (isClickable && isSelected) Gray300 else Color.Transparent
+    val outerBorderColor = if (isClickable && isSelected) Gray700 else Color.Transparent
+
 
     Column(
         modifier = Modifier
-            .width(148.dp)
+            .background(outerBackgroundColor, shape = RoundedCornerShape(12.dp))
+            .border(width = 1.dp, color = outerBorderColor, shape = RoundedCornerShape(12.dp))
+            .padding(outerPadding)
     ) {
         Box(
             modifier = Modifier
@@ -51,11 +63,10 @@ fun ClothesCardComponent() {
                 .background(color = Gray200)
         ) {
             Image(
-                painter = painterResource(id = dummyData.clothesImg),
+                painter = painterResource(id = clothesData.clothesImg),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
             )
 
             Row(
@@ -65,7 +76,10 @@ fun ClothesCardComponent() {
                     .padding(8.dp)
             ) {
                 Text(
-                    text = String.format(stringResource(R.string.number_of_wear), dummyData.wearCount),
+                    text = String.format(
+                        stringResource(R.string.number_of_wear),
+                        clothesData.wearCount
+                    ),
                     style = CodiOnTypography.pretendard_400_12,
                     color = Gray700,
                 )
@@ -84,14 +98,14 @@ fun ClothesCardComponent() {
         }
 
         Text(
-            text = dummyData.clothesName,
+            text = clothesData.clothesName,
             style = CodiOnTypography.pretendard_600_16,
             color = Gray700,
             modifier = Modifier.padding(top = 12.dp)
         )
 
         Text(
-            text = dummyData.clothesPersonalColor,
+            text = clothesData.clothesPersonalColor.label,
             style = CodiOnTypography.pretendard_600_12,
             color = Gray500,
             modifier = Modifier.padding(top = 4.dp)
@@ -99,12 +113,12 @@ fun ClothesCardComponent() {
 
         LazyRow(
             modifier = Modifier
-                .fillMaxWidth()
+                .width(148.dp)
                 .padding(top = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(dummyData.chipList.size) { index ->
-                ChipComponent(stringResource(id = dummyData.chipList[index]))
+            items(clothesData.chipList.size) { index ->
+                ChipComponent(stringResource(id = clothesData.chipList[index]))
             }
         }
     }
@@ -113,5 +127,5 @@ fun ClothesCardComponent() {
 @Preview(showBackground = true)
 @Composable
 private fun ClothesCardComponentPreview() {
-    ClothesCardComponent()
+    ClothesCardComponent(ClothesCardDummyData.dummyData[0])
 }
