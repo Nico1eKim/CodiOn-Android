@@ -33,8 +33,8 @@ import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
 fun LoginScreen() {
-    var emailInputTest by remember { mutableStateOf("") }
-    var pwdInputTest by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var pwd by remember { mutableStateOf("") }
     var isPwdVisible by remember { mutableStateOf(false) }
 
     Box(
@@ -56,19 +56,19 @@ fun LoginScreen() {
                 label = stringResource(R.string.email),
                 isRequired = false,
                 placeholder = stringResource(R.string.email_ph),
-                inputText = emailInputTest,
-                onTextChanged = { emailInputTest = it }
+                inputText = email,
+                onTextChange = { email = it }
             )
             Spacer(modifier = Modifier.height(32.dp))
             InputFieldComponent(
                 label = stringResource(R.string.pwd),
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph),
-                inputText = pwdInputTest,
-                onTextChanged = { pwdInputTest = it },
+                inputText = pwd,
+                onTextChange = { pwd = it },
                 isPwdField = true,
                 isPwdVisible = isPwdVisible,
-                onPwdVisibleToggle = { isPwdVisible = !isPwdVisible }
+                onTogglePwdVisibility = { isPwdVisible = !isPwdVisible }
             )
             Spacer(modifier = Modifier.height(32.dp))
             BigButtonComponent(

@@ -62,7 +62,7 @@ fun RegisterWithEmailScreen() {
                 label = stringResource(R.string.email),
                 placeholder = stringResource(R.string.email_ph),
                 inputText = email,
-                onTextChanged = { email = it },
+                onTextChange = { email = it },
                 btnText = stringResource(R.string.code_btn_send)
             )
             Spacer(modifier = Modifier.height(20.dp))
@@ -70,7 +70,7 @@ fun RegisterWithEmailScreen() {
                 label = stringResource(R.string.code),
                 placeholder = stringResource(R.string.code_ph),
                 inputText = emailCodeToString,
-                onTextChanged = {
+                onTextChange = {
                     emailCodeToString = it
                     emailCode = it.toIntOrNull() ?: 0
                 },
@@ -84,10 +84,10 @@ fun RegisterWithEmailScreen() {
                 isRequired = true,
                 placeholder = stringResource(R.string.pwd_ph_hint),
                 inputText = pwd,
-                onTextChanged = { pwd = it },
+                onTextChange = { pwd = it },
                 isPwdField = true,
                 isPwdVisible = isPwdVisible,
-                onPwdVisibleToggle = { isPwdVisible = !isPwdVisible }
+                onTogglePwdVisibility = { isPwdVisible = !isPwdVisible }
             )
             Spacer(modifier = Modifier.height(20.dp))
             InputFieldComponent(
@@ -95,10 +95,10 @@ fun RegisterWithEmailScreen() {
                 isRequired = true,
                 placeholder = stringResource(R.string.pwd_ph_hint),
                 inputText = pwdCheck,
-                onTextChanged = { pwdCheck = it },
+                onTextChange = { pwdCheck = it },
                 isPwdField = true,
                 isPwdVisible = isPwdCheckVisible,
-                onPwdVisibleToggle = { isPwdCheckVisible = !isPwdCheckVisible }
+                onTogglePwdVisibility = { isPwdCheckVisible = !isPwdCheckVisible }
             )
             Spacer(modifier = Modifier.weight(1f))
             BigButtonComponent(

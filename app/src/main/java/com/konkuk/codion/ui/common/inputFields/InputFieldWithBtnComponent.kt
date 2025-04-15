@@ -1,7 +1,6 @@
 package com.konkuk.codion.ui.common.inputFields
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -27,7 +26,7 @@ fun InputFieldWithBtnComponent(
     label: String,
     placeholder: String,
     inputText: String,
-    onTextChanged: (String) -> Unit,
+    onTextChange: (String) -> Unit,
     btnText: String,
     showTimer: Boolean = false,
     timerSeconds: Int? = null,
@@ -41,7 +40,7 @@ fun InputFieldWithBtnComponent(
             isRequired = true,
             placeholder = placeholder,
             inputText = inputText,
-            onTextChanged = onTextChanged,
+            onTextChange = onTextChange,
             showTimer = showTimer,
             timerSeconds = timerSeconds,
             modifier = Modifier.weight(1f)
@@ -69,7 +68,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_ph),
             inputText = "",
-            onTextChanged = {},
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_send)
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -77,7 +76,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "",
-            onTextChanged = {},
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 180
@@ -87,7 +86,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "12345678",
-            onTextChanged = {},
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 140

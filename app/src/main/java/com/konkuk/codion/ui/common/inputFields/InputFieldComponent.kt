@@ -9,11 +9,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
@@ -31,7 +29,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
@@ -46,12 +43,12 @@ fun InputFieldComponent(
     isRequired: Boolean,
     placeholder: String,
     inputText: String,
-    onTextChanged: (String) -> Unit,
+    onTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     // 비밀번호 필드 관련
     isPwdField: Boolean = false,  // 해당 inputfield가 pwd를 다루는 필드인지 여부
     isPwdVisible: Boolean = true,  // 현재 보이는 상태인지에 대한 여부
-    onPwdVisibleToggle: (() -> Unit)? = null,  // 숨김/안숨김 아이콘 클릭 시 호출할 콜백 함수
+    onTogglePwdVisibility: (() -> Unit)? = null,  // 숨김/안숨김 아이콘 클릭 시 호출할 콜백 함수
     // 타이머 관련
     showTimer: Boolean = false,
     timerSeconds: Int? = null
@@ -75,7 +72,7 @@ fun InputFieldComponent(
         Spacer(modifier = Modifier.height(4.dp))
         BasicTextField(
             value = inputText,
-            onValueChange = onTextChanged,
+            onValueChange = onTextChange,
             modifier = Modifier
                 .height(40.dp)
                 .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
@@ -100,11 +97,11 @@ fun InputFieldComponent(
                         innerTextField()
                     }
                     // 비밀번호 필드 여부
-                    if (isPwdField && onPwdVisibleToggle != null) {
+                    if (isPwdField && onTogglePwdVisibility != null) {
                         Box(
                             modifier = Modifier
                                 .size(20.dp)
-                                .clickable(onClick = onPwdVisibleToggle),
+                                .clickable(onClick = onTogglePwdVisibility),
                             contentAlignment = Alignment.CenterStart
                         ) {
                             Icon(
@@ -138,7 +135,7 @@ fun InputFieldComponent(
     isRequired: Boolean,
     placeholder: String,
     inputText: TextFieldValue,
-    onTextChanged: (TextFieldValue) -> Unit,
+    onTextChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier
 ) {
     // 필수 입력 여부에 따른 '*' 텍스트 추가 or 미추가 처리
@@ -155,7 +152,7 @@ fun InputFieldComponent(
         Spacer(modifier = Modifier.height(4.dp))
         BasicTextField(
             value = inputText,
-            onValueChange = onTextChanged,
+            onValueChange = onTextChange,
             modifier = Modifier
                 .height(40.dp)
                 .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
@@ -204,7 +201,7 @@ fun InputFieldComponentPreview() {
             isRequired = false,
             placeholder = stringResource(R.string.pwd_ph),
             inputText = pwdInputTest1,
-            onTextChanged = { pwdInputTest1 = it }
+            onTextChange = { pwdInputTest1 = it }
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -214,7 +211,7 @@ fun InputFieldComponentPreview() {
             isRequired = true,
             placeholder = stringResource(R.string.pwd_ph_hint),
             inputText = pwdInputTest2,
-            onTextChanged = { pwdInputTest2 = it }
+            onTextChange = { pwdInputTest2 = it }
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -224,10 +221,10 @@ fun InputFieldComponentPreview() {
             isRequired = true,
             placeholder = stringResource(R.string.pwd_ph_hint),
             inputText = pwdInputTest3,
-            onTextChanged = { pwdInputTest3 = it },
+            onTextChange = { pwdInputTest3 = it },
             isPwdField = true,
             isPwdVisible = isPwdVisible,
-            onPwdVisibleToggle = { isPwdVisible = !isPwdVisible }
+            onTogglePwdVisibility = { isPwdVisible = !isPwdVisible }
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -237,7 +234,7 @@ fun InputFieldComponentPreview() {
             isRequired = true,
             placeholder = stringResource(R.string.code_ph),
             inputText = emailCodeInputTest1,
-            onTextChanged = { emailCodeInputTest1 = it },
+            onTextChange = { emailCodeInputTest1 = it },
             showTimer = true,
             timerSeconds = 180
         )

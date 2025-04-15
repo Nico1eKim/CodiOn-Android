@@ -33,7 +33,7 @@ import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
 fun FindPwdScreen() {
-    var emailInputTest by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
 
     // 상단바
     Column(
@@ -72,8 +72,8 @@ fun FindPwdScreen() {
                 label = stringResource(R.string.email),
                 isRequired = false,
                 placeholder = stringResource(R.string.email_ph),
-                inputText = emailInputTest,
-                onTextChanged = { emailInputTest = it }
+                inputText = email,
+                onTextChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(24.dp))

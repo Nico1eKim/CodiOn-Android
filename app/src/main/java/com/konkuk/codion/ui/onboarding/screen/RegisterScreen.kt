@@ -73,7 +73,7 @@ fun RegisterScreen() {
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
                 inputText = nickname,
-                onTextChanged = { nickname = it }
+                onTextChange = { nickname = it }
             )
 
             Spacer(modifier = Modifier.height(20.dp))

@@ -74,7 +74,7 @@ fun ResetPwdScreen() {
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph_hint),
                 inputText = newPwd,
-                onTextChanged = { newPwd = it }
+                onTextChange = { newPwd = it }
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -84,7 +84,7 @@ fun ResetPwdScreen() {
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph_check),
                 inputText = newPwdCheck,
-                onTextChanged = { newPwdCheck = it }
+                onTextChange = { newPwdCheck = it }
             )
 
             Spacer(modifier = Modifier.height(24.dp))

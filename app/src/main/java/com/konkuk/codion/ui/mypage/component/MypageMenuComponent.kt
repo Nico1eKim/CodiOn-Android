@@ -27,7 +27,7 @@ import com.konkuk.codion.ui.theme.Gray700
 @Composable
 fun MypageMenuComponent(
     label: String,
-    showRightIcon: Boolean,
+    isRightIconVisible: Boolean,
     onClicked: (() -> Unit)
 ) {
     Row(
@@ -45,7 +45,7 @@ fun MypageMenuComponent(
         )
         Spacer(modifier = Modifier.weight(1f))
         // 오른쪽 아이콘
-        if (showRightIcon) {
+        if (isRightIconVisible) {
             Box(
                 modifier = Modifier.height(20.dp),
                 contentAlignment = Alignment.CenterEnd
@@ -71,22 +71,22 @@ fun MypageMenuComponentPreview() {
     Column {
         MypageMenuComponent(
             label = stringResource(R.string.edit_profile),
-            showRightIcon = true,
+            isRightIconVisible = true,
             onClicked = {}
         )
         MypageMenuComponent(
             label = stringResource(R.string.change_pwd),
-            showRightIcon = true,
+            isRightIconVisible = true,
             onClicked = {}
         )
         MypageMenuComponent(
             label = stringResource(R.string.logout),
-            showRightIcon = false,
+            isRightIconVisible = false,
             onClicked = {}
         )
         MypageMenuComponent(
             label = stringResource(R.string.withdrawal),
-            showRightIcon = false,
+            isRightIconVisible = false,
             onClicked = {}
         )
     }

@@ -63,22 +63,22 @@ fun MypageScreen() {
         ) {
             MypageMenuComponent(
                 label = stringResource(R.string.edit_profile),
-                showRightIcon = true,
+                isRightIconVisible = true,
                 onClicked = {}
             )
             MypageMenuComponent(
                 label = stringResource(R.string.change_pwd),
-                showRightIcon = true,
+                isRightIconVisible = true,
                 onClicked = {}
             )
             MypageMenuComponent(
                 label = stringResource(R.string.logout),
-                showRightIcon = false,
+                isRightIconVisible = false,
                 onClicked = {}
             )
             MypageMenuComponent(
                 label = stringResource(R.string.withdrawal),
-                showRightIcon = false,
+                isRightIconVisible = false,
                 onClicked = {}
             )
         }

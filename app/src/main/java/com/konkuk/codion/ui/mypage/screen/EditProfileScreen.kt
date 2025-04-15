@@ -77,7 +77,7 @@ fun EditProfileScreen(
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
                 inputText = nicknameFieldValue,
-                onTextChanged = {
+                onTextChange = {
                     nicknameFieldValue = it.copy(
                         selection = TextRange(it.text.length)
                     )
