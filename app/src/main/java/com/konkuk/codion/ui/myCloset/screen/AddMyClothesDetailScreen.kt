@@ -31,6 +31,8 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.ChipComponent
 import com.konkuk.codion.ui.common.ColorWithText
@@ -49,7 +51,9 @@ import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
+fun AddMyClothesDetailScreen(
+    navController: NavHostController
+) {
     val clothesData = ClothesCardDummyData.dummyData[0]
     val clothesNickname by rememberSaveable { mutableStateOf("") }
 
@@ -60,7 +64,8 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
 
     var selectedSmallCategory by remember { mutableStateOf<String?>(null) }
     val selectedParent = topCategories.find { it.label == selectedBigCategory }
-    val childCategories = selectedParent?.let { ClothesCategoryType.getChildrenOf(it) } ?: emptyList()
+    val childCategories =
+        selectedParent?.let { ClothesCategoryType.getChildrenOf(it) } ?: emptyList()
 
     var selectedPersonalColor by remember { mutableStateOf<String?>(null) }
     val personalColorOptions = PersonalColorType.entries
@@ -93,7 +98,7 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
         }
     ) { innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .padding(horizontal = 20.dp)
@@ -297,5 +302,6 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun AddMyClothesDetailScreenPreview() {
-    AddMyClothesDetailScreen()
+    val navController = rememberNavController()
+    AddMyClothesDetailScreen(navController = navController)
 }

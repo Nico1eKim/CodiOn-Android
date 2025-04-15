@@ -29,6 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.ClothesCardComponent
 import com.konkuk.codion.ui.common.TopAppBarComponent
@@ -44,7 +46,9 @@ import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun MyClosetScreen(modifier: Modifier = Modifier) {
+fun MyClosetScreen(
+    navController: NavHostController
+) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
 
@@ -88,7 +92,7 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
         }
     ) { innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
         ) {
@@ -185,5 +189,6 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun MyClosetScreenPreview() {
-    MyClosetScreen()
+    val navController = rememberNavController()
+    MyClosetScreen(navController = navController)
 }

@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.codiRecord.component.CodiRecordCalendar
 import com.konkuk.codion.ui.codiRecord.component.CodiRecordEmpty
@@ -27,7 +29,9 @@ import com.konkuk.codion.ui.home.component.ClothesCardList
 import java.time.LocalDate
 
 @Composable
-fun CodiRecordScreen(modifier: Modifier = Modifier) {
+fun CodiRecordScreen(
+    navController: NavHostController
+) {
     val codiRecordMap = CodiRecordDummyData.dummyData.associateBy { it.date }
 
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
@@ -46,7 +50,7 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
     ) { innerPadding ->
 
         LazyColumn(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
         ) {
@@ -84,5 +88,6 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun CodiRecordScreenPreview() {
-    CodiRecordScreen()
+    val navController = rememberNavController()
+    CodiRecordScreen(navController = navController)
 }

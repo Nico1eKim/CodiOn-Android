@@ -14,6 +14,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.codiRecord.component.EnterCodiRecordDetail
 import com.konkuk.codion.ui.codiRecord.component.EnterTodayCodiEmotion
@@ -23,7 +25,9 @@ import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun RegisterCodiCommentScreen() {
+fun RegisterCodiCommentScreen(
+    navController: NavHostController
+) {
     var text by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
@@ -66,5 +70,6 @@ fun RegisterCodiCommentScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun RegisterCodiCommentScreenPreview() {
-    RegisterCodiCommentScreen()
+    val navController = rememberNavController()
+    RegisterCodiCommentScreen(navController = navController)
 }

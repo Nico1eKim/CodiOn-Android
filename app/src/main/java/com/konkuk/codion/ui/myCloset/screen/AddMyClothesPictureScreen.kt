@@ -17,6 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
@@ -26,7 +28,9 @@ import com.konkuk.codion.ui.theme.Gray600
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
+fun AddMyClothesPictureScreen(
+    navController: NavHostController
+) {
     Scaffold(
         topBar = {
             TopAppBarComponent(
@@ -41,7 +45,7 @@ fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
         }
     ) { innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .background(Gray600)
@@ -81,5 +85,6 @@ fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun AddMyClothesPictureScreenPreview() {
-    AddMyClothesPictureScreen()
+    val navController = rememberNavController()
+    AddMyClothesPictureScreen(navController = navController)
 }
