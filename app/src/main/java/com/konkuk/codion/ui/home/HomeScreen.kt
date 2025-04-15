@@ -21,6 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
@@ -31,7 +33,9 @@ import com.konkuk.codion.ui.theme.Gray300
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    navController: NavHostController
+) {
     val scrollState = rememberScrollState()
 
     Scaffold(
@@ -46,7 +50,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         },
     ) { innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .verticalScroll(scrollState),
@@ -139,5 +143,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }
