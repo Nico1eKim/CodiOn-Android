@@ -125,7 +125,7 @@ fun FilterBottomSheet(
                     selectedOptions = selectedPersonalColorOptions
                 )
 
-                else -> Text("아직 구현되지 않은 필터입니다.")
+                else -> Text("아직 구현되지 않은 필터입니다.") // TODO: filter 구현하기
             }
 
             Spacer(modifier = Modifier.weight(1f))

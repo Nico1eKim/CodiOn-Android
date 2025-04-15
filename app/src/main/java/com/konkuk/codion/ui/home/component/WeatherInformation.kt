@@ -43,24 +43,24 @@ fun WeatherInformation(modifier: Modifier = Modifier, temp: Int, wind: Int, rain
         ) {
             item {
                 WeatherInformationRow(
-                    painter = R.drawable.ic_temperature,
-                    information = R.string.temperature,
+                    painterId = R.drawable.ic_temperature,
+                    informationId = R.string.temperature,
                     value = temp
                 )
             }
 
             item {
                 WeatherInformationRow(
-                    painter = R.drawable.ic_wind,
-                    information = R.string.wind_speend,
+                    painterId = R.drawable.ic_wind,
+                    informationId = R.string.wind_speend,
                     value = wind
                 )
             }
 
             item {
                 WeatherInformationRow(
-                    painter = R.drawable.ic_rain,
-                    information = R.string.rainfall,
+                    painterId = R.drawable.ic_rain,
+                    informationId = R.string.rainfall,
                     value = rain
                 )
             }
@@ -71,19 +71,19 @@ fun WeatherInformation(modifier: Modifier = Modifier, temp: Int, wind: Int, rain
 }
 
 @Composable
-fun WeatherInformationRow(painter: Int, information: Int, value: Int) {
+fun WeatherInformationRow(painterId: Int, informationId: Int, value: Int) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = painter),
+            painter = painterResource(id = painterId),
             contentDescription = null,
             modifier = Modifier
                 .size(24.dp)
         )
 
         Text(
-            text = stringResource(information, value),
+            text = stringResource(informationId, value),
             style = CodiOnTypography.pretendard_600_14,
             color = Gray700,
             modifier = Modifier.padding(start = 4.dp)

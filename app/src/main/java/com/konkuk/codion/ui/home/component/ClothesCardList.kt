@@ -48,6 +48,7 @@ fun ClothesCardList(
                         textDecoration = TextDecoration.Underline
                     ),
                     color = Gray400,
+                    // TODO: 클릭 시 화면 이동
                 )
             }
 

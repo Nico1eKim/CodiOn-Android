@@ -81,7 +81,9 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
                 leftIcon = null,
                 onLeftClicked = null,
                 rightIcon = painterResource(R.drawable.ic_add),
-                onRightClicked = { }
+                onRightClicked = {
+//                    TODO: 화면 이동 구현
+                }
             )
         }
     ) { innerPadding ->

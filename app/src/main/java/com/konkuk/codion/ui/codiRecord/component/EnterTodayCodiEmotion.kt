@@ -31,7 +31,7 @@ import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.theme.Gray800
 
 @Composable
-fun EnterTodayCodiEmotion(modifier: Modifier = Modifier) {
+fun EnterTodayCodiEmotion() {
     var selectedEmotion by remember { mutableStateOf(EmotionType.NEUTRAL) }
 
     Column(

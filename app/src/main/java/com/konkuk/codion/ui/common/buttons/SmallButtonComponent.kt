@@ -76,7 +76,7 @@ private fun SmallButtonComponentPreview() {
             modifier = Modifier.width(144.dp).border(1.dp, Gray500, RoundedCornerShape(6.dp)),
             containerColor = Gray100,
             contentColor = Gray700,
-            text = stringResource(R.string.wearable)
+            text = stringResource(R.string.can_wear)
         )
         Spacer(modifier = Modifier.height(16.dp))
         SmallButtonComponent(

@@ -103,7 +103,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 )
 
                 Text(
-                    text = "에요!",
+                    text = stringResource(R.string.end_word),
                     style = CodiOnTypography.pretendard_400_16,
                     color = Gray700,
                 )

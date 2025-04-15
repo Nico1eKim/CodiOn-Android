@@ -114,7 +114,6 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
                     )
                 }
             }
@@ -229,7 +228,7 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
             ) {
                 OutlineButton(
                     modifier = Modifier.weight(1f),
-                    label = stringResource(R.string.can_wear),
+                    text = stringResource(R.string.can_wear),
                     isClicked = canWearState == true,
                 ) {
                     canWearState = if (canWearState == true) null else true
@@ -239,7 +238,7 @@ fun AddMyClothesDetailScreen(modifier: Modifier = Modifier) {
 
                 OutlineButton(
                     modifier = Modifier.weight(1f),
-                    label = stringResource(R.string.cant_wear),
+                    text = stringResource(R.string.cant_wear),
                     isClicked = canWearState == false,
                 ) {
                     canWearState = if (canWearState == false) null else false

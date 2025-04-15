@@ -54,7 +54,7 @@ fun MyComment(record: CodiRecordDummyData) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
-            .background(color = Gray200)
+            .background(color = Gray200, shape = RoundedCornerShape(12.dp))
             .border(shape = RoundedCornerShape(12.dp), width = 1.dp, color = Gray200)
             .padding(20.dp),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -63,7 +63,7 @@ fun MyComment(record: CodiRecordDummyData) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.my_comment_today),
+                text = stringResource(R.string.today_codi_evaluation),
                 style = CodiOnTypography.pretendard_700_16,
                 color = Gray700,
             )

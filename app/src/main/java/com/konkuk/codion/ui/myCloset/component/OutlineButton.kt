@@ -19,7 +19,7 @@ import com.konkuk.codion.ui.theme.Gray700
 @Composable
 fun OutlineButton(
     modifier: Modifier = Modifier,
-    label: String,
+    text: String,
     isClicked: Boolean? = false,
     onClick: () -> Unit = {},
 ) {
@@ -36,7 +36,7 @@ fun OutlineButton(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = label,
+            text = text,
             style = CodiOnTypography.pretendard_400_14,
             color = if (isClicked == true) Gray100 else Gray700
         )

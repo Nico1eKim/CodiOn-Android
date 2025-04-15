@@ -37,6 +37,7 @@ import com.konkuk.codion.ui.codiRecord.EmotionType
 import com.konkuk.codion.ui.codiRecord.dummy.CalendarDay
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray300
+import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.util.getEmotionIcon
 import java.time.LocalDate
@@ -49,6 +50,7 @@ fun CodiRecordCalendar(
 ) {
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     val today = LocalDate.now()
+    var selectedDate by remember { mutableStateOf<LocalDate>(today) }
 
     val firstDayOfMonth = currentMonth.atDay(1)
     val daysInMonth = currentMonth.lengthOfMonth()
@@ -114,7 +116,8 @@ fun CodiRecordCalendar(
                     else -> Color.Unspecified
                 }
                 Text(
-                    day,
+                    text = day,
+                    style = CodiOnTypography.pretendard_500_12,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
                     color = color
@@ -140,6 +143,7 @@ fun CodiRecordCalendar(
                     Box(modifier = Modifier.size(44.dp)) // 빈 칸
                 } else {
                     val isToday = day.date == today
+                    val isSelected = day.date == selectedDate
 
                     Column(
                         modifier = Modifier
@@ -149,10 +153,15 @@ fun CodiRecordCalendar(
                     ) {
                         Text(
                             text = day.date.dayOfMonth.toString(),
+                            style = CodiOnTypography.pretendard_500_12,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(
-                                    if (isToday) Gray300 else Color.Transparent,
+                                    when {
+                                        isSelected -> Gray500
+                                        isToday -> Gray300
+                                        else -> Color.Transparent
+                                    },
                                     shape = CircleShape
                                 ),
                             textAlign = TextAlign.Center,
@@ -161,7 +170,10 @@ fun CodiRecordCalendar(
                         Box(
                             modifier = Modifier
                                 .size(44.dp)
-                                .clickable { onDateSelected(day.date) }, // 👈 클릭 시 전달
+                                .clickable {
+                                    selectedDate = day.date
+                                    onDateSelected(day.date)
+                                },
                             contentAlignment = Alignment.Center
                         ) {
                             day.emotion?.let {

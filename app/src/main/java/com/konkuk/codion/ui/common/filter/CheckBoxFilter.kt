@@ -42,7 +42,7 @@ fun <T> CheckBoxFilter(
                         if (isSelected) selectedOptions.remove(option)
                         else selectedOptions.add(option)
                     }
-                    .padding(vertical = 16.dp, horizontal = 16.dp)
+                    .padding(16.dp)
             ) {
                 Checkbox(
                     checked = isSelected,

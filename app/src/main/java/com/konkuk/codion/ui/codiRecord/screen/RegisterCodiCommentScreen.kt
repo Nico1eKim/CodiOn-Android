@@ -22,7 +22,7 @@ import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun RegisterCodiCommentScreen(modifier: Modifier = Modifier) {
+fun RegisterCodiCommentScreen() {
     var text by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
