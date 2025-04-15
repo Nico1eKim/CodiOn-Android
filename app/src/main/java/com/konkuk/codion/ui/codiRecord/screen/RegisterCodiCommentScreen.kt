@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,8 +30,10 @@ fun RegisterCodiCommentScreen() {
         topBar = {
             TopAppBarComponent(
                 title = stringResource(R.string.add_comment),
-                leftIcon = null,
-                onLeftClicked = null,
+                leftIcon = painterResource(R.drawable.ic_back),
+                onLeftClicked = {
+//                    TODO: 뒤로가기 구현
+                },
                 rightIcon = null,
                 onRightClicked = null
             )
