@@ -48,7 +48,7 @@ fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
         ) {
 //            TODO: 사진찍기 구현
             Text(
-                text = stringResource(R.string.pictrue_guide),
+                text = stringResource(R.string.picture_guide),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()

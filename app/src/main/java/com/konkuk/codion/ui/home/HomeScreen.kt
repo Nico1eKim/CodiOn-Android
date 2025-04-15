@@ -96,7 +96,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 )
 
                 Text(
-                    text = stringResource(R.string.temprature_unit, 20),
+                    text = stringResource(R.string.temperature_unit, 20),
                     style = CodiOnTypography.pretendard_700_16,
                     color = Gray700,
                     modifier = Modifier.padding(start = 4.dp)

@@ -52,7 +52,7 @@ fun WeatherInformation(modifier: Modifier = Modifier, temp: Int, wind: Int, rain
             item {
                 WeatherInformationRow(
                     painterId = R.drawable.ic_wind,
-                    informationId = R.string.wind_speend,
+                    informationId = R.string.wind_speed,
                     value = wind
                 )
             }
