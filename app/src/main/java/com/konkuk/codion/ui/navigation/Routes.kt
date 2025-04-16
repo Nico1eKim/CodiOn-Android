@@ -1,4 +1,4 @@
-package com.konkuk.codion.ui.navigator
+package com.konkuk.codion.ui.navigation
 
 import kotlinx.serialization.Serializable
 

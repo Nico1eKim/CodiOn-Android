@@ -1,6 +1,7 @@
 package com.konkuk.codion.ui.codiRecord.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -16,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.codiRecord.component.CodiRecordCalendar
@@ -30,7 +30,7 @@ import java.time.LocalDate
 
 @Composable
 fun CodiRecordScreen(
-    navController: NavHostController
+    padding: PaddingValues,
 ) {
     val codiRecordMap = CodiRecordDummyData.dummyData.associateBy { it.date }
 
@@ -52,7 +52,8 @@ fun CodiRecordScreen(
         LazyColumn(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(padding),
         ) {
             item {
                 CodiRecordCalendar(
@@ -89,5 +90,5 @@ fun CodiRecordScreen(
 @Composable
 private fun CodiRecordScreenPreview() {
     val navController = rememberNavController()
-    CodiRecordScreen(navController = navController)
+    CodiRecordScreen(padding = PaddingValues(0.dp))
 }
