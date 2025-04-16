@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -48,11 +49,11 @@ fun RowScope.MainBottomBarItem(
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(tab.iconResId),
-            contentDescription = tab.contentDescription,
+            contentDescription = stringResource(tab.contentDescriptionId),
             tint = color
         )
         Text(
-            text = tab.label,
+            text = stringResource(tab.contentDescriptionId),
             style = CodiOnTypography.pretendard_400_12,
             color = color
         )
