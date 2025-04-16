@@ -1,7 +1,6 @@
 package com.konkuk.codion.ui.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,9 +31,7 @@ import com.konkuk.codion.ui.theme.Gray300
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun HomeScreen(
-    padding: PaddingValues,
-) {
+fun HomeScreen() {
     val scrollState = rememberScrollState()
 
     Scaffold(
@@ -52,7 +49,6 @@ fun HomeScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(padding)
                 .verticalScroll(scrollState),
         ) {
             Row(
@@ -143,5 +139,5 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen(padding = PaddingValues(0.dp))
+    HomeScreen()
 }

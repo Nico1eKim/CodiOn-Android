@@ -1,5 +1,6 @@
 package com.konkuk.codion
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,6 +18,7 @@ import com.konkuk.codion.ui.theme.Gray100
 import kotlinx.collections.immutable.toPersistentList
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,10 +44,9 @@ class MainActivity : ComponentActivity() {
                             onTabSelected = { navController.navigate(it) }
                         )
                     },
-                    content = { innerPadding ->
+                    content = {
                         MainNavHost(
                             navigator = navController,
-                            padding = innerPadding
                         )
                     }
                 )

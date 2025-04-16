@@ -2,7 +2,6 @@ package com.konkuk.codion.ui.myCloset.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,8 +29,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.ClothesCardComponent
 import com.konkuk.codion.ui.common.TopAppBarComponent
@@ -47,9 +44,7 @@ import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
-fun MyClosetScreen(
-    padding: PaddingValues,
-) {
+fun MyClosetScreen() {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
 
@@ -96,7 +91,6 @@ fun MyClosetScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(padding),
         ) {
             ScrollableTabRow(
                 selectedTabIndex = topLevelTabs.indexOf(selectedTab),
@@ -191,5 +185,5 @@ fun MyClosetScreen(
 @Preview(showBackground = true)
 @Composable
 private fun MyClosetScreenPreview() {
-    MyClosetScreen(padding = PaddingValues(0.dp))
+    MyClosetScreen()
 }

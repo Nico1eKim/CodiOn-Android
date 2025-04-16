@@ -2,7 +2,6 @@ package com.konkuk.codion.ui.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +15,6 @@ import com.konkuk.codion.ui.theme.Gray100
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navigator: MainNavController,
-    padding : PaddingValues
 ) {
     Box(
         modifier = modifier
@@ -27,17 +25,11 @@ fun MainNavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
         ) {
-            homeNavGraph(
-                padding = padding,
-            )
+            homeNavGraph()
 
-            codiRecordNavGraph(
-                padding = padding,
-            )
+            codiRecordNavGraph()
 
-            myClosetNavGraph(
-                padding = padding,
-            )
+            myClosetNavGraph()
 
             // MyPage 추가
         }
