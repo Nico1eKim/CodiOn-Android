@@ -119,6 +119,7 @@ fun AddMyClothesDetailScreen(
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .height(196.dp)
                     )
                 }
             }
