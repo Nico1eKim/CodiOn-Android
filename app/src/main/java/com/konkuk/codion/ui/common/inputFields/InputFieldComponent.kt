@@ -54,7 +54,7 @@ fun InputFieldComponent(
     timerSeconds: Int? = null
 ) {
     // 필수 입력 여부에 따른 '*' 텍스트 추가 or 미추가 처리
-    val labelText = if (isRequired) "$label *" else label
+    val labelText = if (isRequired) "$label " + stringResource(R.string.asterisk) else label
 
     // 타이머 시간 '분:초' 형식 텍스트로 변환
     val formattedTime = timerSeconds?.let { seconds ->
@@ -139,7 +139,7 @@ fun InputFieldComponent(
     modifier: Modifier = Modifier
 ) {
     // 필수 입력 여부에 따른 '*' 텍스트 추가 or 미추가 처리
-    val labelText = if (isRequired) "$label *" else label
+    val labelText = if (isRequired) "$label " + stringResource(R.string.asterisk) else label
 
     Column(
         modifier = modifier

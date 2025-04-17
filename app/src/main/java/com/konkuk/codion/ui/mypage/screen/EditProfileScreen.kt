@@ -88,7 +88,7 @@ fun EditProfileScreen(
 
             // 퍼스널컬러
             Text(
-                text = stringResource(R.string.personal_color) + " *",
+                text = stringResource(R.string.personal_color) + " " + stringResource(R.string.asterisk),
                 style = CodiOnTypography.pretendard_600_14,
                 color = Gray700
             )

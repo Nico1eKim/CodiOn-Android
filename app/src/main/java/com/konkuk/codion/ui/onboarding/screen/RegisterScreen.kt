@@ -57,7 +57,7 @@ fun RegisterScreen() {
         ) {
             // 약관 동의
             Text(
-                text = stringResource(R.string.terms) + " *",
+                text = stringResource(R.string.terms) + " " + stringResource(R.string.asterisk),
                 style = CodiOnTypography.pretendard_600_14,
                 color = Gray700
             )
@@ -80,7 +80,7 @@ fun RegisterScreen() {
 
             // 퍼스널컬러
             Text(
-                text = stringResource(R.string.personal_color) + " *",
+                text = stringResource(R.string.personal_color) + " " + stringResource(R.string.asterisk),
                 style = CodiOnTypography.pretendard_600_14,
                 color = Gray700
             )

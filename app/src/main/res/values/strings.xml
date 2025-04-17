@@ -39,6 +39,7 @@
     <string name="code_btn_done">확인</string>
     <string name="nickname">별명</string>
     <string name="nickname_ph">별명 (15자 이내)</string>
+    <string name="asterisk">*</string>
 
     <!--    topappbar component -->
     <string name="find_pwd">비밀번호 찾기</string>
