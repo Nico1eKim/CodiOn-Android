@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,6 +46,7 @@ import com.konkuk.codion.ui.common.filter.SortType
 import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
+import com.konkuk.codion.ui.theme.Gray900
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -99,17 +102,25 @@ fun MyClosetScreen(
         ) {
             ScrollableTabRow(
                 selectedTabIndex = topLevelTabs.indexOf(selectedTab),
-                edgePadding = 0.dp
+                edgePadding = 0.dp,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        Modifier.tabIndicatorOffset(tabPositions[topLevelTabs.indexOf(selectedTab)]),
+                        color = Gray900
+                    )
+
+                },
             ) {
                 topLevelTabs.forEachIndexed { index, tab ->
+                    val isSelected = selectedTab == tab
                     Tab(
-                        selected = selectedTab == tab,
+                        selected = isSelected,
                         onClick = { selectedTab = tab },
                         text = {
                             Text(
                                 text = tab.label,
-                                style = CodiOnTypography.pretendard_400_16,
-                                color = Gray700
+                                style = if (isSelected) CodiOnTypography.pretendard_600_16 else CodiOnTypography.pretendard_400_16,
+                                color = if (isSelected) Gray900 else Gray700
                             )
                         },
                         selectedContentColor = Gray700,
