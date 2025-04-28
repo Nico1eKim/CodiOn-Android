@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.home.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -11,8 +12,12 @@ fun NavController.navigateToHome(navOptions: NavOptions) {
     navigate(MainTabRoute.Home, navOptions)
 }
 
-fun NavGraphBuilder.homeNavGraph() {
+fun NavGraphBuilder.homeNavGraph(
+    padding: PaddingValues
+) {
     composable<MainTabRoute.Home> {
-        HomeScreen()
+        HomeScreen(
+            padding = padding
+        )
     }
 }

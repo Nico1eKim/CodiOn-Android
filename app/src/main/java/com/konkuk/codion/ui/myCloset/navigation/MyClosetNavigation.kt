@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.myCloset.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -11,8 +12,12 @@ fun NavController.navigateToMyCloset(navOptions: NavOptions) {
     navigate(MainTabRoute.MyCloset, navOptions)
 }
 
-fun NavGraphBuilder.myClosetNavGraph() {
+fun NavGraphBuilder.myClosetNavGraph(
+    padding: PaddingValues
+) {
     composable<MainTabRoute.MyCloset> {
-        MyClosetScreen()
+        MyClosetScreen(
+            padding = padding,
+        )
     }
 }
