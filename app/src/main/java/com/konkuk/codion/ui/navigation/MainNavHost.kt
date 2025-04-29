@@ -37,6 +37,8 @@ fun MainNavHost(
 
             myClosetNavGraph(
                 padding = padding,
+                navigateBack = navigator::navigateUp,
+                navigateToAddMyClothesPicture = navigator::navigateToAddMyClothesPicture,
             )
 
             // MyPage 추가

@@ -1,7 +1,9 @@
 package com.konkuk.codion.ui.myCloset.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
@@ -27,9 +27,11 @@ import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray600
 import com.konkuk.codion.ui.theme.Gray900
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AddMyClothesPictureScreen(
-    navController: NavHostController
+    padding: PaddingValues,
+    onBackClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -37,16 +39,16 @@ fun AddMyClothesPictureScreen(
                 title = stringResource(R.string.add_clothes),
                 leftIcon = painterResource(R.drawable.ic_back),
                 onLeftClicked = {
-//                    TODO: 뒤로가기 구현
+                    onBackClick()
                 },
                 rightIcon = null,
                 onRightClicked = null
             )
         }
-    ) { innerPadding ->
+    ) {
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+                .padding(padding)
                 .fillMaxSize()
                 .background(Gray600)
         ) {
@@ -85,6 +87,8 @@ fun AddMyClothesPictureScreen(
 @Preview(showBackground = true)
 @Composable
 private fun AddMyClothesPictureScreenPreview() {
-    val navController = rememberNavController()
-    AddMyClothesPictureScreen(navController = navController)
+    AddMyClothesPictureScreen(
+        padding = PaddingValues(),
+        onBackClick = {}
+    )
 }

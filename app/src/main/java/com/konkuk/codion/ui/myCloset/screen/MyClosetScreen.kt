@@ -51,7 +51,8 @@ import com.konkuk.codion.ui.theme.Gray900
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MyClosetScreen(
-    padding: PaddingValues
+    padding: PaddingValues,
+    onAddClick: () -> Unit,
 ) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
@@ -90,7 +91,7 @@ fun MyClosetScreen(
                 onLeftClicked = null,
                 rightIcon = painterResource(R.drawable.ic_add),
                 onRightClicked = {
-//                    TODO: 화면 이동 구현
+                    onAddClick()
                 }
             )
         }
@@ -202,6 +203,7 @@ fun MyClosetScreen(
 @Composable
 private fun MyClosetScreenPreview() {
     MyClosetScreen(
-        padding = PaddingValues(0.dp)
+        padding = PaddingValues(0.dp),
+        onAddClick = {}
     )
 }

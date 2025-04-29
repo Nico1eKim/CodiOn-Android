@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.konkuk.codion.ui.codiRecord.navigation.navigateToCodiRecord
 import com.konkuk.codion.ui.home.navigation.navigateToHome
+import com.konkuk.codion.ui.myCloset.navigation.navigateToAddMyClothesPicture
 import com.konkuk.codion.ui.myCloset.navigation.navigateToMyCloset
 
 class MainNavController(
@@ -46,6 +47,10 @@ class MainNavController(
     // Back Pressed
     fun navigateUp() {
         navController.navigateUp()
+    }
+
+    fun navigateToAddMyClothesPicture() {
+        navController.navigateToAddMyClothesPicture()
     }
 
     @Composable
