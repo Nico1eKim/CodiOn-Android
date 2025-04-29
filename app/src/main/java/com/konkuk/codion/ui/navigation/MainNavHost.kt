@@ -33,6 +33,7 @@ fun MainNavHost(
 
             codiRecordNavGraph(
                 padding = padding,
+                navigateToAddMyClothesPicture = navigator::navigateToAddMyClothesPicture,
             )
 
             myClosetNavGraph(

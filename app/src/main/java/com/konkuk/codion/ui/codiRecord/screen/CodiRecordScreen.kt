@@ -31,7 +31,8 @@ import java.time.LocalDate
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CodiRecordScreen(
-    padding: PaddingValues
+    padding: PaddingValues,
+    onAddClick: () -> Unit
 ) {
     val codiRecordMap = CodiRecordDummyData.dummyData.associateBy { it.date }
 
@@ -78,7 +79,9 @@ fun CodiRecordScreen(
 
                         MyComment(record = it)
                     }
-                } ?: CodiRecordEmpty()
+                } ?: CodiRecordEmpty(
+                    onAddClick = onAddClick,
+                )
             }
 
         }
@@ -89,6 +92,7 @@ fun CodiRecordScreen(
 @Composable
 private fun CodiRecordScreenPreview() {
     CodiRecordScreen(
-        padding = PaddingValues(0.dp)
+        padding = PaddingValues(0.dp),
+        onAddClick = {}
     )
 }

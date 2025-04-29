@@ -23,7 +23,9 @@ import com.konkuk.codion.ui.theme.Gray700
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun CodiRecordEmpty() {
+fun CodiRecordEmpty(
+    onAddClick: () -> Unit,
+) {
     Column(Modifier.padding(horizontal = 20.dp)) {
         Text(
             text = stringResource(R.string.wore_clothes_empty_title),
@@ -55,7 +57,9 @@ fun CodiRecordEmpty() {
                 containerColor = Gray900,
                 contentColor = Gray100,
                 text = stringResource(R.string.record_codi)
-            )
+            ) {
+                onAddClick()
+            }
         }
     }
 }
