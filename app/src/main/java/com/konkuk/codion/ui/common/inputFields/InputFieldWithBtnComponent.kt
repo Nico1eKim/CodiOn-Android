@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -25,20 +26,25 @@ fun InputFieldWithBtnComponent(
     label: String,
     placeholder: String,
     inputText: String,
+    onTextChange: (String) -> Unit,
     btnText: String,
     showTimer: Boolean = false,
     timerSeconds: Int? = null,
+    onBtnClick: (() -> Unit)? = null
 ) {
     Row(
-        verticalAlignment = Alignment.Bottom
+        verticalAlignment = Alignment.Bottom,
+        modifier = Modifier.fillMaxWidth()
     ) {
         InputFieldComponent(
             label = label,
             isRequired = true,
             placeholder = placeholder,
             inputText = inputText,
+            onTextChange = onTextChange,
             showTimer = showTimer,
-            timerSeconds = timerSeconds
+            timerSeconds = timerSeconds,
+            modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         SmallButtonComponent(
@@ -46,7 +52,8 @@ fun InputFieldWithBtnComponent(
             containerColor = Gray900,
             contentColor = Gray100,
             contentPadding = PaddingValues(0.dp),
-            text = btnText
+            text = btnText,
+            onClick = { onBtnClick?.invoke() }
         )
     }
 }
@@ -63,6 +70,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_ph),
             inputText = "",
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_send)
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -70,6 +78,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "",
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 180
@@ -79,6 +88,7 @@ private fun InputFieldWithBtnComponentPreview() {
             label = stringResource(R.string.code),
             placeholder = stringResource(R.string.code_ph),
             inputText = "12345678",
+            onTextChange = {},
             btnText = stringResource(R.string.code_btn_done),
             showTimer = true,
             timerSeconds = 140

@@ -132,7 +132,7 @@ fun TopAppBarComponentPreview() {
 
         // (2) 왼쪽 아이콘만 존재하는 경우
         TopAppBarComponent(
-            title = stringResource(R.string.find_pw),
+            title = stringResource(R.string.find_pwd),
             leftIcon = painterResource(R.drawable.ic_back),
             onLeftClicked = { },
             rightIcon = null,

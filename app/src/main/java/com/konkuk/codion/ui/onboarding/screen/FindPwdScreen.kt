@@ -1,0 +1,91 @@
+package com.konkuk.codion.ui.onboarding.screen
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.konkuk.codion.R
+import com.konkuk.codion.ui.common.TopAppBarComponent
+import com.konkuk.codion.ui.common.buttons.BigButtonComponent
+import com.konkuk.codion.ui.common.inputFields.InputFieldComponent
+import com.konkuk.codion.ui.common.modifier.ignoreTopPadding
+import com.konkuk.codion.ui.theme.CodiOnTypography
+import com.konkuk.codion.ui.theme.Gray100
+import com.konkuk.codion.ui.theme.Gray700
+import com.konkuk.codion.ui.theme.Gray900
+
+@Composable
+fun FindPwdScreen() {
+    var email by remember { mutableStateOf("") }
+
+    Scaffold(
+        topBar = {
+            TopAppBarComponent(
+                title = stringResource(R.string.find_pwd),
+                leftIcon = painterResource(R.drawable.ic_back),
+                onLeftClicked = { },
+                rightIcon = null,
+                onRightClicked = null
+            )
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .ignoreTopPadding(innerPadding),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier.padding(horizontal = 20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(R.string.find_pwd_info),
+                    style = CodiOnTypography.pretendard_400_14,
+                    color = Gray700,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                InputFieldComponent(
+                    label = stringResource(R.string.email),
+                    isRequired = false,
+                    placeholder = stringResource(R.string.email_ph),
+                    inputText = email,
+                    onTextChange = { email = it }
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                BigButtonComponent(
+                    containerColor = Gray900,
+                    contentColor = Gray100,
+                    text = stringResource(R.string.send_reset_pwd_email)
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun FindPwdScreenPreview() {
+    FindPwdScreen()
+}
