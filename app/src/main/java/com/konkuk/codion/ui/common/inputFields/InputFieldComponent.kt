@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
@@ -28,8 +28,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray500
@@ -39,6 +41,7 @@ import java.util.Locale
 
 @Composable
 fun InputFieldComponent(
+    modifier: Modifier = Modifier,
     label: String,
     isRequired: Boolean,
     placeholder: String,
@@ -51,7 +54,7 @@ fun InputFieldComponent(
     onTogglePwdVisibility: (() -> Unit)? = null,  // 숨김/안숨김 아이콘 클릭 시 호출할 콜백 함수
     // 타이머 관련
     showTimer: Boolean = false,
-    timerSeconds: Int? = null
+    timerSeconds: Int? = null,
 ) {
     // 필수 입력 여부에 따른 '*' 텍스트 추가 or 미추가 처리
     val labelText = if (isRequired) "$label " + stringResource(R.string.asterisk) else label
@@ -66,7 +69,13 @@ fun InputFieldComponent(
     ) {
         Text(
             text = labelText,
-            style = CodiOnTypography.pretendard_600_14,
+            style = CodiOnTypography.pretendard_600_14.copy(
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment.Center,
+                    trim = LineHeightStyle.Trim.None
+                ),
+                lineHeight = 21.sp
+            ),
             color = Gray700
         )
         Spacer(modifier = Modifier.height(4.dp))
