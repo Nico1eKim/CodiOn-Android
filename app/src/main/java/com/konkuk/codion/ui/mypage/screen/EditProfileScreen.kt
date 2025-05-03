@@ -97,8 +97,8 @@ fun EditProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)
-                    .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
-                    .padding(start = 10.dp, end = 10.dp),
+                    .border(width = 1.dp, color = Gray500, shape = RoundedCornerShape(6.dp))
+                    .padding(horizontal = 10.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(

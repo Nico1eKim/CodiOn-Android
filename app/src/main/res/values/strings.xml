@@ -92,9 +92,10 @@
     <string name="image">이미지</string>
     <string name="eye">눈빛</string>
     <string name="skin">피부톤</string>
+    <string name="personal_color_tag"># %1$s</string>
 
     <!--    terms box component -->
-    <string name="required">필수</string>
-    <string name="optional">선택</string>
+    <string name="required">[필수]</string>
+    <string name="optional">[선택]</string>
     <string name="show">보기</string>
 </resources>

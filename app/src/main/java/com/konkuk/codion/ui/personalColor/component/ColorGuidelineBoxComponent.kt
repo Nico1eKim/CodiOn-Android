@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,8 +36,8 @@ fun ColorGuidelineBox() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, Gray700, shape = RoundedCornerShape(6.dp))
-            .padding(10.dp, 42.dp)
+            .border(width = 1.dp, color = Gray700, shape = RoundedCornerShape(6.dp))
+            .padding(horizontal = 10.dp, vertical = 42.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(spacing)
@@ -45,7 +46,11 @@ fun ColorGuidelineBox() {
             Text(
                 text = stringResource(R.string.guideline_title),
                 style = CodiOnTypography.pretendard_600_12.copy(
-                    lineHeight = 18.sp
+                    lineHeight = 18.sp,
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Center,
+                        trim = LineHeightStyle.Trim.None
+                    )
                 ),
                 color = Gray700
             )
@@ -55,7 +60,11 @@ fun ColorGuidelineBox() {
                     Text(
                         text = "${index + 1}.",
                         style = CodiOnTypography.pretendard_400_12.copy(
-                            lineHeight = 18.sp
+                            lineHeight = 18.sp,
+                            lineHeightStyle = LineHeightStyle(
+                                alignment = LineHeightStyle.Alignment.Center,
+                                trim = LineHeightStyle.Trim.None
+                            )
                         ),
                         color = Gray700,
                         modifier = Modifier.width(14.dp)
@@ -63,7 +72,11 @@ fun ColorGuidelineBox() {
                     Text(
                         text = stringResource(text),
                         style = CodiOnTypography.pretendard_400_12.copy(
-                            lineHeight = 18.sp
+                            lineHeight = 18.sp,
+                            lineHeightStyle = LineHeightStyle(
+                                alignment = LineHeightStyle.Alignment.Center,
+                                trim = LineHeightStyle.Trim.None
+                            )
                         ),
                         color = Gray700
                     )

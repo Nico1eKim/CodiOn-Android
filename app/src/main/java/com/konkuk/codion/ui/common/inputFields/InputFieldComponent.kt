@@ -75,8 +75,8 @@ fun InputFieldComponent(
             onValueChange = onTextChange,
             modifier = Modifier
                 .height(40.dp)
-                .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
-                .padding(start = 10.dp, end = 10.dp),
+                .border(width = 1.dp, color = Gray500, shape = RoundedCornerShape(6.dp))
+                .padding(horizontal = 10.dp),
             textStyle = CodiOnTypography.pretendard_400_14.copy(color = Gray700),
             visualTransformation = if (isPwdField && !isPwdVisible) PasswordVisualTransformation() else VisualTransformation.None,
             singleLine = true,  // 필드 내에서 엔터 사용 불가능 처리
@@ -155,8 +155,8 @@ fun InputFieldComponent(
             onValueChange = onTextChange,
             modifier = Modifier
                 .height(40.dp)
-                .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
-                .padding(start = 10.dp, end = 10.dp),
+                .border(width = 1.dp, color = Gray500, shape = RoundedCornerShape(6.dp))
+                .padding(horizontal = 10.dp),
             textStyle = CodiOnTypography.pretendard_400_14.copy(color = Gray700),
             singleLine = true,  // 필드 내에서 엔터 사용 불가능 처리
             decorationBox = { innerTextField ->

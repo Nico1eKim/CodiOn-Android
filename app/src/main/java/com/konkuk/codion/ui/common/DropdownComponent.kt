@@ -59,7 +59,7 @@ fun <T> GenericDropdownComponent(
             .clickable { expanded = true }  // 클릭 시 드롭다운 열림
             .width(width)
             .height(40.dp)
-            .border(1.dp, Gray500, shape = RoundedCornerShape(6.dp))
+            .border(width = 1.dp, color = Gray500, shape = RoundedCornerShape(6.dp))
     ) {
         Row(
             modifier = Modifier

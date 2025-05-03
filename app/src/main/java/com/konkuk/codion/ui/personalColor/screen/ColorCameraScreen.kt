@@ -64,7 +64,7 @@ fun ColorCameraScreen() {
 
                 Spacer(modifier = Modifier.height(14.dp))
 
-                CustomProgressBar(0.6f)
+                CustomProgressBar(progress = 0.6f)
 
                 Spacer(modifier = Modifier.height(54.dp))
             }

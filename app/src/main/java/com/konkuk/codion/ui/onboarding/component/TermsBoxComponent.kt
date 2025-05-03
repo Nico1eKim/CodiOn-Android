@@ -63,7 +63,7 @@ fun TermsBoxComponent() {
 
     Column(
         modifier = Modifier
-            .border(1.dp, Gray700, shape = RoundedCornerShape(6.dp))
+            .border(width = 1.dp, color = Gray700, shape = RoundedCornerShape(6.dp))
             .padding(14.dp)
     ) {
         // 전체 동의 항목
@@ -117,9 +117,9 @@ fun TermsItemComponent(
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
-            text = (if (data.isRequired) "[" + stringResource(R.string.required) + "] " else "[" + stringResource(
+            text = (if (data.isRequired) stringResource(R.string.required) + " " else stringResource(
                 R.string.optional
-            ) + "] ") + data.label,
+            ) + " ") + data.label,
             style = CodiOnTypography.pretendard_400_14,
             color = Gray700
         )

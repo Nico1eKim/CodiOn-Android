@@ -64,8 +64,8 @@ fun CustomProgressBarPreview() {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        CustomProgressBar(0.1f)
-        CustomProgressBar(0.3f)
-        CustomProgressBar(0.6f)
+        CustomProgressBar(progress = 0.1f)
+        CustomProgressBar(progress = 0.3f)
+        CustomProgressBar(progress = 0.6f)
     }
 }

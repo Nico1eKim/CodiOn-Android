@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,7 +60,11 @@ fun ColorGuideScreen() {
             Text(
                 text = stringResource(R.string.start_personal_color),
                 style = CodiOnTypography.pretendard_600_20.copy(
-                    lineHeight = 30.sp
+                    lineHeight = 30.sp,
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Center,
+                        trim = LineHeightStyle.Trim.None
+                    )
                 ),
                 color = Gray700,
                 textAlign = TextAlign.Center
