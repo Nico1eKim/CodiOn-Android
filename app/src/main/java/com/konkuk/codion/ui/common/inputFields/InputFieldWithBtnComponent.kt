@@ -30,6 +30,7 @@ fun InputFieldWithBtnComponent(
     btnText: String,
     showTimer: Boolean = false,
     timerSeconds: Int? = null,
+    onBtnClick: (() -> Unit)? = null
 ) {
     Row(
         verticalAlignment = Alignment.Bottom,
@@ -51,7 +52,8 @@ fun InputFieldWithBtnComponent(
             containerColor = Gray900,
             contentColor = Gray100,
             contentPadding = PaddingValues(0.dp),
-            text = btnText
+            text = btnText,
+            onClick = { onBtnClick?.invoke() }
         )
     }
 }

@@ -27,6 +27,7 @@ import com.konkuk.codion.ui.theme.Gray900
 @Composable
 fun RegisterWithEmailScreen() {
     var email by remember { mutableStateOf("") }
+    var isTimerVisible by remember { mutableStateOf(false) }
     var emailCode by remember { mutableStateOf<Int?>(null) }
     var emailCodeToString by remember { mutableStateOf("") }
     var pwd by remember { mutableStateOf("") }
@@ -58,7 +59,8 @@ fun RegisterWithEmailScreen() {
                 placeholder = stringResource(R.string.email_ph),
                 inputText = email,
                 onTextChange = { email = it },
-                btnText = stringResource(R.string.code_btn_send)
+                btnText = stringResource(R.string.code_btn_send),
+                onBtnClick = { isTimerVisible = true }
             )
             Spacer(modifier = Modifier.height(20.dp))
             InputFieldWithBtnComponent(
@@ -70,7 +72,7 @@ fun RegisterWithEmailScreen() {
                     emailCode = it.toIntOrNull() ?: 0
                 },
                 btnText = stringResource(R.string.code_btn_done),
-                showTimer = true,
+                showTimer = isTimerVisible,
                 timerSeconds = 180
             )
             Spacer(modifier = Modifier.height(20.dp))
