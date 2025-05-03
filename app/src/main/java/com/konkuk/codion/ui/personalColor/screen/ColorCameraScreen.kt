@@ -4,13 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,24 +26,22 @@ import com.konkuk.codion.ui.theme.Gray700
 
 @Composable
 fun ColorCameraScreen() {
-    // 상단바
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(WindowInsets.statusBars.asPaddingValues())  // 상태바 아래부터 컴포넌트가 붙도록 처리
-    ) {
-        TopAppBarComponent(
-            title = stringResource(R.string.camera_personal_color),
-            leftIcon = painterResource(R.drawable.ic_back),
-            onLeftClicked = { },
-            rightIcon = null,
-            onRightClicked = null
-        )
-
+    Scaffold(
+        topBar = {
+            TopAppBarComponent(
+                title = stringResource(R.string.camera_personal_color),
+                leftIcon = painterResource(R.drawable.ic_back),
+                onLeftClicked = { },
+                rightIcon = null,
+                onRightClicked = null
+            )
+        }
+    ) { innerPadding ->
         // TODO: 카메라 화면 가져오기 (서버 측에서 어떻게 제공할지 몰라 우선 영역만 잡아둠)
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(innerPadding)
                 .background(Gray700),
             contentAlignment = Alignment.Center
         ) {

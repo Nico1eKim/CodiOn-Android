@@ -2,12 +2,9 @@ package com.konkuk.codion.ui.onboarding.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,27 +34,25 @@ fun RegisterWithEmailScreen() {
     var pwdCheck by remember { mutableStateOf("") }
     var isPwdCheckVisible by remember { mutableStateOf(false) }
 
-    // 상단바
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(WindowInsets.statusBars.asPaddingValues()),  // 상태바 아래부터 컴포넌트가 붙도록 처리
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        TopAppBarComponent(
-            title = stringResource(R.string.register_email),
-            leftIcon = painterResource(R.drawable.ic_back),
-            onLeftClicked = { },
-            rightIcon = null,
-            onRightClicked = null
-        )
-
-        Spacer(modifier = Modifier.height(30.dp))
-
+    Scaffold(
+        topBar = {
+            TopAppBarComponent(
+                title = stringResource(R.string.register_email),
+                leftIcon = painterResource(R.drawable.ic_back),
+                onLeftClicked = { },
+                rightIcon = null,
+                onRightClicked = null
+            )
+        }
+    ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(horizontal = 20.dp),
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(30.dp))
+
             InputFieldWithBtnComponent(
                 label = stringResource(R.string.email),
                 placeholder = stringResource(R.string.email_ph),
