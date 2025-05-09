@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
@@ -47,7 +47,6 @@ fun InputFieldComponent(
     placeholder: String,
     inputText: String,
     onTextChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     // 비밀번호 필드 관련
     isPwdField: Boolean = false,  // 해당 inputfield가 pwd를 다루는 필드인지 여부
     isPwdVisible: Boolean = true,  // 현재 보이는 상태인지에 대한 여부
