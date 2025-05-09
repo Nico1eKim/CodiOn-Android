@@ -1,7 +1,9 @@
 package com.konkuk.codion.ui.myCloset.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +17,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,9 +46,14 @@ import com.konkuk.codion.ui.common.filter.SortType
 import com.konkuk.codion.ui.myCloset.ClothesCategoryType
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray700
+import com.konkuk.codion.ui.theme.Gray900
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyClosetScreen(modifier: Modifier = Modifier) {
+fun MyClosetScreen(
+    padding: PaddingValues,
+    onAddClick: () -> Unit,
+) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
 
@@ -82,29 +91,37 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
                 onLeftClicked = null,
                 rightIcon = painterResource(R.drawable.ic_add),
                 onRightClicked = {
-//                    TODO: 화면 이동 구현
+                    onAddClick()
                 }
             )
         }
-    ) { innerPadding ->
+    ) {
         Column(
-            modifier = modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
         ) {
             ScrollableTabRow(
                 selectedTabIndex = topLevelTabs.indexOf(selectedTab),
-                edgePadding = 0.dp
+                edgePadding = 0.dp,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        Modifier.tabIndicatorOffset(tabPositions[topLevelTabs.indexOf(selectedTab)]),
+                        color = Gray900
+                    )
+
+                },
             ) {
                 topLevelTabs.forEachIndexed { index, tab ->
+                    val isSelected = selectedTab == tab
                     Tab(
-                        selected = selectedTab == tab,
+                        selected = isSelected,
                         onClick = { selectedTab = tab },
                         text = {
                             Text(
                                 text = tab.label,
-                                style = CodiOnTypography.pretendard_400_16,
-                                color = Gray700
+                                style = if (isSelected) CodiOnTypography.pretendard_600_16 else CodiOnTypography.pretendard_400_16,
+                                color = if (isSelected) Gray900 else Gray700
                             )
                         },
                         selectedContentColor = Gray700,
@@ -185,5 +202,8 @@ fun MyClosetScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun MyClosetScreenPreview() {
-    MyClosetScreen()
+    MyClosetScreen(
+        padding = PaddingValues(0.dp),
+        onAddClick = {}
+    )
 }

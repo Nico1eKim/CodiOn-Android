@@ -1,6 +1,8 @@
 package com.konkuk.codion.ui.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,8 +32,11 @@ import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray300
 import com.konkuk.codion.ui.theme.Gray700
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    padding: PaddingValues
+) {
     val scrollState = rememberScrollState()
 
     Scaffold(
@@ -44,12 +49,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 onRightClicked = null
             )
         },
-    ) { innerPadding ->
+    ) {
         Column(
-            modifier = modifier
-                .padding(innerPadding)
+            modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState),
+                .verticalScroll(scrollState)
+                .padding(padding),
         ) {
             Row(
                 modifier = Modifier
@@ -67,12 +72,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     painter = painterResource(id = R.drawable.ic_map_pin),
                     contentDescription = null,
                     modifier = Modifier
+                        .padding(horizontal = 4.dp)
                         .size(24.dp)
                 )
 
                 Row(
-                    modifier = Modifier
-                        .padding(start = 4.dp)
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     // TODO: 지역 바텀시트 만들기
                     Text(
@@ -139,5 +144,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(
+        padding = PaddingValues(0.dp)
+    )
 }

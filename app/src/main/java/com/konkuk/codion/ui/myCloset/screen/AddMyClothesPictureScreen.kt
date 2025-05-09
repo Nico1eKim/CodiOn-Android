@@ -1,7 +1,9 @@
 package com.konkuk.codion.ui.myCloset.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,24 +27,28 @@ import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray600
 import com.konkuk.codion.ui.theme.Gray900
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
+fun AddMyClothesPictureScreen(
+    padding: PaddingValues,
+    onBackClick: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBarComponent(
                 title = stringResource(R.string.add_clothes),
                 leftIcon = painterResource(R.drawable.ic_back),
                 onLeftClicked = {
-//                    TODO: 뒤로가기 구현
+                    onBackClick()
                 },
                 rightIcon = null,
                 onRightClicked = null
             )
         }
-    ) { innerPadding ->
+    ) {
         Column(
-            modifier = modifier
-                .padding(innerPadding)
+            modifier = Modifier
+                .padding(padding)
                 .fillMaxSize()
                 .background(Gray600)
         ) {
@@ -81,5 +87,8 @@ fun AddMyClothesPictureScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun AddMyClothesPictureScreenPreview() {
-    AddMyClothesPictureScreen()
+    AddMyClothesPictureScreen(
+        padding = PaddingValues(),
+        onBackClick = {}
+    )
 }

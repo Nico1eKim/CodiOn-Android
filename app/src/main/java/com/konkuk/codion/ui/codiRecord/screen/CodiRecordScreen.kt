@@ -1,6 +1,8 @@
 package com.konkuk.codion.ui.codiRecord.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -26,8 +28,12 @@ import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.home.component.ClothesCardList
 import java.time.LocalDate
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CodiRecordScreen(modifier: Modifier = Modifier) {
+fun CodiRecordScreen(
+    padding: PaddingValues,
+    onAddClick: () -> Unit
+) {
     val codiRecordMap = CodiRecordDummyData.dummyData.associateBy { it.date }
 
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
@@ -43,12 +49,11 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
                 onRightClicked = null
             )
         },
-    ) { innerPadding ->
-
+    ) {
         LazyColumn(
-            modifier = modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
         ) {
             item {
                 CodiRecordCalendar(
@@ -74,7 +79,9 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
 
                         MyComment(record = it)
                     }
-                } ?: CodiRecordEmpty()
+                } ?: CodiRecordEmpty(
+                    onAddClick = onAddClick,
+                )
             }
 
         }
@@ -84,5 +91,8 @@ fun CodiRecordScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun CodiRecordScreenPreview() {
-    CodiRecordScreen()
+    CodiRecordScreen(
+        padding = PaddingValues(0.dp),
+        onAddClick = {}
+    )
 }
