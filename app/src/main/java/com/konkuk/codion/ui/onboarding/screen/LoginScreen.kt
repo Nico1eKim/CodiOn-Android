@@ -32,7 +32,7 @@ import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(onLoginSuccess: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var pwd by remember { mutableStateOf("") }
     var isPwdVisible by remember { mutableStateOf(false) }
@@ -74,7 +74,8 @@ fun LoginScreen() {
             BigButtonComponent(
                 containerColor = Gray900,
                 contentColor = Gray100,
-                text = stringResource(R.string.login)
+                text = stringResource(R.string.login),
+                onClick = { onLoginSuccess() }
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row(
@@ -150,5 +151,5 @@ fun LoginScreen() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(onLoginSuccess = {})
 }

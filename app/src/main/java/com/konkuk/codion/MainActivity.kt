@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.konkuk.codion.ui.navigation.MainNavHost
 import com.konkuk.codion.ui.navigation.MainTab
 import com.konkuk.codion.ui.navigation.component.MainBottomBar
@@ -23,6 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
 //            var showSplash by remember { mutableStateOf(true) }
             val navController = rememberMainNavigator()
+            val currentRoute =
+                navController.navController.currentBackStackEntryAsState().value?.destination?.route
+            val showBottomBar = currentRoute?.contains("MainTabRoute") == true
 
             CodiOnTheme {
 //                if (showSplash) {
@@ -32,15 +36,17 @@ class MainActivity : ComponentActivity() {
 //                } else {
                 Scaffold(
                     bottomBar = {
-                        MainBottomBar(
-                            modifier = Modifier
-                                .background(Gray100)
-                                .navigationBarsPadding(),
-                            visible = navController.shouldShowBottomBar(),
-                            tabs = MainTab.entries.toPersistentList(),
-                            currentTab = navController.currentTab,
-                            onTabSelected = { navController.navigate(it) }
-                        )
+                        if (showBottomBar) {
+                            MainBottomBar(
+                                modifier = Modifier
+                                    .background(Gray100)
+                                    .navigationBarsPadding(),
+                                visible = true,
+                                tabs = MainTab.entries.toPersistentList(),
+                                currentTab = navController.currentTab,
+                                onTabSelected = { navController.navigate(it) }
+                            )
+                        }
                     },
                     content = { innerPadding ->
                         MainNavHost(
@@ -49,7 +55,6 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 )
-//                }
             }
         }
     }
