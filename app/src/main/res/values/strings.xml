@@ -142,4 +142,7 @@
     <string name="upload">등록하기</string>
     <string name="take_picture">옷 촬영하기</string>
     <string name="finish_clothes_upload">옷 등록 완료하기</string>
+
+    <!--    error message   -->
+    <string name="error_input_null">입력값을 확인해주세요.</string>
 </resources>

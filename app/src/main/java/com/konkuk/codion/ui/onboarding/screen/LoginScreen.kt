@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.onboarding.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,16 +28,25 @@ import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
 import com.konkuk.codion.ui.common.inputFields.InputFieldComponent
+import com.konkuk.codion.ui.networking.RequestLoginDto
+import com.konkuk.codion.ui.networking.ResponseLoginDto
+import com.konkuk.codion.ui.networking.ServicePool
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray900
+import kotlinx.serialization.json.Json
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
 fun LoginScreen(onLoginSuccess: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var pwd by remember { mutableStateOf("") }
     var isPwdVisible by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -75,7 +86,54 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                 containerColor = Gray900,
                 contentColor = Gray100,
                 text = stringResource(R.string.login),
-                onClick = { onLoginSuccess() }
+                onClick = {
+                    if (email.isNotBlank() && pwd.isNotBlank()) {   // 이메일, 비밀번호가 모두 입력된 경우
+                        val request = RequestLoginDto(
+                            email = email,
+                            password = pwd
+                        )
+
+                        ServicePool.userService.postLogin(request).enqueue(object :
+                            Callback<ResponseLoginDto> {
+                            override fun onResponse(
+                                call: Call<ResponseLoginDto>,
+                                response: Response<ResponseLoginDto>
+                            ) {
+                                if (response.isSuccessful && response.body()?.code == "AUTH_201") {
+                                    Toast.makeText(
+                                        context,
+                                        response.body()?.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    onLoginSuccess()
+                                } else {
+                                    val errorMessage = try {
+                                        val errorJson = response.errorBody()?.string()
+                                        if (errorJson != null) {
+                                            Json.decodeFromString<ResponseLoginDto>(errorJson).message
+                                        } else {
+                                            "알 수 없는 오류가 발생했습니다."
+                                        }
+                                    } catch (e: Exception) {
+                                        "오류 메시지를 불러오지 못했습니다."
+                                    }
+                                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+
+                            override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
+                                Toast.makeText(
+                                    context,
+                                    "네트워크 오류: ${t.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
+                    } else {
+                        Toast.makeText(context, R.string.error_input_null, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row(
