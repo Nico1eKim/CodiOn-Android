@@ -99,7 +99,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                                 call: Call<LoginResponse>,
                                 response: Response<LoginResponse>
                             ) {
-                                if (response.isSuccessful && response.body()?.code == "AUTH_201") {
+                                if (response.isSuccessful) {
                                     Toast.makeText(
                                         context,
                                         response.body()?.message,
