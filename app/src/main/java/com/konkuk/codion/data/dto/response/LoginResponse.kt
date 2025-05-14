@@ -1,16 +1,9 @@
-package com.konkuk.codion.ui.networking
+package com.konkuk.codion.data.dto.response
 
 import kotlinx.serialization.Serializable
 
-// 로그인
 @Serializable
-data class RequestLoginDto(
-    val email: String,
-    val password: String
-)
-
-@Serializable
-data class ResponseLoginDto(
+data class LoginResponse(
     val code: String,
     val message: String,
     val data: UserTokenDto? = null

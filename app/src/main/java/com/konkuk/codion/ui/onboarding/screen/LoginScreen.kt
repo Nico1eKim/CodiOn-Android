@@ -28,9 +28,9 @@ import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
 import com.konkuk.codion.ui.common.inputFields.InputFieldComponent
-import com.konkuk.codion.ui.networking.RequestLoginDto
-import com.konkuk.codion.ui.networking.ResponseLoginDto
-import com.konkuk.codion.ui.networking.ServicePool
+import com.konkuk.codion.data.di.ServicePool
+import com.konkuk.codion.data.dto.request.LoginRequest
+import com.konkuk.codion.data.dto.response.LoginResponse
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray500
@@ -88,16 +88,16 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                 text = stringResource(R.string.login),
                 onClick = {
                     if (email.isNotBlank() && pwd.isNotBlank()) {   // 이메일, 비밀번호가 모두 입력된 경우
-                        val request = RequestLoginDto(
+                        val request = LoginRequest(
                             email = email,
                             password = pwd
                         )
 
-                        ServicePool.userService.postLogin(request).enqueue(object :
-                            Callback<ResponseLoginDto> {
+                        ServicePool.authService.postLogin(request).enqueue(object :
+                            Callback<LoginResponse> {
                             override fun onResponse(
-                                call: Call<ResponseLoginDto>,
-                                response: Response<ResponseLoginDto>
+                                call: Call<LoginResponse>,
+                                response: Response<LoginResponse>
                             ) {
                                 if (response.isSuccessful && response.body()?.code == "AUTH_201") {
                                     Toast.makeText(
@@ -110,7 +110,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                                     val errorMessage = try {
                                         val errorJson = response.errorBody()?.string()
                                         if (errorJson != null) {
-                                            Json.decodeFromString<ResponseLoginDto>(errorJson).message
+                                            Json.decodeFromString<LoginResponse>(errorJson).message
                                         } else {
                                             "알 수 없는 오류가 발생했습니다."
                                         }
@@ -121,7 +121,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                                 }
                             }
 
-                            override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
+                            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                                 Toast.makeText(
                                     context,
                                     "네트워크 오류: ${t.message}",

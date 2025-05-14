@@ -1,7 +1,8 @@
-package com.konkuk.codion.ui.networking
+package com.konkuk.codion.data.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.konkuk.codion.BuildConfig
+import com.konkuk.codion.data.service.AuthService
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -31,7 +32,7 @@ object ApiFactory {
 }
 
 object ServicePool {
-    val userService: UserService by lazy {
-        ApiFactory.create<UserService>()
+    val authService: AuthService by lazy {
+        ApiFactory.create<AuthService>()
     }
 }
