@@ -7,12 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.konkuk.codion.ui.navigation.MainNavHost
 import com.konkuk.codion.ui.navigation.MainTab
 import com.konkuk.codion.ui.navigation.component.MainBottomBar
 import com.konkuk.codion.ui.navigation.rememberMainNavigator
+import com.konkuk.codion.ui.onboarding.screen.SplashScreen
 import com.konkuk.codion.ui.theme.CodiOnTheme
 import com.konkuk.codion.ui.theme.Gray100
 import kotlinx.collections.immutable.toPersistentList
@@ -22,31 +26,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-//            var showSplash by remember { mutableStateOf(true) }
+            var showSplash by remember { mutableStateOf(true) }
             val navController = rememberMainNavigator()
-            val currentRoute =
-                navController.navController.currentBackStackEntryAsState().value?.destination?.route
-            val showBottomBar = currentRoute?.contains("MainTabRoute") == true
 
             CodiOnTheme {
-//                if (showSplash) {
-//                    SplashScreen {
-//                        showSplash = false
-//                    }
-//                } else {
+                if (showSplash) {
+                    SplashScreen {
+                        showSplash = false
+                    }
+                }
                 Scaffold(
                     bottomBar = {
-                        if (showBottomBar) {
-                            MainBottomBar(
-                                modifier = Modifier
-                                    .background(Gray100)
-                                    .navigationBarsPadding(),
-                                visible = true,
-                                tabs = MainTab.entries.toPersistentList(),
-                                currentTab = navController.currentTab,
-                                onTabSelected = { navController.navigate(it) }
-                            )
-                        }
+                        MainBottomBar(
+                            modifier = Modifier
+                                .background(Gray100)
+                                .navigationBarsPadding(),
+                            visible = navController.shouldShowBottomBar(),
+                            tabs = MainTab.entries.toPersistentList(),
+                            currentTab = navController.currentTab,
+                            onTabSelected = { navController.navigate(it) }
+                        )
                     },
                     content = { innerPadding ->
                         MainNavHost(

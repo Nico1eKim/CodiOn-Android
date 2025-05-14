@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.konkuk.codion.ui.codiRecord.navigation.codiRecordNavGraph
 import com.konkuk.codion.ui.home.navigation.homeNavGraph
 import com.konkuk.codion.ui.myCloset.navigation.myClosetNavGraph
-import com.konkuk.codion.ui.onboarding.screen.LoginScreen
-import com.konkuk.codion.ui.onboarding.screen.SplashScreen
+import com.konkuk.codion.ui.onboarding.navigation.onboardingNavGraph
 import com.konkuk.codion.ui.theme.Gray100
 
 @Composable
@@ -28,24 +26,12 @@ fun MainNavHost(
     ) {
         NavHost(
             navController = navigator.navController,
-            startDestination = "splash",
+            startDestination = navigator.startDestination,
         ) {
-
-            composable("splash") {
-                SplashScreen {
-                    navigator.navController.navigate("login") {
-                        popUpTo("splash") { inclusive = true }
-                    }
-                }
-            }
-
-            composable("login") {
-                LoginScreen {
-                    navigator.navController.navigate(MainTabRoute.Home) {
-                        popUpTo("login") { inclusive = true }
-                    }
-                }
-            }
+            onboardingNavGraph(
+                navigateToLogin = navigator::navigateToLogin,
+                navigateOnboardingToHome = navigator::navigateOnboardingToHome
+            )
 
             homeNavGraph(
                 padding = padding,

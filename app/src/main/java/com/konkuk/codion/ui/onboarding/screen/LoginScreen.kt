@@ -41,7 +41,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit) {
+fun LoginScreen(
+    navigateToHome: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var pwd by remember { mutableStateOf("") }
     var isPwdVisible by remember { mutableStateOf(false) }
@@ -105,7 +107,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                                         response.body()?.message,
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                    onLoginSuccess()
+                                    navigateToHome()
                                 } else {
                                     val errorMessage = try {
                                         val errorJson = response.errorBody()?.string()
@@ -209,5 +211,5 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(onLoginSuccess = {})
+    LoginScreen(navigateToHome = {})
 }

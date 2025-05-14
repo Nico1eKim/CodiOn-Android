@@ -3,6 +3,12 @@ package com.konkuk.codion.ui.navigation
 import kotlinx.serialization.Serializable
 
 sealed interface Routes {
+    // onboarding
+    @Serializable
+    data object Splash: Routes
+    @Serializable
+    data object Login : Routes
+
     // Home
     @Serializable
     data object Home : Routes

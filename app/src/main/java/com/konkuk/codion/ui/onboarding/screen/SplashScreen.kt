@@ -17,7 +17,9 @@ import com.konkuk.codion.ui.theme.Gray900
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(onFinish: () -> Unit) {
+fun SplashScreen(
+    navigateToLogin: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -33,12 +35,14 @@ fun SplashScreen(onFinish: () -> Unit) {
 
     LaunchedEffect(Unit) {
         delay(2000)
-        onFinish()
+        navigateToLogin()
     }
 }
 
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen(onFinish = {})
+    SplashScreen(
+        navigateToLogin = {}
+    )
 }
