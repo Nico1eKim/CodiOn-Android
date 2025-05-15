@@ -14,41 +14,83 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.buttons.BigButtonComponent
 import com.konkuk.codion.ui.common.inputFields.InputFieldComponent
-import com.konkuk.codion.data.di.ServicePool
-import com.konkuk.codion.data.dto.request.LoginRequest
-import com.konkuk.codion.data.dto.response.LoginResponse
+import com.konkuk.codion.ui.onboarding.state.LoginState
+import com.konkuk.codion.ui.onboarding.viewmodel.LoginViewModel
 import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray500
 import com.konkuk.codion.ui.theme.Gray900
-import kotlinx.serialization.json.Json
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
-    var email by remember { mutableStateOf("") }
-    var pwd by remember { mutableStateOf("") }
+    val email by viewModel.email.collectAsStateWithLifecycle()
+    val pwd by viewModel.password.collectAsStateWithLifecycle()
     var isPwdVisible by remember { mutableStateOf(false) }
+    val loginState by viewModel.loginState.collectAsStateWithLifecycle()
+
+    val scope = rememberCoroutineScope()
+    val emailFocusRequester = remember { FocusRequester() }
+    val passwordFocusRequester = remember { FocusRequester() }
 
     val context = LocalContext.current
+
+    LaunchedEffect(loginState) {
+        when (loginState) {
+            // 200 로그인 성공
+            is LoginState.Success -> {
+                navigateToHome()
+                // TODO: UI적으로 사용자에게 안내하는 부분
+            }
+
+            // 오류
+            is LoginState.Error -> {
+                // TODO: UI적으로 사용자에게 안내하는 부분
+            }
+
+            // 401 비밀번호 불일치
+            is LoginState.DifferentPassword -> {
+                scope.launch {
+                    passwordFocusRequester.requestFocus()
+                    delay(800)
+                }
+                // TODO: UI적으로 사용자에게 안내하는 부분
+            }
+
+            // 404 존재하지 않는 사용자
+            is LoginState.NotFoundUser -> {
+                scope.launch {
+                    emailFocusRequester.requestFocus()
+                    delay(800)
+                }
+                // TODO: UI적으로 사용자에게 안내하는 부분
+            }
+
+            else -> {}
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -70,7 +112,7 @@ fun LoginScreen(
                 isRequired = false,
                 placeholder = stringResource(R.string.email_ph),
                 inputText = email,
-                onTextChange = { email = it }
+                onTextChange = { viewModel.updateEmail(it) }
             )
             Spacer(modifier = Modifier.height(32.dp))
             InputFieldComponent(
@@ -78,7 +120,7 @@ fun LoginScreen(
                 isRequired = false,
                 placeholder = stringResource(R.string.pwd_ph),
                 inputText = pwd,
-                onTextChange = { pwd = it },
+                onTextChange = { viewModel.updatePassword(it) },
                 isPwdField = true,
                 isPwdVisible = isPwdVisible,
                 onTogglePwdVisibility = { isPwdVisible = !isPwdVisible }
@@ -90,50 +132,9 @@ fun LoginScreen(
                 text = stringResource(R.string.login),
                 onClick = {
                     if (email.isNotBlank() && pwd.isNotBlank()) {   // 이메일, 비밀번호가 모두 입력된 경우
-                        val request = LoginRequest(
-                            email = email,
-                            password = pwd
-                        )
-
-                        ServicePool.authService.postLogin(request).enqueue(object :
-                            Callback<LoginResponse> {
-                            override fun onResponse(
-                                call: Call<LoginResponse>,
-                                response: Response<LoginResponse>
-                            ) {
-                                if (response.isSuccessful) {
-                                    Toast.makeText(
-                                        context,
-                                        response.body()?.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    navigateToHome()
-                                } else {
-                                    val errorMessage = try {
-                                        val errorJson = response.errorBody()?.string()
-                                        if (errorJson != null) {
-                                            Json.decodeFromString<LoginResponse>(errorJson).message
-                                        } else {
-                                            "알 수 없는 오류가 발생했습니다."
-                                        }
-                                    } catch (e: Exception) {
-                                        "오류 메시지를 불러오지 못했습니다."
-                                    }
-                                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-                                }
-                            }
-
-                            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                                Toast.makeText(
-                                    context,
-                                    "네트워크 오류: ${t.message}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        })
+                        viewModel.signInWithEmail()
                     } else {
-                        Toast.makeText(context, R.string.error_input_null, Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(context, "모든 항목을 입력해주세요.", Toast.LENGTH_SHORT).show()
                     }
                 }
             )
@@ -164,7 +165,6 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(12.dp))
             // TODO: 카카오톡 로그인 버튼 추가
         }
-
         // 하단 텍스트 (회원가입 | 비밀번호 찾기)
         Box(
             modifier = Modifier
@@ -206,10 +206,4 @@ fun LoginScreen(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(navigateToHome = {})
 }

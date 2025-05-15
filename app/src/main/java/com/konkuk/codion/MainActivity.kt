@@ -19,8 +19,10 @@ import com.konkuk.codion.ui.navigation.rememberMainNavigator
 import com.konkuk.codion.ui.onboarding.screen.SplashScreen
 import com.konkuk.codion.ui.theme.CodiOnTheme
 import com.konkuk.codion.ui.theme.Gray100
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.toPersistentList
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

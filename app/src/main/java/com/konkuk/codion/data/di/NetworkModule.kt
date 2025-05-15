@@ -1,0 +1,49 @@
+package com.konkuk.codion.data.di
+
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.konkuk.codion.BuildConfig
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    @OptIn(ExperimentalSerializationApi::class)
+    @Provides
+    @Singleton
+    fun provideJson(): Json =
+        Json {
+            isLenient = true // 유연한 JSON 구분 허용
+            prettyPrint = true // 출력 JSON 을 예쁘게 들여쓰기해서 가독성을 높임
+            encodeDefaults = true // 파라미터의 기본값(default) 을 JSON 으로 인코딩
+            explicitNulls = false // null 값을 명시적으로 표시하지 않음
+            ignoreUnknownKeys = true // JSON 에 정의하지 않은 키가 있어도 무시하고 파싱
+        }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient =
+        OkHttpClient.Builder()
+            .build()
+
+    @Provides
+    @Singleton
+    fun providesRetrofit(
+        json: Json,
+        okHttpClient: OkHttpClient
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .build()
+}

@@ -7,6 +7,7 @@ import com.konkuk.codion.ui.navigation.MainTabRoute
 import com.konkuk.codion.ui.navigation.Routes
 import com.konkuk.codion.ui.onboarding.screen.LoginScreen
 import com.konkuk.codion.ui.onboarding.screen.SplashScreen
+import com.konkuk.codion.ui.onboarding.viewmodel.LoginViewModel
 
 fun NavController.navigateToLogin() {
     navigate(Routes.Login)
@@ -22,7 +23,7 @@ fun NavController.navigateOnboardingToHome() {
 
 fun NavGraphBuilder.onboardingNavGraph(
     navigateToLogin: () -> Unit,
-    navigateOnboardingToHome: () -> Unit
+    navigateOnboardingToHome: () -> Unit,
 ) {
     composable<Routes.Splash> {
         SplashScreen(
