@@ -12,6 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import com.konkuk.codion.ui.common.TopAppBarComponent
 import com.konkuk.codion.ui.navigation.MainNavHost
 import com.konkuk.codion.ui.navigation.MainTab
 import com.konkuk.codion.ui.navigation.component.MainBottomBar
@@ -30,6 +33,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             var showSplash by remember { mutableStateOf(true) }
             val navController = rememberMainNavigator()
+            val topAppBarState =
+                remember { mutableStateOf<com.konkuk.codion.ui.common.TopAppBarState?>(null) }
 
             CodiOnTheme {
                 if (showSplash) {
@@ -38,6 +43,17 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 Scaffold(
+                    topBar = {
+                        topAppBarState.value?.let { state ->
+                            TopAppBarComponent(
+                                title = state.titleId?.let { stringResource(it) } ?: "",
+                                leftIcon = state.leftIconId?.let { painterResource(it) },
+                                onLeftClicked = state.onLeftClicked,
+                                rightIcon = state.rightIconId?.let { painterResource(it) },
+                                onRightClicked = state.onRightClicked
+                            )
+                        }
+                    },
                     bottomBar = {
                         MainBottomBar(
                             modifier = Modifier
@@ -52,7 +68,8 @@ class MainActivity : ComponentActivity() {
                     content = { innerPadding ->
                         MainNavHost(
                             navigator = navController,
-                            padding = innerPadding
+                            padding = innerPadding,
+                            setTopAppBar = { topAppBarState.value = it }
                         )
                     }
                 )

@@ -14,9 +14,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
-import com.konkuk.codion.ui.common.TopAppBarComponent
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.home.component.ClothesCardList
 import com.konkuk.codion.ui.home.component.WeatherInformation
@@ -35,109 +35,106 @@ import com.konkuk.codion.ui.theme.Gray700
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-    padding: PaddingValues
+    padding: PaddingValues,
+    setTopAppBar: (TopAppBarState?) -> Unit
 ) {
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        topBar = {
-            TopAppBarComponent(
-                title = stringResource(R.string.home),
-                leftIcon = null,
-                onLeftClicked = null,
-                rightIcon = null,
-                onRightClicked = null
+    LaunchedEffect(Unit) {
+        setTopAppBar(
+            TopAppBarState(
+                titleId = R.string.home
             )
-        },
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)
+            .verticalScroll(scrollState)
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(padding),
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
+            Text(
+                text = stringResource(R.string.home_nickname, "닉네임"),
+                style = CodiOnTypography.pretendard_400_16,
+                color = Gray700,
+            )
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_map_pin),
+                contentDescription = null,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+                    .padding(horizontal = 4.dp)
+                    .size(24.dp)
+            )
+
+            Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // TODO: 지역 바텀시트 만들기
                 Text(
-                    text = stringResource(R.string.home_nickname, "닉네임"),
-                    style = CodiOnTypography.pretendard_400_16,
+                    text = "서초구",
+                    style = CodiOnTypography.pretendard_700_16,
                     color = Gray700,
                 )
 
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_map_pin),
+                    painter = painterResource(id = R.drawable.ic_arrow_down),
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(horizontal = 4.dp)
-                        .size(24.dp)
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // TODO: 지역 바텀시트 만들기
-                    Text(
-                        text = "서초구",
-                        style = CodiOnTypography.pretendard_700_16,
-                        color = Gray700,
-                    )
-
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_arrow_down),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(16.dp)
-                    )
-                }
-
-                Text(
-                    text = stringResource(R.string.sensory_temp_is),
-                    style = CodiOnTypography.pretendard_400_16,
-                    color = Gray700,
-                )
-
-                Text(
-                    text = stringResource(R.string.temperature_unit, 20),
-                    style = CodiOnTypography.pretendard_700_16,
-                    color = Gray700,
-                    modifier = Modifier.padding(start = 4.dp)
-                )
-
-                Text(
-                    text = stringResource(R.string.end_word),
-                    style = CodiOnTypography.pretendard_400_16,
-                    color = Gray700,
+                        .size(16.dp)
                 )
             }
 
-            WeatherInformation(Modifier.padding(top = 8.dp, start = 20.dp, end = 20.dp), 9, 4, 0)
-
-            Spacer(modifier = Modifier.height(24.dp))
-            HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp),
-                color = Gray300,
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-
-            ClothesCardList(
-                title = stringResource(R.string.today_clothes),
-                clothesDataList = ClothesCardDummyData.dummyData
+            Text(
+                text = stringResource(R.string.sensory_temp_is),
+                style = CodiOnTypography.pretendard_400_16,
+                color = Gray700,
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
-
-            ClothesCardList(
-                title = stringResource(R.string.unusual_clothes),
-                clothesDataList = ClothesCardDummyData.dummyData
+            Text(
+                text = stringResource(R.string.temperature_unit, 20),
+                style = CodiOnTypography.pretendard_700_16,
+                color = Gray700,
+                modifier = Modifier.padding(start = 4.dp)
             )
-            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = stringResource(R.string.end_word),
+                style = CodiOnTypography.pretendard_400_16,
+                color = Gray700,
+            )
         }
+
+        WeatherInformation(Modifier.padding(top = 8.dp, start = 20.dp, end = 20.dp), 9, 4, 0)
+
+        Spacer(modifier = Modifier.height(24.dp))
+        HorizontalDivider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp),
+            color = Gray300,
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+
+        ClothesCardList(
+            title = stringResource(R.string.today_clothes),
+            clothesDataList = ClothesCardDummyData.dummyData
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        ClothesCardList(
+            title = stringResource(R.string.unusual_clothes),
+            clothesDataList = ClothesCardDummyData.dummyData
+        )
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 
@@ -145,6 +142,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenPreview() {
     HomeScreen(
-        padding = PaddingValues(0.dp)
+        padding = PaddingValues(0.dp),
+        setTopAppBar = {}
     )
 }
