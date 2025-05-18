@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.konkuk.codion.ui.common.TopAppBarComponent
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.navigation.MainNavHost
 import com.konkuk.codion.ui.navigation.MainTab
 import com.konkuk.codion.ui.navigation.component.MainBottomBar
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
             var showSplash by remember { mutableStateOf(true) }
             val navController = rememberMainNavigator()
             val topAppBarState =
-                remember { mutableStateOf<com.konkuk.codion.ui.common.TopAppBarState?>(null) }
+                remember { mutableStateOf<TopAppBarState?>(null) }
 
             CodiOnTheme {
                 if (showSplash) {
