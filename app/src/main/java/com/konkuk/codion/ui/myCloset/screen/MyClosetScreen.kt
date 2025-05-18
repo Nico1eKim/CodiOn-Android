@@ -14,13 +14,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -29,13 +29,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.ClothesCardComponent
-import com.konkuk.codion.ui.common.TopAppBarComponent
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.common.dummy.ClothesCardDummyData
 import com.konkuk.codion.ui.common.filter.FilterBottomSheetList
 import com.konkuk.codion.ui.common.filter.FilterButton
@@ -53,6 +51,7 @@ import com.konkuk.codion.ui.theme.Gray900
 fun MyClosetScreen(
     padding: PaddingValues,
     onAddClick: () -> Unit,
+    setTopAppBar: (TopAppBarState?) -> Unit
 ) {
     val topLevelTabs = ClothesCategoryType.getTopLevelCategories()
     var selectedTab by remember { mutableStateOf(topLevelTabs.first()) }
@@ -83,117 +82,115 @@ fun MyClosetScreen(
     val options = SortType.entries
     var selectedOption by rememberSaveable { mutableStateOf(SortType.FREQUENCY) }
 
-    Scaffold(
-        topBar = {
-            TopAppBarComponent(
-                title = stringResource(R.string.my_closet),
-                leftIcon = null,
-                onLeftClicked = null,
-                rightIcon = painterResource(R.drawable.ic_add),
+    LaunchedEffect(Unit) {
+        setTopAppBar(
+            TopAppBarState(
+                titleId = R.string.my_closet,
+                rightIconId = R.drawable.ic_add,
                 onRightClicked = {
                     onAddClick()
                 }
             )
-        }
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize()
+        ScrollableTabRow(
+            selectedTabIndex = topLevelTabs.indexOf(selectedTab),
+            edgePadding = 0.dp,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    Modifier.tabIndicatorOffset(tabPositions[topLevelTabs.indexOf(selectedTab)]),
+                    color = Gray900
+                )
+
+            },
         ) {
-            ScrollableTabRow(
-                selectedTabIndex = topLevelTabs.indexOf(selectedTab),
-                edgePadding = 0.dp,
-                indicator = { tabPositions ->
-                    TabRowDefaults.Indicator(
-                        Modifier.tabIndicatorOffset(tabPositions[topLevelTabs.indexOf(selectedTab)]),
-                        color = Gray900
-                    )
-
-                },
-            ) {
-                topLevelTabs.forEachIndexed { index, tab ->
-                    val isSelected = selectedTab == tab
-                    Tab(
-                        selected = isSelected,
-                        onClick = { selectedTab = tab },
-                        text = {
-                            Text(
-                                text = tab.label,
-                                style = if (isSelected) CodiOnTypography.pretendard_600_16 else CodiOnTypography.pretendard_400_16,
-                                color = if (isSelected) Gray900 else Gray700
-                            )
-                        },
-                        selectedContentColor = Gray700,
-                    )
-                }
+            topLevelTabs.forEachIndexed { index, tab ->
+                val isSelected = selectedTab == tab
+                Tab(
+                    selected = isSelected,
+                    onClick = { selectedTab = tab },
+                    text = {
+                        Text(
+                            text = tab.label,
+                            style = if (isSelected) CodiOnTypography.pretendard_600_16 else CodiOnTypography.pretendard_400_16,
+                            color = if (isSelected) Gray900 else Gray700
+                        )
+                    },
+                    selectedContentColor = Gray700,
+                )
             }
+        }
 
-            FilterBottomSheetList(
-                selectedParentCategory = selectedTab,
-                selectedCategoryOptions = tempCategoryOptions,
-                selectedPersonalColorOptions = tempPersonalColorOptions,
-                onClick = {
-                    appliedCategoryOptions.clear()
-                    appliedCategoryOptions.addAll(tempCategoryOptions)
+        FilterBottomSheetList(
+            selectedParentCategory = selectedTab,
+            selectedCategoryOptions = tempCategoryOptions,
+            selectedPersonalColorOptions = tempPersonalColorOptions,
+            onClick = {
+                appliedCategoryOptions.clear()
+                appliedCategoryOptions.addAll(tempCategoryOptions)
 
-                    appliedPersonalColorOptions.clear()
-                    appliedPersonalColorOptions.addAll(tempPersonalColorOptions)
+                appliedPersonalColorOptions.clear()
+                appliedPersonalColorOptions.addAll(tempPersonalColorOptions)
 
-                    expandedSheet = null
-                },
-                expandedSheet = expandedSheet,
-                onDismiss = { expandedSheet = null },
-                onOpenSheet = { expandedSheet = it }
-            )
+                expandedSheet = null
+            },
+            expandedSheet = expandedSheet,
+            onDismiss = { expandedSheet = null },
+            onOpenSheet = { expandedSheet = it }
+        )
 
-            Row(
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            // 적용된 필터 목록
+            LazyRow(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .width(256.dp),
             ) {
-                // 적용된 필터 목록
-                LazyRow(
-                    modifier = Modifier
-                        .width(256.dp),
-                ) {
-                    items(appliedCategoryOptions) { category ->
-                        FilterButton(
-                            filterLabel = category.label,
-                            onClose = {
-                                appliedCategoryOptions.remove(category)
-                                tempCategoryOptions.remove(category)
-                            }
-                        )
-                    }
-                    items(appliedPersonalColorOptions) { color ->
-                        FilterButton(
-                            filterLabel = color.label,
-                            onClose = {
-                                appliedPersonalColorOptions.remove(color)
-                                tempPersonalColorOptions.remove(color)
-                            }
-                        )
-                    }
+                items(appliedCategoryOptions) { category ->
+                    FilterButton(
+                        filterLabel = category.label,
+                        onClose = {
+                            appliedCategoryOptions.remove(category)
+                            tempCategoryOptions.remove(category)
+                        }
+                    )
                 }
-
-                SortDropdown(
-                    options = options.map { it.label },
-                    selectedOption = selectedOption.label,
-                ) { selectedLabel ->
-                    selectedOption = options.first { it.label == selectedLabel }
+                items(appliedPersonalColorOptions) { color ->
+                    FilterButton(
+                        filterLabel = color.label,
+                        onClose = {
+                            appliedPersonalColorOptions.remove(color)
+                            tempPersonalColorOptions.remove(color)
+                        }
+                    )
                 }
             }
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.padding(horizontal = 20.dp),
-            ) {
-                items(filteredClothes) { item ->
-                    ClothesCardComponent(clothesData = item, isClickable = true, isSelected = false)
-                }
+            SortDropdown(
+                options = options.map { it.label },
+                selectedOption = selectedOption.label,
+            ) { selectedLabel ->
+                selectedOption = options.first { it.label == selectedLabel }
+            }
+        }
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.padding(horizontal = 20.dp),
+        ) {
+            items(filteredClothes) { item ->
+                ClothesCardComponent(clothesData = item, isClickable = true, isSelected = false)
             }
         }
     }
@@ -204,6 +201,7 @@ fun MyClosetScreen(
 private fun MyClosetScreenPreview() {
     MyClosetScreen(
         padding = PaddingValues(0.dp),
-        onAddClick = {}
+        onAddClick = {},
+        setTopAppBar = {}
     )
 }

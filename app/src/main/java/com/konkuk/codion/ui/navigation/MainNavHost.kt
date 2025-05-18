@@ -8,15 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.konkuk.codion.ui.codiRecord.navigation.codiRecordNavGraph
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.home.navigation.homeNavGraph
 import com.konkuk.codion.ui.myCloset.navigation.myClosetNavGraph
+import com.konkuk.codion.ui.onboarding.navigation.onboardingNavGraph
 import com.konkuk.codion.ui.theme.Gray100
 
 @Composable
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navigator: MainNavController,
-    padding: PaddingValues
+    padding: PaddingValues,
+    setTopAppBar: (TopAppBarState?) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -27,19 +30,27 @@ fun MainNavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
         ) {
+            onboardingNavGraph(
+                navigateToLogin = navigator::navigateToLogin,
+                navigateOnboardingToHome = navigator::navigateOnboardingToHome
+            )
+
             homeNavGraph(
                 padding = padding,
+                setTopAppBar = setTopAppBar
             )
 
             codiRecordNavGraph(
                 padding = padding,
                 navigateToAddMyClothesPicture = navigator::navigateToAddMyClothesPicture,
+                setTopAppBar = setTopAppBar
             )
 
             myClosetNavGraph(
                 padding = padding,
                 navigateBack = navigator::navigateUp,
                 navigateToAddMyClothesPicture = navigator::navigateToAddMyClothesPicture,
+                setTopAppBar = setTopAppBar
             )
 
             // MyPage 추가

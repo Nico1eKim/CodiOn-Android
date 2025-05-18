@@ -11,6 +11,8 @@ import com.konkuk.codion.ui.codiRecord.navigation.navigateToCodiRecord
 import com.konkuk.codion.ui.home.navigation.navigateToHome
 import com.konkuk.codion.ui.myCloset.navigation.navigateToAddMyClothesPicture
 import com.konkuk.codion.ui.myCloset.navigation.navigateToMyCloset
+import com.konkuk.codion.ui.onboarding.navigation.navigateOnboardingToHome
+import com.konkuk.codion.ui.onboarding.navigation.navigateToLogin
 
 class MainNavController(
     val navController: NavHostController,
@@ -19,7 +21,7 @@ class MainNavController(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-    val startDestination = MainTabRoute.Home // TODO: Landing으로 바꾸기
+    val startDestination = Routes.Splash
 
     val currentTab: MainTab?
         @Composable get() = MainTab.entries.find { tab ->
@@ -47,6 +49,15 @@ class MainNavController(
     // Back Pressed
     fun navigateUp() {
         navController.navigateUp()
+    }
+
+    // Onboarding
+    fun navigateToLogin() {
+        navController.navigateToLogin()
+    }
+
+    fun navigateOnboardingToHome() {
+        navController.navigateOnboardingToHome()
     }
 
     fun navigateToAddMyClothesPicture() {

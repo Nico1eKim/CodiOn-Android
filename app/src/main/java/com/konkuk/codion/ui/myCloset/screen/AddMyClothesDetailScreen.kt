@@ -55,7 +55,7 @@ fun AddMyClothesDetailScreen(
     navController: NavHostController
 ) {
     val clothesData = ClothesCardDummyData.dummyData[0]
-    val clothesNickname by rememberSaveable { mutableStateOf("") }
+    var clothesNickname by rememberSaveable { mutableStateOf("") }
 
     var selectedBigCategory by remember { mutableStateOf<String?>(null) }
     val topCategories = ClothesCategoryType
@@ -131,6 +131,7 @@ fun AddMyClothesDetailScreen(
                 isRequired = true,
                 placeholder = stringResource(R.string.nickname_ph),
                 inputText = clothesNickname,
+                onTextChange = { clothesNickname = it }
             )
 
             Text(

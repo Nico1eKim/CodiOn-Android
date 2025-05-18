@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.konkuk.codion.ui.codiRecord.screen.CodiRecordScreen
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.navigation.MainTabRoute
 import com.konkuk.codion.ui.navigation.Routes
 
@@ -20,11 +21,13 @@ fun NavController.navigateToAddMyClothesPicture() {
 fun NavGraphBuilder.codiRecordNavGraph(
     padding: PaddingValues,
     navigateToAddMyClothesPicture: () -> Unit,
+    setTopAppBar: (TopAppBarState?) -> Unit
 ) {
     composable<MainTabRoute.CodiRecord> {
         CodiRecordScreen(
             padding = padding,
             onAddClick = navigateToAddMyClothesPicture,
+            setTopAppBar = setTopAppBar
         )
     }
 }

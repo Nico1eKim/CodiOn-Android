@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.home.HomeScreen
 import com.konkuk.codion.ui.navigation.MainTabRoute
 
@@ -13,11 +14,13 @@ fun NavController.navigateToHome(navOptions: NavOptions) {
 }
 
 fun NavGraphBuilder.homeNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
+    setTopAppBar: (TopAppBarState?) -> Unit
 ) {
     composable<MainTabRoute.Home> {
         HomeScreen(
-            padding = padding
+            padding = padding,
+            setTopAppBar = setTopAppBar
         )
     }
 }
