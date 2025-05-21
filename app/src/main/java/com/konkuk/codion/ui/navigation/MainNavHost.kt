@@ -11,6 +11,7 @@ import com.konkuk.codion.ui.codiRecord.navigation.codiRecordNavGraph
 import com.konkuk.codion.ui.common.TopAppBarState
 import com.konkuk.codion.ui.home.navigation.homeNavGraph
 import com.konkuk.codion.ui.myCloset.navigation.myClosetNavGraph
+import com.konkuk.codion.ui.mypage.navigation.mypageNavGraph
 import com.konkuk.codion.ui.onboarding.navigation.onboardingNavGraph
 import com.konkuk.codion.ui.theme.Gray100
 
@@ -53,7 +54,10 @@ fun MainNavHost(
                 setTopAppBar = setTopAppBar
             )
 
-            // MyPage 추가
+            mypageNavGraph(
+                padding = padding,
+                setTopAppBar = setTopAppBar
+            )
         }
     }
 }

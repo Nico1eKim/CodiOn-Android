@@ -11,6 +11,7 @@ import com.konkuk.codion.ui.codiRecord.navigation.navigateToCodiRecord
 import com.konkuk.codion.ui.home.navigation.navigateToHome
 import com.konkuk.codion.ui.myCloset.navigation.navigateToAddMyClothesPicture
 import com.konkuk.codion.ui.myCloset.navigation.navigateToMyCloset
+import com.konkuk.codion.ui.mypage.navigation.navigateToMypage
 import com.konkuk.codion.ui.onboarding.navigation.navigateOnboardingToHome
 import com.konkuk.codion.ui.onboarding.navigation.navigateToLogin
 
@@ -41,8 +42,7 @@ class MainNavController(
             MainTab.HOME -> navController.navigateToHome(navOptions)
             MainTab.CODI_RECORD -> navController.navigateToCodiRecord(navOptions)
             MainTab.MY_CLOSET -> navController.navigateToMyCloset(navOptions)
-            MainTab.MY_PAGE -> navController.navigateToMyCloset(navOptions)
-//            MainTab.MY_PAGE -> navController.navigateToMyPage(navOptions) // TODO: 위에 있는 MyPage 이거로 변경
+            MainTab.MY_PAGE -> navController.navigateToMypage(navOptions)
         }
     }
 
