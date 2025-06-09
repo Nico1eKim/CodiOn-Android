@@ -41,6 +41,7 @@ import kotlinx.coroutines.delay
 fun ColorResultScreen(
     personalColorData: ColorDummyData,
     onBackClick: () -> Unit,  // 뒤로 가기
+    navigateToRegister: () -> Unit
 ) {
     var showContent by remember { mutableStateOf(false) }
 
@@ -138,7 +139,8 @@ fun ColorResultScreen(
                     BigButtonComponent(
                         containerColor = Gray900,
                         contentColor = Gray100,
-                        text = stringResource(R.string.code_btn_done)
+                        text = stringResource(R.string.code_btn_done),
+                        onClick = { navigateToRegister() }
                     )
                     Spacer(modifier = Modifier.height(32.dp))
                 }
@@ -154,6 +156,7 @@ fun ColorResultScreen(
 fun ColorResultScreenPreview() {
     ColorResultScreen(
         personalColorData = ColorDummyData.autumnDummyData,
-        onBackClick = {}
+        onBackClick = {},
+        navigateToRegister = {}
     )
 }
