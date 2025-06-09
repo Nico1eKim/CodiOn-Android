@@ -37,12 +37,14 @@ fun MainNavHost(
                 navigateToLogin = navigator::navigateToLogin,
                 navigateOnboardingToHome = navigator::navigateOnboardingToHome,
                 navigateToRegisterMain = navigator::navigateToRegisterMain,
-                navigateToRegisterWithEmail = navigator::navigateToRegisterWithEmail,                navigateToRegister = navigator::navigateToRegister,
+                navigateToRegisterWithEmail = navigator::navigateToRegisterWithEmail,
+                navigateToRegister = navigator::navigateToRegister,
                 navigateToColorGuide = navigator::navigateToColorGuide
             )
 
             personalColorNavGraph(
-                navigateBack = navigator::navigateUp
+                navigateBack = navigator::navigateUp,
+                navigateToColorCamera = navigator::navigateToColorCamera
             )
             homeNavGraph(
                 padding = padding,
