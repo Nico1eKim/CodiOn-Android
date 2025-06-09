@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.onboarding.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -12,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +39,8 @@ fun RegisterWithEmailScreen(
     var isPwdVisible by remember { mutableStateOf(false) }
     var pwdCheck by remember { mutableStateOf("") }
     var isPwdCheckVisible by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -75,6 +79,9 @@ fun RegisterWithEmailScreen(
                     emailCode = it.toIntOrNull() ?: 0
                 },
                 btnText = stringResource(R.string.code_btn_done),
+                onBtnClick = {
+                    Toast.makeText(context, "인증되었습니다.", Toast.LENGTH_SHORT).show()
+                },
                 showTimer = isTimerVisible,
                 timerSeconds = 180
             )
