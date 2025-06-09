@@ -144,6 +144,8 @@ fun ColorResultScreen(
                 }
             }
         }
+    } else {
+        LoadingScreen()
     }
 }
 
