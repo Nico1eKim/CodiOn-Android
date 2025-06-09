@@ -24,7 +24,8 @@ fun NavController.navigateToColorResult() {
 fun NavGraphBuilder.personalColorNavGraph(
     navigateBack: () -> Unit,
     navigateToColorCamera: () -> Unit,
-    navigateToColorResult: () -> Unit
+    navigateToColorResult: () -> Unit,
+    navigateToRegister: () -> Unit
 ) {
     composable<Routes.ColorGuide> {
         ColorGuideScreen(
@@ -41,7 +42,8 @@ fun NavGraphBuilder.personalColorNavGraph(
     composable<Routes.ColorResult> {
         ColorResultScreen(
             personalColorData = ColorDummyData.autumnDummyData,
-            onBackClick = navigateBack
+            onBackClick = navigateBack,
+            navigateToRegister = navigateToRegister
         )
     }
 }

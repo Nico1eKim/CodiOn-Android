@@ -45,7 +45,8 @@ fun MainNavHost(
             personalColorNavGraph(
                 navigateBack = navigator::navigateUp,
                 navigateToColorCamera = navigator::navigateToColorCamera,
-                navigateToColorResult = navigator::navigateToColorResult
+                navigateToColorResult = navigator::navigateToColorResult,
+                navigateToRegister = navigator::navigateToRegister
             )
 
             homeNavGraph(
