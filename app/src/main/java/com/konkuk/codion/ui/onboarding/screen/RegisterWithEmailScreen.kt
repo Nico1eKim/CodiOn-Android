@@ -25,7 +25,10 @@ import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun RegisterWithEmailScreen() {
+fun RegisterWithEmailScreen(
+    onBackClick: () -> Unit,  // 뒤로 가기
+    navigateToRegister: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var isTimerVisible by remember { mutableStateOf(false) }
     var emailCode by remember { mutableStateOf<Int?>(null) }
@@ -40,7 +43,7 @@ fun RegisterWithEmailScreen() {
             TopAppBarComponent(
                 title = stringResource(R.string.register_email),
                 leftIcon = painterResource(R.drawable.ic_back),
-                onLeftClicked = { },
+                onLeftClicked = { onBackClick() },
                 rightIcon = null,
                 onRightClicked = null
             )
@@ -101,7 +104,8 @@ fun RegisterWithEmailScreen() {
             BigButtonComponent(
                 containerColor = Gray900,
                 contentColor = Gray100,
-                text = stringResource(R.string.next)
+                text = stringResource(R.string.next),
+                onClick = { navigateToRegister() }
             )
             Spacer(modifier = Modifier.height(32.dp))
         }
@@ -111,5 +115,8 @@ fun RegisterWithEmailScreen() {
 @Preview
 @Composable
 fun RegisterWithEmailScreenPreview() {
-    RegisterWithEmailScreen()
+    RegisterWithEmailScreen(
+        onBackClick = {},
+        navigateToRegister = {}
+    )
 }

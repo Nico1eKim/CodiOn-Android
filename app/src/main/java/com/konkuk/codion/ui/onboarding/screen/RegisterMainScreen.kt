@@ -23,13 +23,16 @@ import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray900
 
 @Composable
-fun RegisterMainScreen() {
+fun RegisterMainScreen(
+    onBackClick: () -> Unit,  // 뒤로 가기
+    navigateToRegisterWithEmail: () -> Unit  // 이메일로 회원가입
+) {
     Scaffold(
         topBar = {
             TopAppBarComponent(
                 title = stringResource(R.string.register),
                 leftIcon = painterResource(R.drawable.ic_back),
-                onLeftClicked = { },
+                onLeftClicked = { onBackClick() },
                 rightIcon = null,
                 onRightClicked = null
             )
@@ -53,7 +56,8 @@ fun RegisterMainScreen() {
                 Spacer(modifier = Modifier.height(72.dp))
                 BigButtonWithIconComponent(
                     text = stringResource(id = R.string.register_email),
-                    icon = painterResource(id = R.drawable.ic_mail)
+                    icon = painterResource(id = R.drawable.ic_mail),
+                    onClick = { navigateToRegisterWithEmail() }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 // TODO: 카카오톡 회원가입 버튼 추가
@@ -65,5 +69,8 @@ fun RegisterMainScreen() {
 @Preview
 @Composable
 fun RegisterMainScreenPreview() {
-    RegisterMainScreen()
+    RegisterMainScreen(
+        onBackClick = {},
+        navigateToRegisterWithEmail = {}
+    )
 }

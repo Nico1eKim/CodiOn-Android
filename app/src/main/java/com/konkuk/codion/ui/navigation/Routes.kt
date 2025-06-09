@@ -8,6 +8,20 @@ sealed interface Routes {
     data object Splash: Routes
     @Serializable
     data object Login : Routes
+    @Serializable
+    data object RegisterMain : Routes
+    @Serializable
+    data object RegisterWithEmail : Routes
+    @Serializable
+    data object Register : Routes
+
+    // personalColor
+    @Serializable
+    data object ColorGuide : Routes
+    @Serializable
+    data object ColorCamera : Routes
+    @Serializable
+    data object ColorResult : Routes
 
     // Home
     @Serializable

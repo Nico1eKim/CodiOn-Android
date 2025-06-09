@@ -6,8 +6,10 @@ import androidx.navigation.compose.composable
 import com.konkuk.codion.ui.navigation.MainTabRoute
 import com.konkuk.codion.ui.navigation.Routes
 import com.konkuk.codion.ui.onboarding.screen.LoginScreen
+import com.konkuk.codion.ui.onboarding.screen.RegisterMainScreen
+import com.konkuk.codion.ui.onboarding.screen.RegisterScreen
+import com.konkuk.codion.ui.onboarding.screen.RegisterWithEmailScreen
 import com.konkuk.codion.ui.onboarding.screen.SplashScreen
-import com.konkuk.codion.ui.onboarding.viewmodel.LoginViewModel
 
 fun NavController.navigateToLogin() {
     navigate(Routes.Login)
@@ -21,9 +23,26 @@ fun NavController.navigateOnboardingToHome() {
     }
 }
 
+fun NavController.navigateToRegisterMain() {
+    navigate(Routes.RegisterMain)
+}
+
+fun NavController.navigateToRegisterWithEmail() {
+    navigate(Routes.RegisterWithEmail)
+}
+
+fun NavController.navigateToRegister() {
+    navigate(Routes.Register)
+}
+
 fun NavGraphBuilder.onboardingNavGraph(
+    navigateBack: () -> Unit,
     navigateToLogin: () -> Unit,
     navigateOnboardingToHome: () -> Unit,
+    navigateToRegisterMain: () -> Unit,
+    navigateToRegisterWithEmail: () -> Unit,
+    navigateToRegister: () -> Unit,
+    navigateToColorGuide: () -> Unit
 ) {
     composable<Routes.Splash> {
         SplashScreen(
@@ -32,7 +51,26 @@ fun NavGraphBuilder.onboardingNavGraph(
     }
     composable<Routes.Login> {
         LoginScreen(
-            navigateToHome = navigateOnboardingToHome
+            navigateToHome = navigateOnboardingToHome,
+            navigateToRegisterMain = navigateToRegisterMain
+        )
+    }
+    composable<Routes.RegisterMain> {
+        RegisterMainScreen(
+            onBackClick = navigateBack,
+            navigateToRegisterWithEmail = navigateToRegisterWithEmail
+        )
+    }
+    composable<Routes.RegisterWithEmail> {
+        RegisterWithEmailScreen(
+            onBackClick = navigateBack,
+            navigateToRegister = navigateToRegister
+        )
+    }
+    composable<Routes.Register> {
+        RegisterScreen(
+            onBackClick = navigateBack,
+            navigateToColorGuide = navigateToColorGuide
         )
     }
 }

@@ -13,6 +13,7 @@ import com.konkuk.codion.ui.home.navigation.homeNavGraph
 import com.konkuk.codion.ui.myCloset.navigation.myClosetNavGraph
 import com.konkuk.codion.ui.mypage.navigation.mypageNavGraph
 import com.konkuk.codion.ui.onboarding.navigation.onboardingNavGraph
+import com.konkuk.codion.ui.personalColor.navigation.personalColorNavGraph
 import com.konkuk.codion.ui.theme.Gray100
 
 @Composable
@@ -32,8 +33,19 @@ fun MainNavHost(
             startDestination = navigator.startDestination,
         ) {
             onboardingNavGraph(
+                navigateBack = navigator::navigateUp,
                 navigateToLogin = navigator::navigateToLogin,
-                navigateOnboardingToHome = navigator::navigateOnboardingToHome
+                navigateOnboardingToHome = navigator::navigateOnboardingToHome,
+                navigateToRegisterMain = navigator::navigateToRegisterMain,
+                navigateToRegisterWithEmail = navigator::navigateToRegisterWithEmail,
+                navigateToRegister = navigator::navigateToRegister,
+                navigateToColorGuide = navigator::navigateToColorGuide
+            )
+
+            personalColorNavGraph(
+                navigateBack = navigator::navigateUp,
+                navigateToColorCamera = navigator::navigateToColorCamera,
+                navigateToColorResult = navigator::navigateToColorResult
             )
 
             homeNavGraph(
