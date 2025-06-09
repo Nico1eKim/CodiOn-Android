@@ -70,7 +70,8 @@ fun NavGraphBuilder.onboardingNavGraph(
     composable<Routes.Register> {
         RegisterScreen(
             onBackClick = navigateBack,
-            navigateToColorGuide = navigateToColorGuide
+            navigateToColorGuide = navigateToColorGuide,
+            navigateToLogin = navigateToLogin
         )
     }
 }

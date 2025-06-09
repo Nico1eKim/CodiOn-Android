@@ -1,5 +1,6 @@
 package com.konkuk.codion.ui.onboarding.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,9 +32,12 @@ import com.konkuk.codion.ui.theme.Gray900
 @Composable
 fun RegisterScreen(
     onBackClick: () -> Unit,  // 뒤로 가기
-    navigateToColorGuide: () -> Unit
+    navigateToColorGuide: () -> Unit,
+    navigateToLogin: () -> Unit
 ) {
     var nickname by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -99,7 +104,11 @@ fun RegisterScreen(
             BigButtonComponent(
                 containerColor = Gray900,
                 contentColor = Gray100,
-                text = stringResource(R.string.register_done)
+                text = stringResource(R.string.register_done),
+                onClick = {
+                    Toast.makeText(context, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    navigateToLogin()
+                }
             )
             Spacer(modifier = Modifier.height(32.dp))
         }
@@ -111,6 +120,7 @@ fun RegisterScreen(
 fun RegisterScreenPreview() {
     RegisterScreen(
         onBackClick = {},
-        navigateToColorGuide = {}
+        navigateToColorGuide = {},
+        navigateToLogin = {}
     )
 }
