@@ -19,6 +19,7 @@ import com.konkuk.codion.ui.onboarding.navigation.navigateToLogin
 import com.konkuk.codion.ui.onboarding.navigation.navigateToRegister
 import com.konkuk.codion.ui.onboarding.navigation.navigateToRegisterMain
 import com.konkuk.codion.ui.onboarding.navigation.navigateToRegisterWithEmail
+import com.konkuk.codion.ui.personalColor.navigation.navigateToColorGuide
 
 class MainNavController(
     val navController: NavHostController,
@@ -75,6 +76,11 @@ class MainNavController(
 
     fun navigateToRegister() {
         navController.navigateToRegister()
+    }
+
+    // personalColor
+    fun navigateToColorGuide() {
+        navController.navigateToColorGuide()
     }
 
     fun navigateToAddMyClothesPicture() {
