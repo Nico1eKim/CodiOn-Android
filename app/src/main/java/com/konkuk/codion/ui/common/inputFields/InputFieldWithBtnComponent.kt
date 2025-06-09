@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,8 +24,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.konkuk.codion.R
 import com.konkuk.codion.ui.common.buttons.SmallButtonComponent
+import com.konkuk.codion.ui.theme.CodiOnTypography
 import com.konkuk.codion.ui.theme.Gray100
 import com.konkuk.codion.ui.theme.Gray900
+import com.konkuk.codion.ui.theme.Green
 
 @Composable
 fun InputFieldWithBtnComponent(
@@ -35,6 +38,7 @@ fun InputFieldWithBtnComponent(
     btnText: String,
     showTimer: Boolean = false,
     timerSeconds: Int? = null,
+    helperText: String? = null,
     onBtnClick: (() -> Unit)? = null
 ) {
     var timer by remember { mutableStateOf(timerSeconds ?: 0) }
@@ -49,29 +53,43 @@ fun InputFieldWithBtnComponent(
         }
     }
 
-    Row(
-        verticalAlignment = Alignment.Bottom,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        InputFieldComponent(
-            label = label,
-            isRequired = true,
-            placeholder = placeholder,
-            inputText = inputText,
-            onTextChange = onTextChange,
-            showTimer = showTimer,
-            timerSeconds = timer,
-            modifier = Modifier.weight(1f)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        SmallButtonComponent(
-            modifier = Modifier.width(100.dp),
-            containerColor = Gray900,
-            contentColor = Gray100,
-            contentPadding = PaddingValues(0.dp),
-            text = btnText,
-            onClick = { onBtnClick?.invoke() }
-        )
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            verticalAlignment = Alignment.Bottom,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            InputFieldComponent(
+                label = label,
+                isRequired = true,
+                placeholder = placeholder,
+                inputText = inputText,
+                onTextChange = onTextChange,
+                showTimer = showTimer,
+                timerSeconds = timer,
+                modifier = Modifier.weight(1f)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            SmallButtonComponent(
+                modifier = Modifier.width(100.dp),
+                containerColor = Gray900,
+                contentColor = Gray100,
+                contentPadding = PaddingValues(0.dp),
+                text = btnText,
+                onClick = { onBtnClick?.invoke() }
+            )
+        }
+
+        // ✅ 헬퍼 텍스트 출력
+        if (!helperText.isNullOrEmpty()) {
+            Text(
+                text = helperText,
+                color = Green,
+                style = CodiOnTypography.pretendard_500_14,
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 4.dp)
+                    .align(Alignment.Start)
+            )
+        }
     }
 }
 

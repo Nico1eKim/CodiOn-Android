@@ -46,7 +46,7 @@ fun ColorResultScreen(
     var showContent by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(4000)
         showContent = true
     }
 
