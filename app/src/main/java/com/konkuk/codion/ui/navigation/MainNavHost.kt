@@ -44,8 +44,10 @@ fun MainNavHost(
 
             personalColorNavGraph(
                 navigateBack = navigator::navigateUp,
-                navigateToColorCamera = navigator::navigateToColorCamera
+                navigateToColorCamera = navigator::navigateToColorCamera,
+                navigateToColorResult = navigator::navigateToColorResult
             )
+
             homeNavGraph(
                 padding = padding,
                 setTopAppBar = setTopAppBar
